@@ -1,6 +1,6 @@
 package com.lxisoft.ekart.customer;
 import java.util.HashMap;
-import com.lxisoft.ekart.product.Product;
+import com.lxisoft.ekart.product.Product; 
 public class Customer
 {
 	private String fName;

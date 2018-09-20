@@ -1,5 +1,5 @@
 package com.lxisoft.ekart.outlet;
-import com.lxisoft.ekart.warehouse.Warehouse;
+import com.lxisoft.ekart.warehouse.Warehouse;  
 import com.lxisoft.ekart.customer.Customer;
 public class Outlet
 {

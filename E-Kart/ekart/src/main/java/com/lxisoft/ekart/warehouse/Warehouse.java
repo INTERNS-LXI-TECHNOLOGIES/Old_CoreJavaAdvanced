@@ -5,7 +5,7 @@ public class Warehouse
 {
 	private HashMap<Product,Integer> stock;
 
-	public Warehouse()
+	public Warehouse() 
 	{
 		stock= new HashMap<Product,Integer>();
 	}

@@ -6,7 +6,7 @@ public class Product
 	private String name;
 	private int price;
 	private String category;
-	private List<String> searchTags;
+	private List<String> searchTags; 
 
 	public void setName(String name)
 	{
