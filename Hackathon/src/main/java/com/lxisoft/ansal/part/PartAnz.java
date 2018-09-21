@@ -1,18 +1,19 @@
 // @TODO Add java doc comments
 package com.lxisoft.ansal.part;
 
-public interface Part {
+public interface PartAnz
+ {
 
 
-@override
+//@override
 public double getPrice() ;
 
 
-@override
+//@override
 public String getName() ;
 
-@override
-public double isProductAvailableinStock() ;
+//@override
+public boolean isProductAvailableinStock() ;
 
 
 }

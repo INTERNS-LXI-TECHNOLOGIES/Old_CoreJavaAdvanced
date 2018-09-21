@@ -1,8 +1,8 @@
 package com.lxisoft.ansal.customer;
-public class Customer 
+public class CustomerAnz 
 {
 	private String name ;
-	private int cashInHand ;
+	private double cashInHand ;
 	
 	public String getName()
 	{
@@ -12,8 +12,12 @@ public class Customer
 	{
 		this.name=name;
 	}
-	public void setCashInHand(int cashInHand)
+	public void setCashInHand(double cashInHand)
 	{
 		this.cashInHand=cashInHand;
+	}
+	public double getCashInHand()
+	{
+		return cashInHand;
 	}
 }
