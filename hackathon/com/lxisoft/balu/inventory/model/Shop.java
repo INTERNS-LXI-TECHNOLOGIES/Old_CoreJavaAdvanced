@@ -1,26 +1,35 @@
-class Shop {
+package com.lxisoft.balu.inventory.model;
 
-String shopName ;
-Inventory inventory ;
-int totalSales ;
+import com.lxisoft.balu.inventory.controller.*;
+import com.lxisoft.balu.inventory.model.*; 
+import java.util.*;
+
+
+public class Shop {
+
+//String shopName ;
+//Inventory inventory ;
+//int totalSales ;
 List<Customer> customers ;
 
 
 InventoryController inventorycontroller;
-SaleController  SaleController ;
+//SaleController  SaleController ;
 
 
-public static void main(String args[]){
+public void addCustomer(Customer customer){
+	
+ customers = new ArrayList<Customer>();
+ customers.add(customer);
 
 //Create Shop
 //@Create Customers in Shop
 //@Create Inventory in Shopp
 //@Conduct sale 
+}
 
-
-
-
-
+public List<Customer> getCustomers(){
+	return customers;
 }
 
 

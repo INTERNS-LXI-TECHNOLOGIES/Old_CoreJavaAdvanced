@@ -5,15 +5,15 @@ package com.lxisoft.balu.inventory.model;
 public abstract class Part {
 
 
-@override
-public abstract double getPrice() ;
+
+public abstract int getPrice() ;
 
 
-@override
+
 public abstract String getName() ;
 
-@override
-public abstract boolean isProductAvailableinStock() ;
+
+public abstract void isProductAvailableinStock() ;
 
 
 }

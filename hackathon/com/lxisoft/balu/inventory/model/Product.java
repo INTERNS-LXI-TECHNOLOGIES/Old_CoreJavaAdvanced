@@ -6,43 +6,72 @@ package com.lxisoft.balu.inventory.model;
 public class Product extends Part {
 
 
-  private string name = null ;
+  private String name;
 
 
-  private String description = null;
+  //private String description = null;
 
-  private boolean display = null;
+ // private boolean display = null;
 
-  private long id = null;
+  private long id;
+  
+  private int price;
 
 
 
-  private double maximumStockLevel = null;
+  private int maximumStockLevel;
+  
+  private int quantityInStock;
 
 
  // private String name = null;
 
-  private double reOrderLevel = null;
+ // private double reOrderLevel = null;
 
-  private String reference = null;
+ // private String reference = null;
 
-  private String searchkey = null;
+ // private String searchkey = null;
 
   //private List<Product> parts = new ArrayList<Product>();
+
+  
+ public Product(String name,int id,int price){
+	  this.name = name;
+	  this.id = id;
+	  this.price = price;
+  }
+  
+  public void setQuantityInStock(int quantityInStock){
+	  this.quantityInStock =quantityInStock;
+  }
   
   public String getName(){
 	  return name;
   }
   
-  public String getDescription(){
+  public int getPrice(){
+	  return price;
+  }
+ /** public String getDescription(){
 	  return description;
   }
   
-  public String getSearchkey(){
+   public String getSearchkey(){
 	  return searchKey;
+  }*/
+  public int getQuantityInStock(){
+	  return quantityInStock;
   }
 
-  public String getReference(){
-	  return reference;
+  public long  getId(){
+	  return id;
+  }
+  
+  public void isProductAvailableinStock(){
+	  
+  }
+  
+  public String toString(){
+	  return this.name;
   }
 }

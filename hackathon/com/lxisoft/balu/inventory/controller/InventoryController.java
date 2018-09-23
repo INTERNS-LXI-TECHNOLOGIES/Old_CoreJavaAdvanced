@@ -1,18 +1,18 @@
-package com.lxisoft.balu.inventory.controlle;
+package com.lxisoft.balu.inventory.controller;
+import com.lxisoft.balu.inventory.model.*;
 
-
-public abstract class InventoryControll {
+public abstract class InventoryController {
 
 
 // List<Products> inventory ;
 
 
-@override
-public abstract void addStockToInventory( Product productToAdd, size quantitytoadd) ;
+
+public abstract void addStockToInventory( Product productToAdd, int quantitytoadd) ;
 
 
-@override
-public abstract void removeStockFromInventory( Product productToRemove, size quantityToRemove) ;
+
+public abstract void removeStockFromInventory( Product productToRemove, int quantityToRemove) ;
 
 
 
