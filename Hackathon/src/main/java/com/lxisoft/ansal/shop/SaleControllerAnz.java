@@ -1,12 +1,15 @@
 package com.lxisoft.ansal.shop;
 import com.lxisoft.ansal.inventory.ProductAnz;
+import com.lxisoft.ansal.customer.CustomerAnz;
 public class SaleControllerAnz
 {
-	public void sell(ProductAnz productShopped, int quantity)
+	public double sell(CustomerAnz buyer,ProductAnz productShopped, int quantity)
 	{
 		System.out.println("Item sold :"+productShopped+"\n"+"Quantity : "+quantity);
 		double cost=totalAmount(productShopped,quantity);
+		buyer.setCashInHand(buyer.getCashInHand()-cost);
 		System.out.println("Total cost : "+cost);
+		return cost;
 	}
 	public double totalAmount(ProductAnz productShopped,int quantity)
 	{

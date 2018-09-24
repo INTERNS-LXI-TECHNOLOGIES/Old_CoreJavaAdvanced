@@ -48,19 +48,25 @@ public class InventoryControllerAnz
 		HashMap<ProductAnz,Integer> stock=inventoryModel.getStock();
 		inventory=new ArrayList<ProductAnz>(stock.keySet());
 		ProductAnz product= inventory.get(selection-1);
-		return product;
+		if(isAvailable(product,quantity))
+		{
+			return product;
+		}
+		else 
+		{
+			return null;
+		}
 	}
-	public void changeStock(ProductAnz product,int quantity)
+	public boolean isAvailable(ProductAnz product, int quantity)
 	{
 		int availableQuantity=(int)(inventoryModel.getStock().get(product));
 		if(quantity<=availableQuantity)
 		{
-			removeStockFromInventory(product,quantity);
+			return true;
 		}
 		else
 		{
-			System.out.println("Out of stock");
-			System.exit(0);
+			return false;
 		}
 	}
 }
