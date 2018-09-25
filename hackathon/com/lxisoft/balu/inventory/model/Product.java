@@ -67,8 +67,12 @@ public class Product extends Part {
 	  return id;
   }
   
-  public void isProductAvailableinStock(){
-	  
+  public boolean isProductAvailableinStock(int finalQuantity){
+	   if(finalQuantity<0){
+      return true;
+     }else{
+      return false;
+     }
   }
   
   public String toString(){

@@ -13,7 +13,7 @@ public abstract int getPrice() ;
 public abstract String getName() ;
 
 
-public abstract void isProductAvailableinStock() ;
+public abstract boolean isProductAvailableinStock(int finalQuantity) ;
 
 
 }

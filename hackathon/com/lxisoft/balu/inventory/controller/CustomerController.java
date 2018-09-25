@@ -5,13 +5,27 @@ import com.lxisoft.balu.inventory.controller.*;
 import com.lxisoft.balu.inventory.view.*;
 
 public class CustomerController{
-	public void purchase(){
-		char choice;
+	public void check(){
+		
 		Scanner scanner = new Scanner(System.in);
+		
 		CustomerView customerView = new CustomerView();
-		customerView.customerInfo();
-		String customerName = System.console().readLine();
-		int cashInHand = scanner.nextInt();
+
+		CheckController checkController = new CheckController();
+		//Adding customer details.
+		customerView.customerEntry();
+		int entryChoice = scanner.nextInt();
+        checkController.check(entryChoice);
+
+    }
+
+    public void getDetails(int id){
+        char choice;
+        JdbcController jdbcController = new JdbcController();
+        CustomerView customerView = new CustomerView();
+        Scanner scanner = new Scanner(System.in);
+        String customerName = jdbcController.getCustomerName(id);
+        int cashInHand = jdbcController.getCustomerBalance(id);
 		Customer customer = new Customer(customerName);
 		customer.setCashInHand(cashInHand);
 		Shop shop = new Shop();
@@ -24,12 +38,13 @@ public class CustomerController{
 		String ProductName = System.console().readLine();
 		int quantity = scanner.nextInt();
 		doPurchase(ProductName,quantity,list,customers);
-		customerView.wish();
+		customerView.customerWish();
 		choice = scanner.next(".").charAt(0);
 		}while(choice == 'y');
 	}
 	
 	public void doPurchase(String ProductName,int quantity,List<Product> list,List<Customer> customers){
+		try{
 		  for(int i =0;i<list.size();i++){
 			  if(ProductName.equals(list.get(i).getName())){
 				  int currentQuantity = list.get(i).getQuantityInStock();
@@ -38,12 +53,13 @@ public class CustomerController{
 				   //System.out.println(finalQuantity);
 				   int currentCash = customers.get(0).getCashInHand();
 				   int finalCash =  currentCash-(quantity * list.get(i).getPrice());
+				   boolean isProductAvailable = list.get(i).isProductAvailableinStock(finalQuantity);
 				   if(finalCash<0){
 					   System.out.println("YOUR BALANCE IS LOW ....you cannot purcahse the item");
 					    customers.clear();
 					   break;
 				   }
-				  if(finalQuantity<0){
+				  if(isProductAvailable){
 					  System.out.println("THE ITEM IS OUT OF STOCK ....you cannot purcahse the item");
 					  break;
 				  }
@@ -51,6 +67,31 @@ public class CustomerController{
 				  list.get(i).setQuantityInStock(finalQuantity);
 			  }
 		  }
+		}catch(Exception e){
+			System.out.println("SORRY YOU CANNOT PURCHASE THE GOODS");
+		}
 	}
 	
+
+ public void customerRegistration(){
+ 	    Scanner scanner = new Scanner(System.in);
+ 	    CustomerView customerView = new CustomerView();
+        customerView.customerReg();
+		int id = scanner.nextInt();
+		String customerName = System.console().readLine();
+		int cashInHand = scanner.nextInt();
+		//Storing details to the database.
+   	    JdbcController jdbcController = new JdbcController();
+		jdbcController.addCustomer(id,customerName,cashInHand);
+		getDetails(id);
+	}
+
+  
+ public void customerLogin(){
+      Scanner scanner = new Scanner(System.in);
+      CustomerView customerView = new CustomerView();
+      customerView.customerLogin();
+      int customerId = scanner.nextInt();
+      getDetails(customerId);
+   }
 }

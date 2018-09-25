@@ -9,7 +9,7 @@ public class UserController{
 		int choice = scanner.nextInt();
 		if(choice == 1){
 			CustomerController customerController = new CustomerController();
-			customerController.purchase();
+			customerController.check();
 		}else
 		{
 			ManagerController managerController = new ManagerController();
