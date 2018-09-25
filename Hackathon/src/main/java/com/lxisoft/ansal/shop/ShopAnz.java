@@ -24,7 +24,10 @@ public class ShopAnz
 		inventoryController=new InventoryControllerAnz(inventory);
 		saleController=new SaleControllerAnz();
 		//@Conduct sale 
+		System.out.println("\n\n*******************************************");
+		System.out.println("Welcome to "+shopName);
 		initSale();
+		printTotalSales();
 	}
 	public void initSale()
 	{
@@ -33,10 +36,12 @@ public class ShopAnz
 		int numOfCustomers=in.nextInt();
 		while(numOfCustomers>0)
 		{
+			System.out.println("\n\n*******************************************");
 			CustomerAnz buyer=readCustomerDetails();
 			customers.add(buyer);
 			startSale();
-			numOfCustomers--;		
+			numOfCustomers--;
+			System.out.println("\n\n*******************************************");
         }
     }
     public void startSale()
@@ -58,14 +63,18 @@ public class ShopAnz
 					inventoryController.removeStockFromInventory(product,quantity);
 				}
 				else
+				{
 					System.out.println("Sorry you are out of money");
+				}
 			}
 			else
+			{
 				System.out.println("Sorry out of stock");
-			if(continueShopping())
-				continue;
-			else
+			}
+			if(!continueShopping())
+			{
 				break;
+			}
 		}while(true);
 	}
 	public Map.Entry<ProductAnz,Integer> getSelection()
@@ -90,11 +99,34 @@ public class ShopAnz
 	}
 	public boolean continueShopping()
 	{
-		System.out.println("continue shopping? (y/n) :");
+		System.out.print("continue shopping? (y/n) :");
      	Scanner in=new Scanner(System.in);
 		if(in.nextLine().equals("y"))
 			return true;
 		else
 			return false;
+	}
+	public void printTotalSales()
+	{
+		System.out.println("\n\n*******************************************");
+		printCustomers();
+		System.out.println("\nTotal sales = : "+totalSales);
+		System.out.println("\n\n*******************************************");
+	}
+	public void printCustomers()
+	{
+		System.out.println("\n\nTotal of "+customers.size()+" customers");
+		int count=0;
+		for(CustomerAnz customer:customers)
+		{
+			System.out.println("\n"+(customers.indexOf(customer)+1)+". "+customer);
+			double total=0;
+			for(double transaction:customer.getTransactions())
+			{
+				System.out.print("\t"+(customer.getTransactions().indexOf(transaction)+1)+". Rs."+transaction);
+				total+=transaction;
+			}
+			System.out.println("\tTotal= "+total);
+		}
 	}
 }

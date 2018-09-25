@@ -1,5 +1,6 @@
 package com.lxisoft.ansal.inventory;
 import java.util.*;
+import java.sql.*;
 public class InventoryControllerAnz
 {
 	InventoryAnz inventoryModel;
@@ -8,17 +9,77 @@ public class InventoryControllerAnz
 	public InventoryControllerAnz(InventoryAnz inventoryModel)
 	{
 		this.inventoryModel=inventoryModel;
-		addProducts();
+		addProducts(getAllProducts());
 	}
-	public void addProducts()
+	public ResultSet getAllProducts()
 	{
-		int count=0;
-		ProductAnz product=createProduct(count++,"Rice","Eatables",20);
-		addStockToInventory(product,3);
-		product=createProduct(count++,"TV","Electronics",1500);
-		addStockToInventory(product,3);
-		product=createProduct(count++,"Hammer","Tools",300);
-		addStockToInventory(product,3);
+		Connection con=getConnection();
+		Statement stmt=getStatement(con);
+		String query="select * from product";
+		return getResultSet(query,stmt);
+	}
+	public void addProducts(ResultSet result)
+	{
+		try
+		{
+			while(result.next())
+			{
+				int id=result.getInt("id");
+				String name=result.getString("name");
+				String description=result.getString("category");
+				double price=result.getInt("unitprice");
+				int available=result.getInt("stock");
+				ProductAnz product= new ProductAnz(id,name,description,price);
+				inventoryModel.addProductAndStock(product,available);
+			}
+		}
+		catch(SQLException se)
+		{
+			se.printStackTrace();	
+		}
+	}
+	public Connection getConnection()
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			return DriverManager.getConnection("jdbc:mysql://localhost:3306/storefront","root","root");
+		}
+		catch(SQLException se)
+		{
+			se.printStackTrace();
+		}
+		catch(ClassNotFoundException e)
+		{
+			System.out.println(e);
+		}
+			return null;
+	}
+	public Statement getStatement(Connection con)
+	{
+		try
+		{
+			if(con!=null)
+				return con.createStatement();
+		}
+		catch(SQLException se)
+		{
+			se.printStackTrace();
+		}
+			return null;
+	}
+	public ResultSet getResultSet(String query,Statement stmt)
+	{
+		try
+		{
+			if(stmt!=null)
+				return stmt.executeQuery(query);
+		}
+		catch(SQLException se)
+		{
+			se.printStackTrace();
+		}
+			return null;
 	}
 	public ProductAnz createProduct(int id,String name,String description,double price)
 	{
@@ -40,7 +101,7 @@ public class InventoryControllerAnz
 		int count=0;
 		for(Map.Entry entry:stock.entrySet())
 		{  
-			System.out.println(++count+". "+entry.getKey()+"   *"+entry.getValue());  
+			System.out.println("\n"+(++count)+". "+entry.getKey()+"\n\tStock: "+entry.getValue()+"\n\tUnit price:Rs."+((ProductAnz)entry.getKey()).getPrice());  
 		}  
 	}
 	public ProductAnz getProduct(int selection,int quantity)

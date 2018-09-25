@@ -12,4 +12,8 @@ public class InventoryAnz
 	{
 		return stock;
 	}
+	public void addProductAndStock(ProductAnz product,int stock)
+	{
+		this.stock.put(product,stock);
+	}
 }
