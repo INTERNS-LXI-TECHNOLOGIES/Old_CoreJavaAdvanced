@@ -4,7 +4,7 @@ import com.lxisoft.balu.inventory.model.*;
 import com.lxisoft.balu.inventory.controller.*;
 import com.lxisoft.balu.inventory.view.*;
 
-public class CustomerController{
+   public class CustomerController{
 	public void check(){
 		
 		Scanner scanner = new Scanner(System.in);
@@ -33,42 +33,58 @@ public class CustomerController{
 		List<Customer> customers = shop.getCustomers();
 		ManagerController managerController = new ManagerController();
 		List<Product> list = managerController.getList();
-		customerView.view(list,customers);
 		do{
+		customerView.view(list,customers);
 		String ProductName = System.console().readLine();
 		int quantity = scanner.nextInt();
 		doPurchase(ProductName,quantity,list,customers);
 		customerView.customerWish();
 		choice = scanner.next(".").charAt(0);
 		}while(choice == 'y');
+		customerView.customerExit(customers);
+		customers.clear();
 	}
 	
 	public void doPurchase(String ProductName,int quantity,List<Product> list,List<Customer> customers){
 		try{
+            JdbcController jdbcController = new JdbcController();
+            
+			if(list.isEmpty()){
+			System.out.println("\t\t\t SORRY" + " " +customers.get(0).getName()+" THERE IS NO PRODUCT IN THE SHOP");
+		}else{
 		  for(int i =0;i<list.size();i++){
 			  if(ProductName.equals(list.get(i).getName())){
+                 
 				  int currentQuantity = list.get(i).getQuantityInStock();
 				  //System.out.println(currentQuantity);
 				  int finalQuantity = currentQuantity - quantity;
 				   //System.out.println(finalQuantity);
 				   int currentCash = customers.get(0).getCashInHand();
+				      //System.out.println(currentCash);
 				   int finalCash =  currentCash-(quantity * list.get(i).getPrice());
-				   boolean isProductAvailable = list.get(i).isProductAvailableinStock(finalQuantity);
+				      System.out.println("\n\t\t YOUR CURRENT BALANCE IS: "+finalCash);
+				      boolean isProductAvailable = list.get(i).isProductAvailableinStock(finalQuantity);
 				   if(finalCash<0){
-					   System.out.println("YOUR BALANCE IS LOW ....you cannot purcahse the item");
-					    customers.clear();
+					   System.out.println("PLEASE CREDIT YOUR ACCOUNT ,YOUR BALANCE IS LOW ....you cannot purcahse the item");
+					    //customers.clear();
 					   break;
 				   }
 				  if(isProductAvailable){
 					  System.out.println("THE ITEM IS OUT OF STOCK ....you cannot purcahse the item");
 					  break;
 				  }
+				  int transactionCost = currentCash - finalCash;
 				  customers.get(0).setCashInHand(finalCash);
+				  jdbcController.updateTransactionDetails(customers.get(0).getName(),transactionCost);
+                  jdbcController.updateCustomerDetails(finalCash,customers.get(0).getName());
 				  list.get(i).setQuantityInStock(finalQuantity);
+				   //adding the purchased produc
+			  	  customers.get(0).addPurchasedProduct(list.get(i));
 			  }
 		  }
+		}
 		}catch(Exception e){
-			System.out.println("SORRY YOU CANNOT PURCHASE THE GOODS");
+			System.out.println("SORRY YOU CANNOT PURCHASE GOODS");
 		}
 	}
 	

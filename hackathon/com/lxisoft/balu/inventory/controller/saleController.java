@@ -1,15 +1,17 @@
 package com.lxisoft.balu.inventory.controller;
 
-public class SaleController {
+import com.lxisoft.balu.inventory.model.Product;
+
+public abstract class SaleController {
 
 
 
 
 
-amount  sell(Product productShopped, quantity) ;
+public abstract void  addPurchasedProduct(Product productShopped);
 
 
-totalAmount() ;
+//totalAmount() ;
 
 
 

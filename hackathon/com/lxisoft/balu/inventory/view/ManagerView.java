@@ -4,11 +4,11 @@ import java.io.*;
 
 public class ManagerView{
 	public void view(){
-		System.out.println("ADD ITEMS TO THE INVENTORY");
+		System.out.println("\t\t\t***************ADD ITEMS TO THE INVENTORY*****************\n\n\n");
 		
-		System.out.println("ENTER THE DETAILS OF THE ITEMS");
+		System.out.println("\t\t\t*********ENTER THE DETAILS OF THE ITEMS********\n\n");
 		
-	    System.out.println("PLEASE ENTER THE ITEM DETAILS AS FOLLOWS" + "\n" + " [1.Enter the product id] [2.Enter the Item Name]  [3.Enter the quantity to add]    [4.Enter Maximum stock level] [5.Product price] ");
+	    System.out.println("\t\t\t********PLEASE ENTER THE ITEM DETAILS AS FOLLOWS**********" + "\n" + " \t\t[1.Enter the product id]"+"\n" +"\t\t[2.Enter the Item Name]"+"\n"+"\t\t[3.Enter the quantity to add]"+"\n"+"\t\t[4.Enter Maximum stock level]"+"\n"+"\t\t[5.Product price] ");
 		
 	}
 	

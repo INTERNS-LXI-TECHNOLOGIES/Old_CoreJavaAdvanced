@@ -76,6 +76,6 @@ public class Product extends Part {
   }
   
   public String toString(){
-	  return this.name;
+	  return this.name + "\n\t\t\t\t" +"Stock:"+this.quantityInStock + "\n\t\t\t\t" +"Price:"+ this.price ;
   }
 }
