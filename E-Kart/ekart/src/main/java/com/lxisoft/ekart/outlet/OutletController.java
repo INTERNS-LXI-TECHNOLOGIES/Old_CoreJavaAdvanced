@@ -19,10 +19,11 @@ public class OutletController
 	}
 	public void receivePayment(String method)
 	{
-		if(!method.equals("success"))
+		if(!method.equals("pay on delivery"))
 		{
 			System.out.println("Payment received from card number :"+method);
 		}
+		System.out.println("Item will be delivered to : "+outlet.getCustomer().getFName()+outlet.getCustomer().getLName()+outlet.getCustomer().getAddress());
 		System.out.println("Thank you for shopping.....");
 	}
 }

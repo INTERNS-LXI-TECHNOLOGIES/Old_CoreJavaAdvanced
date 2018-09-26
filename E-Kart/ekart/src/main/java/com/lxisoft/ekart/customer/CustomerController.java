@@ -26,36 +26,50 @@ public class CustomerController
 	}
 	public void customerLogin()
 	{
-		fetchCustomer();
-		validateCustomer();
+		do
+		{
+			if(validateCustomer(fetchCustomer()))
+			{
+				System.out.println("Welcome "+customer.getFName()+" "+customer.getLName());
+				break;
+			}
+			else
+			{
+				System.out.println("Sorry you are not signed up or you entered a wrong username or password");
+			}
+		}while(true);
 	}
-	public void fetchCustomer()
+	public Customer fetchCustomer()
 	{
 		System.out.println("************ Please Login ************");
 		Scanner in=new Scanner(System.in);
 		System.out.print("Username : ");
-		customer.setUsername(in.nextLine());
+		Customer attemptingCustomer=new Customer();
+		attemptingCustomer.setUsername(in.nextLine());
 		System.out.print("Password : ");
-		customer.setPassword(in.nextLine());
+		attemptingCustomer.setPassword(in.nextLine());
+		return attemptingCustomer;
 	}
-	public void validateCustomer()
+	public boolean validateCustomer(Customer attemptingCustomer)
 	{
 		Connection con=DAO.getConnection();
 		Statement stmt=DAO.getStatement(con);
-		String query="select * from customers where username="+"\""+customer.getUsername()+"\"";
+		String query="select * from customers where username="+"\""+attemptingCustomer.getUsername()+"\"";
 		try
 		{
 			customer=createCustomer(DAO.getResultSet(query,stmt));
-			
+			if(!customer.getPassword().equals(attemptingCustomer.getPassword()))
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 		catch(SQLException se)
 		{
-			System.out.println("Sorry you are not signed up or you entered a wrong username or password");
-			customer=null;
-			while(customer==null)
-			{
-				customerLogin();
-			}
+			return false;
 		}
 	}
 	public Customer createCustomer(ResultSet result)
@@ -93,7 +107,7 @@ public class CustomerController
 	}
 	public boolean continueShopping()
 	{
-		System.out.println("Continue shopping? (Y/N) : ");
+		System.out.print("Continue shopping? (Y/N) : ");
 		Scanner in=new Scanner(System.in);
 		if(in.nextLine().equals("y"))
 		{
@@ -108,9 +122,10 @@ public class CustomerController
 	public String makePayment()
 	{
 		printCart();
+		System.out.println("Total amount Rs."+calculatePayment());
 		System.out.println("1.Pay on Delivery");
 		System.out.println("2.Credit/debit Card");
-		System.out.println("Select payment method : ");
+		System.out.print("Select payment method : ");
 		Scanner in=new Scanner(System.in);
 		if(in.nextInt()==1)
 		{
@@ -125,8 +140,8 @@ public class CustomerController
 	{
 		System.out.println("You selected pay on delivery");
 		double totalPayment=calculatePayment();
-		System.out.println("Please pay Rs."+totalPayment+"on delivery");
-		return "success";
+		System.out.println("Please pay Rs."+totalPayment+" on delivery");
+		return "pay on delivery";
 	}
 	public String cardBanking()
 	{
