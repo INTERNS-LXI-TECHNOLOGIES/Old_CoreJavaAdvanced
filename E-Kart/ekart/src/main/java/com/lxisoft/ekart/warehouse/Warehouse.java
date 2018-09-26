@@ -9,10 +9,6 @@ public class Warehouse
 	{
 		stock= new HashMap<Product,Integer>();
 	}
-	public void addStock(Product product,Integer quantity)
-	{
-		stock.put(product,quantity);
-	}
 	public HashMap<Product,Integer> getStock()
 	{
 		return stock;

@@ -1,16 +1,13 @@
 package com.lxisoft.ekart.outlet;
 import com.lxisoft.ekart.warehouse.Warehouse;  
 import com.lxisoft.ekart.customer.Customer;
+import java.util.ArrayList;
+import java.util.List;
 public class Outlet
 {
 	private Warehouse warehouse;
 	private Customer customer;
 
-	public Outlet()
-	{
-		warehouse=new Warehouse();
-		customer=new Customer();
-	}
 	public Warehouse getWarehouse()
 	{
 		return warehouse;

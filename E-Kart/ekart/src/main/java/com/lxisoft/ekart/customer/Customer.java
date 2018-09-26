@@ -5,6 +5,8 @@ public class Customer
 {
 	private String fName;
 	private String lName;
+	private String username;
+	private String password;
 	private String address;
 	private int postCode;
 	private long contactNum;
@@ -26,6 +28,22 @@ public class Customer
 	public void setLName(String lName)
 	{
 		this.lName=lName;
+	}
+	public void setUsername(String username)
+	{
+		this.username=username;
+	}
+	public String getUsername()
+	{
+		return username;
+	}
+	public void setPassword(String password)
+	{
+		this.password=password;
+	}
+	public String getPassword()
+	{
+		return password;
 	}
 	public String getLName()
 	{
@@ -69,10 +87,6 @@ public class Customer
 	public String getEmail()
 	{
 		return email;
-	}
-	public void addToCart(Product product,Integer quantity)
-	{
-		cart.put(product,quantity);
 	}
 	public HashMap<Product,Integer> getCart()
 	{
