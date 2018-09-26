@@ -117,7 +117,11 @@ public class CustomerController
 	}
 	public void addToCart(Product product,Integer quantity)
 	{
-		customer.getCart().put(product,quantity);
+		if(customer.getCart().get(product)!=null)
+		{
+			quantity+=(Integer)customer.getCart().get(product);
+		}
+			customer.getCart().put(product,quantity);
 	}
 	public String makePayment()
 	{
