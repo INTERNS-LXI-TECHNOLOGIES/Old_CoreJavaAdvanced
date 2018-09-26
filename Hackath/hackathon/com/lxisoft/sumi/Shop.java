@@ -6,8 +6,8 @@ import java.util.*;
 class Shop {
 
 	String shopName ;
-	public static InventoryController inventory ;
-	int totalSales ;
+	public static InventoryController inventory=new InventoryController();
+	int totalSales;
 	public static SaleController  sale;
 
 	public static CustomerController customer;
@@ -32,7 +32,7 @@ class Shop {
 public static void main(String args[]){
 
 	Shop shop=new Shop();
-	inventory=new InventoryController();
+
 	int ch;
 		do
 		{
@@ -43,10 +43,10 @@ public static void main(String args[]){
 		{
 			case 1:
 					customer=new CustomerController();
-					
+					inventory.productSale();
 					break;
-			case 2:
-			inventory.entry();
+				case 2:
+					inventory.entry();
 			break;
 			
 		}
