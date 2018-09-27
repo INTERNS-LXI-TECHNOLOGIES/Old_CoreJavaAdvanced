@@ -14,7 +14,7 @@ public class Product extends Part{
 	// private TrueOrFalse display = null;
 
 	public long id;
-	public int maximumStockLevel;
+	public double maximumStockLevel;
 	//private String name = null;
 
 	// private Double reOrderLevel = null;
@@ -22,7 +22,7 @@ public class Product extends Part{
 	//private String reference = null;
 
 	public String searchkey;
-	public Product(long id,String name,int price,int maximumStockLevel,String searchkey)
+	public Product(long id,String name,double price,double maximumStockLevel,String searchkey)
 	{
 		this.id=id;
 		this.name=name;
