@@ -1,0 +1,9 @@
+com\lxisoft\controller\CustomerController.class
+com\lxisoft\model\Part.class
+com\lxisoft\controller\InventoryController.class
+com\lxisoft\model\Customer.class
+com\lxisoft\model\Product.class
+com\lxisoft\Shop.class
+com\lxisoft\controller\ProductController.class
+com\lxisoft\controller\SaleController.class
+com\lxisoft\model\Sale.class
