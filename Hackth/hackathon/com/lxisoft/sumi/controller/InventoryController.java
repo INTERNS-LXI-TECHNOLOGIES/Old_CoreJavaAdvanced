@@ -2,9 +2,17 @@ package com.lxisoft.sumi.controller;
 import com.lxisoft.sumi.model.*;
 import java.util.*;
 import java.io.*;
+import java.sql.*;
 public class InventoryController
 {
-	private Map<Integer,Product> stock=new HashMap<Integer,Product>();
+	String url="jdbc:mysql://localhost:3306/online_shopping";
+	String uname="root";
+	String pass="root";
+	Connection conn=null;
+	Connection con=null;
+	PreparedStatement stmt=null;
+	Statement state=null;
+	//private Map<Integer,Product> stock=new HashMap<Integer,Product>();
 	private Product productToAdd;
 	private Product productToRemove;
 	private Product productShopped;
@@ -17,8 +25,10 @@ public class InventoryController
 	int count=1;
 	String date1;
 	SaleController salectrl=new SaleController();
+	Scanner scanner=new Scanner(System.in);
 	public void entry()
 	{
+		
 		int ch;
 		do
 		{
@@ -29,176 +39,150 @@ public class InventoryController
 			{
 				case 1:
 				{
-					Date date=new Date();
-					date1=date.toString();
-					System.out.println("Enter quanity");
-					Scanner ad=new Scanner(System.in);
-					quantityToAdd=ad.nextInt();
-					long id;
-					String name;
-					double price,maximumStockLevel;
-					String searchkey;
-					for(int j=0;j<quantityToAdd;j++)
+					try
 					{
-						System.out.println("Add products");
-						System.out.println("[ID:][NAME][PRICE][MaxStock][SearchKey]");
-						
-						id=ad.nextLong();
-						
-						name=ad.nextLine();
-						price=ad.nextDouble();
-						maximumStockLevel=ad.nextDouble();
-						searchkey=ad.nextLine();
-						productToAdd=new Product(id,name,price,maximumStockLevel,searchkey);
-						addStockToInventory(productToAdd,quantityToAdd) ;
+						//Date date=new Date();
+						//date1=date.toString();
+						System.out.println("Enter quanity");
+						Scanner ad=new Scanner(System.in);
+						quantityToAdd=ad.nextInt();
+						int id;
+						String name;
+						int price,maximumStockLevel;
+						String searchkey;
+						for(int j=0;j<quantityToAdd;j++)
+						{
+							System.out.println("Add products");
+							System.out.println("[ID:][NAME][PRICE][MaxStock][SearchKey]");
+							
+							id=ad.nextInt();
+							
+							name=ad.nextLine();
+							price=ad.nextInt();
+							maximumStockLevel=ad.nextInt();
+							searchkey=ad.nextLine();
+							//productToAdd=new Product(id,name,price,maximumStockLevel,searchkey);
+							//addStockToInventory(productToAdd,quantityToAdd) ;
+							conn = DriverManager.getConnection(url,uname,pass);
+							String query="insert into product "
+											+ " (Id,name,price,maxStock,category)" + " values (?, ?, ?,?,?)";
+							Class.forName("com.mysql.jdbc.Driver");
+							stmt=conn.prepareStatement(query);
+							stmt.setInt(1,id);
+							stmt.setString(2,name);
+							stmt.setInt(3,price);
+							stmt.setInt(4,maximumStockLevel);
+							stmt.setString(5,searchkey);
+							stmt.executeUpdate();
+							stmt.close();
+							conn.close();
+							
+						}
+					}
+					catch(Exception e)
+					{
+						System.out.println("Error");
 					}
 				}
+					
 				break;
 				case 2:
-					availProdDisplay();
+					display();
 					break;
-				case 3:
-					salectrl.displaySellProduct();
-	
 			}
-			System.out.println("Store keeper! do u wanna continue(0/1)");
-			ch=input.nextInt();
-		}while(ch==1);
-		
-	}
-
-	public void addStockToInventory(Product productToAdd,int quantityToAdd)
-	{
-		
-		stock.put(i,productToAdd);
-				i++;
-		
-		
-	}
-		
-	public void removeStockFromInventory( Product productToRemove,int quantityToRemove)
-	{
-		
-	}
-	public void exit()
-	{
-		
+			System.out.println("Do youwanna Continue the shopping(Y/N)");
+			ch=scanner.next().charAt(0);
+		}
+		while(ch=='Y');
 	}
 	public void display()
 	{
-
-		for(Map.Entry<Integer,Product> entry:stock.entrySet())
-		{    
-			Product p=entry.getValue(); 
-			int key=entry.getKey();  		
-			System.out.println(key+" Products:\n");  
-			System.out.println(p.id+"  "+p.name+"\nPrice: "+p.price+"\nStocks Available "+p.maximumStockLevel+" \n"); 
-			
+		try
+		{
+			conn = DriverManager.getConnection(url,uname,pass);
+			String query1="select * from product";
+			Class.forName("com.mysql.jdbc.Driver");
+			state = conn.createStatement();
+			ResultSet rs = state.executeQuery(query1);
+			System.out.println("Products Available:\n");
+			int i=1;
+			while (rs.next())
+			{
+				System.out.println("Product: "+i+"\n");
+				System.out.println(rs.getInt(1));
+				System.out.println(rs.getString(2));
+				
+				System.out.println("Price: "+rs.getString(3));
+				System.out.println("Stocks Available:"+rs.getString(4)+"\n");
+				i++;
+			}
+			conn.close();
+			state.close();
 		}
-	}
-	public void availProdDisplay()
-	{
-		System.out.println("Product added in :  "+date1);
-		for(Map.Entry<Integer,Product> entry:stock.entrySet())
-		{    
-			Product p=entry.getValue(); 
-			int key=entry.getKey();  		
-			System.out.println(key+" Products:\n");  
-			System.out.println(p.id+"  "+p.name+"\nPrice: "+p.price+"\nStocks Available "+p.maximumStockLevel+" \n"); 
-			
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	public void productSale()
 	{
 		char ch;
-		Scanner input=new Scanner(System.in);
-		System.out.println("Cash In Hand");
-		cashInHand=input.nextInt();
-		do
-		{
+		do{
 			System.out.println("[1.Buy Product] [2.View Product]");
 			Scanner scanner=new Scanner(System.in);
 			int select=scanner.nextInt();
 			switch(select)
 			{
 				case 1:
-				{
-					if(cashInHand!=0)
-					{
-						System.out.println("Available Products:\n");
-						availProdDisplay();
-						System.out.println("Enter the product key value for purchase that product");
-						int id=input.nextInt();
-						for(Map.Entry<Integer,Product> entry:stock.entrySet())
-						{    
-							Product p=entry.getValue(); 
-							int key=entry.getKey(); 
-							if((key==id))
-							{	
-								if((cashInHand>=p.price))
-								{
-									Date date=new Date();
-									String date1=date.toString();
-									System.out.println("You purchased the products");
-									p.maximumStockLevel--;
-									System.out.println(p.id+" "+p.name+"\nPrice: "+p.price+" \n"+p.maximumStockLevel+" \n"); 
-									balance=cashInHand-(int) p.price;
-									cashInHand=balance;
-									System.out.println("Balance available: "+cashInHand);
-									long id1=p.id;
-									String name=p.name;
-									double price=p.price;
-									double maximumStockLevel=p.maximumStockLevel;
-									String searchkey=p.searchkey;
-									productShopped=new Product(id1,name,price,maximumStockLevel,searchkey);
-									salectrl.sell(productShopped,count++,date1);
-									
-								}
-							}
-						}
-					}
-					else
-					{
-						System.out.println("Sorry! In Sufficient Balance.............Thank You ...");
-					}
-				}
-				break;
+
+					buyProduct();
+					break;
+				
 				case 2:
-				{
-					Scanner sea=new Scanner(System.in);
-					System.out.println("[1.Search product] [2.Display all]");
-					int in=sea.nextInt();
-					
-					switch(in)
-					{
-						case 1:
-						{
-							Scanner sear=new Scanner(System.in);
-							System.out.println("Enter product name or category");
-							String search=sear.nextLine();
-							for(Map.Entry<Integer,Product> entry:stock.entrySet())
-							{    
-								Product p=entry.getValue(); 
-								int key=entry.getKey(); 
-								if((search==p.searchkey)||(search==p.name))
-								{
-									System.out.println(key+" Products:\n");  
-									System.out.println(p.id+"  "+p.name+"\nPrice: "+p.price+"\nStocks Available "+p.maximumStockLevel+" \n"); 
-								}
-							}
-							System.out.println("Sorry product is not available!");
-						}
-					
-						break;
-						case 2:
-						display();
-						break;
-					}
-				}	
+					display();
+					break;
 			}
 			System.out.println("Do youwanna Continue the shopping(Y/N)");
 			ch=scanner.next().charAt(0);
 		}
-		while(ch=='Y');					
+		while(ch=='Y');
+	}
+	public void buyProduct()
+	{
+		Scanner input=new Scanner(System.in);
+		System.out.println("Available products: ");
+		display();
+		System.out.println("Enter purchasing product Id ");
+		int id=input.nextInt();
+		try{
+			conn = DriverManager.getConnection(url,uname,pass);
+			String query1="select * from product";
+			Class.forName("com.mysql.jdbc.Driver");
+			state = conn.createStatement();
+			ResultSet rs = state.executeQuery(query1);
+			System.out.println(":\n");
+			int i=1;
+			while (rs.next())
+			{
+				if(id==rs.getInt(1))
+				{
+					id=rs.getInt(1);
+					state=conn.createStatement();
+					String query2="update product set maxStock=maxStock-1 where Id=id";
+					state.executeUpdate(query2);
+					System.out.println("You purchased product is:");
+					//System.out.println(rs.getInt(1));
+					System.out.println(rs.getString(2));
+					System.out.println("Price: "+rs.getString(3));
+				}
+			}
+			conn.close();
+			state.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 }
