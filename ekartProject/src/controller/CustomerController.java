@@ -2,6 +2,8 @@ package controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
 
 import model.*;
@@ -40,26 +42,26 @@ public class CustomerController {
 	public void addCustomerDetails(){
 		try{
 			Class.forName("com.mysql.jdbc.Driver");  	
-
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customer","root","root");
-		String query="insert into customerdata"+"(name,phoneNumber,email,postcode)"+" values(?,?,?,?)";
-		stmt=con.prepareStatement(query); 
-		input = new Scanner(System.in);
-		System.out.println("Name:");
-		String name  = input.nextLine();
-		System.out.println("Contact Number:");
-		String phoneNumber= input.nextLine();
-		System.out.println("E-mail:");
-		String email= input.nextLine();
-		System.out.println("Postcode:");
-		String postcode=input.nextLine();
-		
-		stmt.setString(1,name);//1 specifies the first parameter in the query  
-		stmt.setString(2,phoneNumber); 
-		stmt.setString(3,email);
-		stmt.setString(4,postcode);
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customer","root","root");
+			String query="insert into customerdata"+"(name,phoneNumber,email,postcode)"+" values(?,?,?,?)";
+			stmt=con.prepareStatement(query); 
+			input = new Scanner(System.in);
+			System.out.println("Name:");
+			String name  = input.nextLine();
+			System.out.println("Contact Number:");
+			String phoneNumber= input.nextLine();
+			System.out.println("E-mail:");
+			String email= input.nextLine();
+			System.out.println("Postcode:");
+			String postcode=input.nextLine();
+			
+			stmt.setString(1,name);//1 specifies the first parameter in the query  
+			stmt.setString(2,phoneNumber); 
+			stmt.setString(3,email);
+			stmt.setString(4,postcode);
 		}
 		catch(Exception e){System.out.println(e);}
-		System.out.println("Start Parchasing.......");
-	}
+		System.out.println("Start Purchasing.......");
+	}		
+
 }
