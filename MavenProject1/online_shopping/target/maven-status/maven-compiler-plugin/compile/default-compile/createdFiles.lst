@@ -1,0 +1,9 @@
+com\lxisoft\sumi\model\Sale.class
+com\lxisoft\sumi\model\Part.class
+com\lxisoft\sumi\controller\CustomerController.class
+com\lxisoft\sumi\Shop.class
+com\lxisoft\sumi\controller\InventoryController.class
+com\lxisoft\sumi\controller\ProductController.class
+com\lxisoft\sumi\model\Customer.class
+com\lxisoft\sumi\controller\SaleController.class
+com\lxisoft\sumi\model\Product.class
