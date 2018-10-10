@@ -101,8 +101,21 @@ public class InventoryController {
 			prestmt.close();
 			con.close();
 		 }catch(Exception e){ System.out.println(e);}
+	}
 	
-	
+	public void searchProduct(){
+		 try{
+			 	Class.forName("com.mysql.jdbc.Driver");  
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/store","root","root");  
+				Statement stmt=con.createStatement();  
+				ResultSet rs=stmt.executeQuery("select * from addProduct");  
+				while(rs.next()) {
+					
+				}
+		
+		
+	 }catch(Exception e){ System.out.println(e);}
+			
 	}
 
 }

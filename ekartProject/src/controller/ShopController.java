@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
 
-import model.Customer;
+import model.*;
 
 public class ShopController {
 	
@@ -39,6 +40,7 @@ public class ShopController {
 		System.out.println(p.getProperty("shopName"));
 		System.out.println(p.getProperty("ContactNumber"));
 		System.out.println(p.getProperty("E-mail"));
+		
 		customerController = new CustomerController();
 		home();			 
 		}
@@ -62,7 +64,7 @@ public class ShopController {
 			buyProduct();
 		break;
 		case 3:inventoryController.inventoryManagerSignIn();
-		inventoryController.displayStock();
+			inventoryController.displayStock();
 		break;
 		default:home();	
 		}
@@ -100,6 +102,7 @@ public class ShopController {
 
 	public void buyProduct(){
 		inventoryController.displayStock();
+		inventoryController.searchProduct();
 		in= new Scanner(System.in);
 		inventoryController.productSale();
 		System.out.println("Want to continue purchasing Y/N");

@@ -41,13 +41,4 @@ public class Product {
 		this.category=category;
 	}
 	
-	/*public void addSearchTag(String tag)
-	{
-		searchTags.add(tag);
-	}
-	
-	public List<String> getSearchTags()
-	{
-		return searchTags;
-	}*/
 }
