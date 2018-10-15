@@ -78,23 +78,44 @@ public class CustomerController {
 		email=scan.nextLine();
 		System.out.println("Password");
 		pass=scan.nextLine();
-		checkLogin();
-		
-	}
-	private void checkLogin() {
+		String email1,pass1;
+		boolean value=false;
 		try{
 			con=jdbc.getConnection();
 			stmt=jdbc.getStatement(con);
 			String query="select * from customer";
+			stmt=con.createStatement();
+		//	pstmt.setString(1,email);
+		//	pstmt.setString(2,pass);
 			ResultSet rs=stmt.executeQuery(query);
 			while(rs.next())
 			{
-				if((email.equals(rs.getString(5)))&&(pass.equals(rs.getString(6))))
-						{
-							System.out.println("login success......");
-							inventory.viewProduct();
-						}
+				email1=rs.getString(5);
+				pass1=rs.getString(6);
+				if(email.equals(email1))
+				{
+					if(pass.equals(pass1))
+					{
+						
+						value=true;
+					}
+					else
+					{
+						System.out.println("Incorrect password");
+					}
+				}
 				
+						
+			}
+			if(value==true)
+			{
+				System.out.println("login success......");
+				inventory.productSale();
+			}
+			else
+			{
+				System.out.println("Incorrect email\nplss.......re-enter the email and password");
+				login();
 			}
 			
 		
