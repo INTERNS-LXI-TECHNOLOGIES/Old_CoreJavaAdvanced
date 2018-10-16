@@ -20,6 +20,7 @@ public class E_KartTdd {
 	{
 		E_KartTdd ekart=new E_KartTdd();
 		CustomerController customer=new CustomerController();
+		InventoryController inventory =new InventoryController();
 		System.out.println("******Welcome To EKart*******");
 		System.out.println("Enjoy your Shopping");
 		
@@ -28,7 +29,7 @@ public class E_KartTdd {
 		char ch;
 		do
 		{
-			System.out.println("Enter your choice......[1.Sign-Up]   [2.Login]   [3.StoreKeeper Login]");
+			System.out.println("Enter your choice......[1.Sign-Up]   [2.Login]   [3.StoreKeeper Login] ");
 			int choice=input.nextInt();
 			switch(choice)
 			{
@@ -45,6 +46,7 @@ public class E_KartTdd {
 				case 3:
 				{
 					ekart.storeLogin();
+					break;
 				}
 			}
 			System.out.println("Do you wanna continue(Y/N)");

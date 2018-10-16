@@ -85,8 +85,6 @@ public class CustomerController {
 			stmt=jdbc.getStatement(con);
 			String query="select * from customer";
 			stmt=con.createStatement();
-		//	pstmt.setString(1,email);
-		//	pstmt.setString(2,pass);
 			ResultSet rs=stmt.executeQuery(query);
 			while(rs.next())
 			{

@@ -110,31 +110,34 @@ public class InventoryController {
 				System.out.println("Maximum Stocks Available:"+rs.getInt(4));
 				
 			}
+			buyProduct();
+			con.close();
+			stmt.close();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			}
-		
+	
 		
 	}
 		public void productSale()
 		{
 			char ch;
 			do{
-				System.out.println("[1.Buy Product] [2.View Product]");
+				System.out.println("[1.View Product] [2.Search Product]");
 				Scanner scanner=new Scanner(System.in);
 				int select=scanner.nextInt();
 				switch(select)
 				{
 					case 1:
-		
-						buyProduct();
+						viewProduct();
 						break;
 					
 					case 2:
-						viewProduct();
+						searchProduct();
 						break;
+						
 				}
 				System.out.println("Do you wanna Continue the shopping(Y/N)");
 				ch=scanner.next().charAt(0);
@@ -146,7 +149,6 @@ public class InventoryController {
 		private void buyProduct() {
 			Scanner input=new Scanner(System.in);
 			System.out.println("Available products: ");
-			viewProduct();
 			System.out.println("Enter purchasing product Id ");
 			int id=input.nextInt();
 			try{
@@ -189,6 +191,42 @@ public class InventoryController {
 				e.printStackTrace();
 			}
 			
+			
+		}
+
+
+		public void searchProduct() {
+			try
+			{
+			con=jdbc.getConnection();
+			Scanner scan=new Scanner(System.in);
+			System.out.println("Enter the category for search: ");
+			String userSearch=scan.nextLine();
+			String query="select * from products where search like '%"+userSearch+"%'";
+			stmt = con.createStatement();
+			ResultSet rs=stmt.executeQuery(query);
+			System.out.println("The " +userSearch+" Products available\n");
+			int i=1;
+			if(rs.next())
+			{
+				do
+				{
+				System.out.println("Product: "+i+"\n");
+				System.out.println(rs.getInt(1)+"   "+rs.getString(2));
+				System.out.println("Price: "+rs.getInt(3));
+				System.out.println("Stocks Available: "+rs.getInt(4));
+				i++;
+				}while(rs.next());
+			
+			}
+			buyProduct();
+			stmt.close();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 			
 		}
 

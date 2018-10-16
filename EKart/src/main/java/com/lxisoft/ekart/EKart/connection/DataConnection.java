@@ -40,18 +40,5 @@ public class DataConnection {
 		}
 		return null;
 	}
-	public static ResultSet getResultSet(String query,Statement stmt)throws SQLException
-	{
-		try
-		{
-			if(stmt!=null)
-				
-				return stmt.executeQuery(query);
-		}
-		catch (SQLException ex) 
-		{
-			ex.printStackTrace();
-		}
-		return null;
-	}
+
 }
