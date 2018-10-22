@@ -1,18 +1,18 @@
 package model;
 
-import java.util.*;
-
 public class Customer {
 
 	private String name;
 	private String phoneNumber;
 	private String email;
 	private String postcode;
-	private HashMap<Product,Integer> cart;
+	private String userName;
+	private String passWord;
+	//private HashMap<Product,Integer> cart;
 	
-	public Customer(){
-		cart = new HashMap<Product,Integer>();
-	}
+	//public Customer(){
+	//	cart = new HashMap<Product,Integer>();
+	//}
 	
 	public void setName(String name){
 		this.name = name;
@@ -30,28 +30,22 @@ public class Customer {
 		return phoneNumber;
 	}
 	
-	public void setEmail(String email) throws IllegalStateException{
-		if (email.contains("@")&& email.contains("."))
-		{
+	public void setEmail(String email){ 
 			this.email=email;
 		}
-		else
-		{
-			throw new IllegalStateException("Invalid email please re-enter");
-		}
-	}
+		
 	
 	public String getEmail(){
 		return email;
 	}
 	
-	public void addToCart(Product product,Integer quantity){
-		cart.put(product,quantity);
-	}
+	//public void addToCart(Product product,Integer quantity){
+		//cart.put(product,quantity);
+	//}
 	
-	public HashMap<Product,Integer> getCart(){
-		return cart;
-	}
+	//public HashMap<Product,Integer> getCart(){
+		//return cart;
+	//}
 
 	public String getPostcode() {
 		return postcode;
@@ -59,5 +53,21 @@ public class Customer {
 
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassWord() {
+		return passWord;
+	}
+
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
 	}
 }

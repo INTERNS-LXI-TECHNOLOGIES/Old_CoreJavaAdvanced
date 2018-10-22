@@ -8,6 +8,7 @@ public class Product {
 	private String name;
 	private int price;
 	private String category;
+	private int maxStocke;
 	//private List<String> searchTags; 
 
 	public void setId(int id){
@@ -39,6 +40,14 @@ public class Product {
 	
 	public void setCategory(String category){
 		this.category=category;
+	}
+
+	public int getMaxStocke() {
+		return maxStocke;
+	}
+
+	public void setMaxStocke(int maxStocke) {
+		this.maxStocke = maxStocke;
 	}
 	
 }
