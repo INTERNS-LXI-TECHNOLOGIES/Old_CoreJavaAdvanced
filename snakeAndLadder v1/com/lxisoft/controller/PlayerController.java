@@ -7,10 +7,12 @@ import com.lxisoft.model.*;
 
 public class PlayerController {
 	
-	int i,id;
-	//String name;
-	Player[] player = new Player[10];
+	int i,id,diceValue=0;
+	String name;
+	int noOfUsers=0;
 	
+	
+	Player[] player;
 	
 	Scanner scanner=new Scanner(System.in);
 
@@ -23,28 +25,23 @@ public class PlayerController {
 	}
 
 	
-	public void createPlayer(){
+	public int createPlayer(){
 		System.out.println("Number of players:");
+		noOfUsers= scanner.nextInt();
 		
-		int n = scanner.nextInt();
-		
-		for(i =1;i<=n;i++){
-			
-			player[i]= new Player(i);
+		for(i =1;i<=noOfUsers;i++){
+			player=new Player[10];
+			player[i] = new Player(i);
 			id=player[i].getPlayerId();
-			System.out.println("Id:");
-			id=scanner.nextInt();
-			
-			System.out.println("Player"+id+"");
-			//addDetails();
+			System.out.println("Player"+id+"\n");	
+
 		}
-		
-		//return player ;
-		
+		return noOfUsers;
 	}
+		
+
 	
-	/*public void addDetails(){
-			System.out.println("Name:");
-			player[i].setName(Scanner.nextLine());
-	}*/
+		
 }
+	
+	

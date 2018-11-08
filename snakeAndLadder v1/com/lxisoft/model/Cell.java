@@ -11,11 +11,7 @@ public class Cell{
 	}
 	public int getCellNumber(){
 		return cellNumber;
-		//cellNumber--;
+	
 	}
-
-	//public int getCellNumber() {
-		//return cellNumber;
-	//}
 	
 }
