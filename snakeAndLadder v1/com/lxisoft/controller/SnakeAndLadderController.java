@@ -23,42 +23,59 @@ public class SnakeAndLadderController{
 		startGame();
 	}
 	
-	public void startGame(){
-		
-		playGame();
-			
-	}
-			public void playGame(){
+			public void startGame(){
 			
 			noOfUsers=playerController.createPlayer();
 			int currentPlayer;
-			
-			do{
-			//playerController.player[].setPosition()=0;	
+		
 			for (currentPlayer=1;currentPlayer<=noOfUsers;currentPlayer++){
-				
-			
+			do{
 			System.out.println(currentPlayer+"PLAYER TURN");
 		    System.out.println("Press a to roll Dice");
-		    string = scanner.next();
+			string = scanner.next();
 			diceValue=playerController.rollDice();
 			System.out.println(diceValue);
-			playerPosition=calculatePlayerValue(playerPosition,diceValue);
+			}
+			while(diceValue==1);
+			
+			
+				playerPosition=1;
+				
+			//continuePlay();
+			}
+			while("a".equals(string));
+			
+			}
+			
+			
+			//public void startPlay(int currentPlayer){
+			//do{
+				 //int player=currentPlayer;
+			
+				//continuePlay();
+				
+				
+			
+		
+			
+			//public void continuePlay(){
+			//	do{
+			//diceValue=playerController.rollDice();
+				//playerPosition=calculatePlayerValue(playerPosition,diceValue);
+//playerPosition=calculatePlayerValue(playerPosition,diceValue);
+				
 			//currentPlayerPosition=playerPosition;
 			
-			System.out.println(currentPlayer+" Player :: " + playerPosition);
+			/*System.out.println(currentPlayer+" Player :: " + playerPosition);
 			System.out.println("------------------\n<<<<<<<<<<<>>>>>>>>>>>");
 			if(isWin(currentPlayer))
 			{
 				System.out.println("Winner"+currentPlayer+"Player");
 				return;
 			}
-		
-			}
-			}
-		
-			while("a".equals(string));
 		}
+			while("a".equals(string));
+		}*/
 	
 	public int calculatePlayerValue(int playerScore, int diceValue){
 	
@@ -78,9 +95,4 @@ public class SnakeAndLadderController{
 	
 	return winpoint== playerScore;
 }
-
-	
-
-
-
 }

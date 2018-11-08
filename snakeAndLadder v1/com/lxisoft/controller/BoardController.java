@@ -41,7 +41,6 @@ public class BoardController{
 			
 		}
 		
-		//printCell();
 	}
 	
 	public void constructSnakePosition(){
@@ -51,7 +50,6 @@ public class BoardController{
 			snake[3] = new Snake(40,21);
 			snake[4] = new Snake(92,4);
 			
-			//System.out.println(head);
 			head1 = snake[1].getHeadPosition();
 			tail1 = snake[1].getTailPosition();
 			
@@ -72,7 +70,6 @@ public class BoardController{
 			ladder[3] = new Ladder(32,60);
 			ladder[4] = new Ladder(4,88);
 			
-			//System.out.println(start);
 			
 			
 			
@@ -125,12 +122,6 @@ public class BoardController{
 					
 					cellNumber++;
 					
-			//for ( i= 1;i<=4;i++){
-			//head = snake[1].getHeadPosition();
-			//tail = snake[i].getTailPosition();
-			//start = ladder[i].getStartPosition();
-			//end = ladder[i].getEndPosition();
-					
 					if(cellNumber==head1||cellNumber==head2||cellNumber==head3||cellNumber==head4){
 					System.out.print("SH\t");
 				}
@@ -156,28 +147,5 @@ public class BoardController{
 			System.out.println("\n\n\n");
 			}
 	}
-	/*public void addSnakeToBoard(){
-	for(cellNumber=1;cellNumber<=100;cellNumber++){
-				
-				if(cellNumber==head){
-								
-								//cellNumber=
-					System.out.print(cellNumber+"H\t");	
-							
-					}
-			}
-			}
-
-	public void addLadderToBoard(){
-	for(cellNumber=1;cellNumber<=100;cellNumber++){
-				
-				if(cellNumber==start){
-								
-					System.out.print(cellNumber+"S\t");	
-							
-					}
-			}
-
-	}	*/
 
 }
