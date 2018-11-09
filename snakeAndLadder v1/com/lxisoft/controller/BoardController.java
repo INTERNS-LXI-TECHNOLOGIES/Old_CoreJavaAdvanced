@@ -11,14 +11,14 @@ public class BoardController{
 	Snake[] snake=new Snake[10]; 
 	Ladder[] ladder= new Ladder[10];
 	
-	int i,j,head1,head2,head3,head4,tail1,tail2,tail3,tail4,start1,start2,start3,start4,end1,end2,end3,end4,cellNumber;
-
+	int head1,head2,head3,head4,tail1,tail2,tail3,tail4,start1,start2,start3,start4,end1,end2,end3,end4,cellNumber;
+	int row,column;
 	public void initBoard(){
-		for (i=1;i<=10;i++){
+		for (row=1;row<=10;row++){
 			
-			for(j=1;j<=10;j++){
+			for(column=1;column<=10;column++){
 				
-			board[i][j]=null;
+			board[row][column]=null;
 			
 			}
 		}
@@ -35,6 +35,7 @@ public class BoardController{
 	}
 
 	public void initCell(){
+		int i;
 	for ( i= 1;i<=100;i++){
 			cell[i] = new Cell(i);
 			cellNumber=cell[i].getCellNumber();
@@ -45,10 +46,10 @@ public class BoardController{
 	
 	public void constructSnakePosition(){
 
-			snake[1] = new Snake(56,2);
-			snake[2] = new Snake(31,5);
-			snake[3] = new Snake(40,21);
-			snake[4] = new Snake(92,4);
+			snake[1] = new Snake(40,2);
+			snake[2] = new Snake(56,24);
+			snake[3] = new Snake(61,29);
+			snake[4] = new Snake(92,34);
 			
 			head1 = snake[1].getHeadPosition();
 			tail1 = snake[1].getTailPosition();
@@ -66,11 +67,9 @@ public class BoardController{
 
 	public void constructLadderPosition() {
 			ladder[1] = new Ladder(10,22);
-			ladder[2] = new Ladder(26,44);
-			ladder[3] = new Ladder(32,60);
-			ladder[4] = new Ladder(4,88);
-			
-			
+			ladder[2] = new Ladder(4,44);
+			ladder[3] = new Ladder(26,60);
+			ladder[4] = new Ladder(32,88);
 			
 			
 			start1 = ladder[1].getStartPosition();
@@ -87,29 +86,37 @@ public class BoardController{
 
 	}
 	public void printCell(){
+	int w=4,x=4,y=4,z=4;
+	System.out.println("\n\t\t\t************Snake And Ladder************\n\n");
 	
-	for(i=1;i<=10;i++){
+	for(row=1;row<=10;row++){
 			
-			if(i%2==1){
+			if(row%2==1){
 				
-			for(j=1;j<=10;j++){
+			for(column=1;column<=10;column++){
 				
 			
 				if(cellNumber==head1||cellNumber==head2||cellNumber==head3||cellNumber==head4){
-					System.out.print("SH\t");
+					System.out.print("<<SH"+w+"\t");
+					w--;
 				}
+			
 				else if(cellNumber==tail1||cellNumber==tail2||cellNumber==tail3||cellNumber==tail4){
-					System.out.print("ST\t");
+					System.out.print("ST"+x+">>\t");
+					x--;
 				}
 				else if(cellNumber==start1||cellNumber==start2||cellNumber==start3||cellNumber==start4){
-					System.out.print("LS\t");
+					System.out.print("##LS"+y+"\t");
+					y--;
 				}
 				else if(cellNumber==end1||cellNumber==end2||cellNumber==end3||cellNumber==end4){
-					System.out.print("LE\t");
+					System.out.print("LE"+z+"##\t");
+					z--;
 				}
 				else{				
-					System.out.print(cellNumber+"\t");			
+					System.out.print("["+cellNumber+"]\t");			
 					}
+			
 					cellNumber--;
 			}
 			}	
@@ -118,26 +125,30 @@ public class BoardController{
 				
 			 cellNumber=cellNumber-10;
 			 
-				for(j=1;j<=10;j++){
+				for(column=1;column<=10;column++){
 					
 					cellNumber++;
 					
 					if(cellNumber==head1||cellNumber==head2||cellNumber==head3||cellNumber==head4){
-					System.out.print("SH\t");
+					System.out.print("<<SH"+w+"\t");
+					w--;
 				}
 				else if(cellNumber==tail1||cellNumber==tail2||cellNumber==tail3||cellNumber==tail4){
-					System.out.print("ST\t");
+					System.out.print("ST"+x+">>\t");
+					x--;
 				}
 				else if(cellNumber==start1||cellNumber==start2||cellNumber==start3||cellNumber==start4){
-					System.out.print("LS\t");
+					System.out.print("##LS"+y+"\t");
+					y--;
 				}
 				else if(cellNumber==end1||cellNumber==end2||cellNumber==end3||cellNumber==end4){
-					System.out.print("LE\t");
+					System.out.print("LE"+z+"##\t");
+					z--;
 				}
 				
 				else{
 					
-					System.out.print(cellNumber+"\t");
+					System.out.print("["+cellNumber+"]\t");
 				}
 				}
 			

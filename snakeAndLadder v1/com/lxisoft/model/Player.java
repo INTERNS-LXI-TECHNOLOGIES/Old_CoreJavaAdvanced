@@ -8,6 +8,8 @@ int position;
 
 int playerId;
 
+String coinColour;
+
 
 public Player(int playerId){
 	this.playerId = playerId;
@@ -25,6 +27,16 @@ public String getName() {
 
 public void setName(String name) {
 	this.name = name;
+
+}
+
+public String getCoinColour() {
+	return coinColour;
+	
+}
+
+public void setCoinColour(String coinColour) {
+	this.coinColour = coinColour;
 
 }
 
