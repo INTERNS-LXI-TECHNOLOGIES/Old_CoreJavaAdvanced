@@ -12,7 +12,7 @@ public class SnakeAndLadderController{
 	Scanner scanner = new Scanner(System.in);
 
 	int winpoint = 100,diceValue=0,i;
-	int player1position=0,player2position=0,noOfUsers;
+	int playerPosition,noOfUsers;
 	int playerScore=0,key;
 	int currentPlayer=0;
 	String string;
@@ -20,22 +20,16 @@ public class SnakeAndLadderController{
 	
 	public SnakeAndLadderController(){
 		boardController.initBoard();
-		
-		
 		startGame();
 	}
 	
-			public void startGame(){
+	public void startGame(){
 				
-				
-			System.out.println("Select Number of Players....\n[1.2Players]\t[2.3Palyers]\t[3.4Players]");
-			
-		    key= scanner.nextInt();
-	
-			switch(key){
-				
+		System.out.println("Select Number of Players....\n[1.2Players]\t[2.3Palyers]\t[3.4Players]");
+		key= scanner.nextInt();
+		switch(key){
 				case 1:playerController.createPlayer(noOfUsers=2);
-					playGame();
+					playGame(noOfUsers=2);
 			
 				break;
 				
@@ -48,80 +42,50 @@ public class SnakeAndLadderController{
 				default:System.out.println("Invalied......");
 				startGame();
 			}
+	}
 			
-			
-			}
-			
-	public void playGame(){
+	public void playGame(int users){
 		
-	
+		System.out.println("<<<<<<<<<<<<<<<<GAME STARTS>>>>>>>>>>>>>>");
 		do{
-		System.out.println(currentPlayer==-1?"\n\nFIRST PLAYER TURN":"\n\nSECOND PLAYER TURN");
-		System.out.println("Press a to roll Dice");
-		string = scanner.nextLine();
-		diceValue = playerController.rollDice();
-		
-	
-		
-		if(currentPlayer == -1){
+		for(i=1;i<=users;i++){
+		System.out.println("TURN OF PLAYER"+playerController.player[i].getPlayerId()+" :");
+		System.out.println("position:"+playerController.player[i].getPosition());
+		playerScore=playerController.player[i].getPosition();
+			if(playerScore==0){
+			System.out.println("Press a to roll Dice");
+			string = scanner.nextLine();
+			diceValue = playerController.rollDice();
 			
-			player1position = calculatePlayerValue(player1position,diceValue);
-			System.out.println("First Player :: " + player1position);
-			System.out.println("Second Player :: " + player2position);
-			System.out.println("------------------\n<<<<<<<<<<<>>>>>>>>>>>");
-			if(isWin(player1position))
-			{
-				System.out.println("Winner : First Player");
-				return;
+				while(diceValue==1){
+				//ayerPosition=1;
+				playerScore=playerScore+diceValue;
+				playerController.player[i].setPosition(playerScore);
+			//ytem.out.println("position:"+playerController.player[i].getPosition());
+				}
 			}
+	//ontinueGame(playerScore);
+			System.out.println("position:"+playerController.player[i].getPosition());
 		}
 		
-		else{
+		}while("a".equals(string));	
+		//turn playerScore;
+	}
 			
-			player2position = calculatePlayerValue(player2position,diceValue);
-			System.out.println("First Player :: " + player1position);
-			System.out.println("Second Player :: " + player2position);
-			System.out.println("------------------\n<<<<<<<<<<<>>>>>>>>>>>");
-			if(isWin(player2position))
-			{
-				System.out.println("Winner : Second Player");
-				return;
-			}
-		}
-		}while("a".equals(string));
-		
-		currentPlayer= -currentPlayer;
-
-}
-
-public int calculatePlayerValue(int playerScore, int diceValue){
-	
-	System.out.println("Dice :"+diceValue);
-	playerScore = playerScore + diceValue;
-	
-	if(playerScore > winpoint){
-		
-		playerScore = playerScore - diceValue;
-		return playerScore;
+	public void continueGame(int playerScore){
+				do{
+		 if(playerPosition>=1&&playerPosition<=100){
+			diceValue=playerController.rollDice();
+			playerPosition=playerPosition+diceValue;
+			System.out.println(playerPosition);
+				}
+		/*else if(playerPosition==100){
+					System.out.println("Player"+i+"win");
+				}*/
+			
+			else{
+					System.out.println("*********");
+				}
+		}while("a".equals(string));	
 	}
-	
-	/*if(null!=snake.get(player)){
-		
-		System.out.println("swallowed by snake");
-		playerScore= snake.get(player);
-	}
-	
-	if(null!=ladder.get(player)){
-		
-		System.out.println("climb up the ladder");
-		playerScore= ladder.get(player);
-	}*/
-	return playerScore;
-}
-
-public boolean isWin(int playerScore){
-	
-	return winpoint == playerScore;
-}
-
 }

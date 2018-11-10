@@ -4,11 +4,11 @@ public class Player {
 	
 private String name;
 
-int position;
+private int position;
 
-int playerId;
+private int playerId;
 
-String coinColour;
+private String coinColour;
 
 
 public Player(int playerId){
