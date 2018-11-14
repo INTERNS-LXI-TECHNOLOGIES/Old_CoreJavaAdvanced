@@ -7,6 +7,15 @@ public class BoardController{
 	SnakeController s=new SnakeController();
 	LadderController l=new LadderController();
 	int i=4,j=4,k=4,m=4;
+
+
+
+	//int sh1=s.sh1,sh2=s.sh2,sh3=s.sh3,sh4=s.sh4;
+	//int lh1=l.lh1,lh2=l.lh2,lh3=l.lh3,lh4=l.lh4;
+
+	//int st1=s.st1,st2=s.st2,st3=s.st3,st4=s.st4;
+	//int lt1=l.lt1,lt2=l.lt2,lt3=l.lt3,lt4=l.lt4;
+
 	public void printCell(){
 
 		cell.createCell();
@@ -100,4 +109,5 @@ public class BoardController{
 						m--;
 
 	}
+
 }

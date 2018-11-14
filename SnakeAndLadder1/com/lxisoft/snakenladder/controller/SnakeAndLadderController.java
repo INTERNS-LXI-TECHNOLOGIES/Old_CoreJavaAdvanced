@@ -8,6 +8,7 @@ public class SnakeAndLadderController{
 	DieController die;
 	Scanner scan=new Scanner(System.in);
 	int playerno,i;
+		int point=0;
 	public SnakeAndLadderController(){
 		board.printCell();
 		gamePlayer();
@@ -26,25 +27,33 @@ public class SnakeAndLadderController{
 	}
 	public void playGame(){
 
-		for(int i=0;i<playerno;i++)
+		for(int i=0;i<playerno;i++){
+			if(player[i].point[i]<=100){
+		
 		player[i].startPlay(i);
+	}
+	}
 		
 }
 public void startGame()
 {
-	int j=0;
-	int point=0;
-	for(int i=point;i<=100;i++)
-	do{
-		playGame();
-		point=player[j].point[i];
-		j++;
-
-
-	}while(point==0);
-	System.out.println(point);
-}
-
-
 	
+
+	do{
+	
+	for(int j=0;j<playerno;j++)
+	{
+		
+		for(int i=0;i<=j;i++)
+		{
+			
+			playGame();
+			point=player[j].point[i];
+		}
+
+	}
+}while(point<=100);
+
+}	
+
 }
