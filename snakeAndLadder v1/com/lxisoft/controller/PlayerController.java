@@ -7,39 +7,28 @@ import com.lxisoft.model.*;
 
 public class PlayerController {
 	
-	int i,id,diceValue=0;
+	int i,position,diceValue,id1,id;
 	String name,string;
-	
-	int noOfUsers=0;
-	//int currentPlayer=1;
-	
-		//String name;
-	Player[] player=new Player[10];;
-	
+	BoardController boardController;
+	Player[] player=new Player[10];
+	Coin coin;
+	int[] score = new int[100];
+	DiceController diceController;
 	Scanner scanner=new Scanner(System.in);
 
-	public int rollDice()
-	{
-	    int n = 0;
-	    Random random = new Random();
-	    n=random.nextInt(7);
-	    return (n==0?1:n);
-	}
-
-	
 	public int createPlayer(int users){
 		
 		for(i =1;i<=users;i++){
 			player[i] = new Player(i);
 			System.out.println("Name:");
-			player[i].setName(scanner.nextLine());			
+			player[i].setName(scanner.nextLine());
+			coin = new Coin(i);			
 			selectCoinColour();
+			
 		}
 			for(i=1;i<=users;i++){
-			id=player[i].getPlayerId();			
-			System.out.print("Player"+id+":");
-			System.out.print("  "+player[i].getCoinColour()+"\n");
-		}
+				showPlayerList();
+			}
 		return users;
 	}
 	
@@ -47,24 +36,101 @@ public class PlayerController {
 		String key;
 		System.out.println("****Choose a coin****\n[1.Green] [2.Blue] [3.Red] [4.Yellow]");
 		key=scanner.nextLine();
-		//String number = "10";
 		int num = Integer.parseInt(key);			
-	//System.out.println(num);
+
 		 switch(num){
 				 case 1:player[i].setCoinColour("Green\n");
-				 player[i].setPosition(0);
 				 break;
 				 case 2:player[i].setCoinColour("Blue\n");
-				 player[i].setPosition(0);
 				 break;
 				 case 3:player[i].setCoinColour("Red\n");
-				 player[i].setPosition(0);
 				 break;
 				 case 4:player[i].setCoinColour("Yellow\n");
-				 player[i].setPosition(0);
 				 break;
 				 default:System.out.println("Invalied");
 			 }
 	}
+	public void showPlayerList(){
+		
+	System.out.println("Player"+player[i].getPlayerId()+":\nName:"+player[i].getName()+"\nCoin:"+player[i].getCoinColour());
+		
+	}
 	
+	public void startPlay(int k){
+		if(player[k].getScore()<=100){
+		System.out.println("Turn of Player"+player[k].getPlayerId());
+//System.out.println("Score:"+player[k].getScore());
+		startRollDice(k);
+		
+		}
+	}
+	
+	public void startRollDice(int id){
+			
+			System.out.println("Press 0 to Roll Dice..");
+			int n=scanner.nextInt();
+			if(n==0){
+			diceController=new DiceController();
+			diceValue=diceController.dice.getDiceValue();
+			changeScore(id);
+			if(player[id].getScore()<100){
+
+				if(diceValue==1||diceValue==6){
+					System.out.println("Roll Again.......");
+					startRollDice(id);
+				}
+			}else{
+				System.out.println("Congrats..........You Win the Game..........\nWinner:"+player[id].getName());
+				System.exit(0);
+			}		
+		}
+	}
+
+	public void changeScore(int id){
+		if(score[id]==0&&diceValue==1){
+			score[id]=1;
+			player[id].setScore(score[id]);
+			System.out.println("Score:"+player[id].getScore());
+		}
+		else if(score[id]==0&&diceValue>=1){
+			score[id]=0;
+			player[id].setScore(score[id]);
+			System.out.println("Score:"+player[id].getScore());
+
+		}
+		else if(score[id]>=1&&score[id]<=94&&diceValue>=1){
+			score[id]+=diceValue;
+			player[id].setScore(score[id]);
+			System.out.println("Score:"+player[id].getScore());
+		}
+		else if(score[id]>94&&score[id]<=100){
+			finalRound(id);
+			System.out.println("Score:"+player[id].getScore());
+		}
+	}
+
+	public void finalRound(int id1){
+		if(score[id1]==95&&diceValue<6){
+			score[id1]+=diceValue;
+			player[id1].setScore(score[id1]);
+		}
+		else if(score[id1]==96&&diceValue<5){
+			score[id1]+=diceValue;
+			player[id1].setScore(score[id1]);
+		}
+		else if(score[id1]==97&&diceValue<4){
+			score[id1]+=diceValue;
+			player[id1].setScore(score[id1]);
+		}
+		else if(score[id1]==98&&diceValue<3){
+			score[id1]+=diceValue;
+			player[id1].setScore(score[id1]);
+		}
+		else if(score[id1]==99&&diceValue==1){
+			score[id1]+=diceValue;
+			player[id1].setScore(score[id1]);
+		}
+	
+	}	
+
 }

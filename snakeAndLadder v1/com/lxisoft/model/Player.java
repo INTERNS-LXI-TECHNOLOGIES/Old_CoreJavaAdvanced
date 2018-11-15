@@ -2,13 +2,13 @@ package com.lxisoft.model;
 
 public class Player {
 	
-private String name;
+String name;
 
-private int position;
+int score;
 
-private int playerId;
+int playerId;
 
-private String coinColour;
+String coinColour;
 
 
 public Player(int playerId){
@@ -40,13 +40,13 @@ public void setCoinColour(String coinColour) {
 
 }
 
-public int getPosition() {
-	return position;
+public int getScore() {
+	return score;
 	
 }
 
-public void setPosition(int position) {
-	this.position = position;
+public void setScore(int score) {
+	this.score= score;
 
 }
 }

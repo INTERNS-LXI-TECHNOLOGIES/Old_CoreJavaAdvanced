@@ -13,6 +13,7 @@ public class BoardController{
 	
 	int head1,head2,head3,head4,tail1,tail2,tail3,tail4,start1,start2,start3,start4,end1,end2,end3,end4,cellNumber;
 	int row,column;
+	int w=4,x=4,y=4,z=4;
 	public void initBoard(){
 		for (row=1;row<=10;row++){
 			
@@ -86,7 +87,7 @@ public class BoardController{
 
 	}
 	public void printCell(){
-	int w=4,x=4,y=4,z=4;
+	
 	System.out.println("\n\t\t\t************Snake And Ladder************\n\n");
 	
 	for(row=1;row<=10;row++){
@@ -97,21 +98,17 @@ public class BoardController{
 				
 			
 				if(cellNumber==head1||cellNumber==head2||cellNumber==head3||cellNumber==head4){
-					System.out.print("<<SH"+w+"\t");
-					w--;
+					addSnakeHead();
 				}
 			
 				else if(cellNumber==tail1||cellNumber==tail2||cellNumber==tail3||cellNumber==tail4){
-					System.out.print("ST"+x+">>\t");
-					x--;
+					addSnakeTail();
 				}
 				else if(cellNumber==start1||cellNumber==start2||cellNumber==start3||cellNumber==start4){
-					System.out.print("##LS"+y+"\t");
-					y--;
+					addLadderStart();
 				}
 				else if(cellNumber==end1||cellNumber==end2||cellNumber==end3||cellNumber==end4){
-					System.out.print("LE"+z+"##\t");
-					z--;
+					addLadderEnd();
 				}
 				else{				
 					System.out.print("["+cellNumber+"]\t");			
@@ -130,20 +127,16 @@ public class BoardController{
 					cellNumber++;
 					
 					if(cellNumber==head1||cellNumber==head2||cellNumber==head3||cellNumber==head4){
-					System.out.print("<<SH"+w+"\t");
-					w--;
+					addSnakeHead();
 				}
 				else if(cellNumber==tail1||cellNumber==tail2||cellNumber==tail3||cellNumber==tail4){
-					System.out.print("ST"+x+">>\t");
-					x--;
+					addSnakeTail();
 				}
 				else if(cellNumber==start1||cellNumber==start2||cellNumber==start3||cellNumber==start4){
-					System.out.print("##LS"+y+"\t");
-					y--;
+					addLadderStart();
 				}
 				else if(cellNumber==end1||cellNumber==end2||cellNumber==end3||cellNumber==end4){
-					System.out.print("LE"+z+"##\t");
-					z--;
+					addLadderEnd();
 				}
 				
 				else{
@@ -157,6 +150,22 @@ public class BoardController{
 			
 			System.out.println("\n\n\n");
 			}
+	}
+	public void addSnakeHead(){
+		System.out.print("<<SH"+w+"\t");
+		w--;
+	}
+	public void addSnakeTail(){
+		System.out.print("ST"+x+">>\t");
+		x--;
+	}
+	public void addLadderStart(){
+		System.out.print("##LS"+y+"\t");
+		y--;
+	}
+	public void addLadderEnd(){
+		System.out.print("LE"+z+"##\t");
+		z--;
 	}
 
 }
