@@ -13,7 +13,7 @@ public class PlayerController{
 	PlayerCoin coin;
 	String name;
 	int rollno;
-	int point[]=new int[100];
+	int point[]=new int[500];
 	int playerno;
 	Random ran=new Random();
 	Scanner scan = new Scanner(System.in);
@@ -28,28 +28,28 @@ public class PlayerController{
 
 	public void startPlay(int k)
 	{
-		if(player.getPoint()<=100){
-		System.out.println("Turn of :"+player.getName()+":\t"+coin.getCoin()+player.getPoint());
+		point[k]=player.getPoint();
+		if(point[k]<100){
+		System.out.println("Turn of :"+player.getName()+":\t"+coin.getCoin()+point[k]);
 		rollDie(k);
 	}
 	}
 	public void rollDie(int id)
 	{
-
 		System.out.println("Enter 1 to rolling the die");
 		rollno=scan.nextInt();
 		if(rollno==1)
 		{
 			die=new DieController();
 			moveCoin(id);
-			System.out.println(player.getPoint());
-			if(player.getPoint()<100){
+			System.out.println(point[id]);
+			if(point[id]<100){
 			if(die.roll==1||die.roll==6){
-				System.out.println("Roll again: ");
+				System.out.println("Roll again: "+player.getName());
 				rollDie(id);
 			}
 			}
-			else{
+			else if(point[id]==100){
 
 				System.out.println("You win...\n"+"Winner is....:  "+player.getName());
 				System.exit(0);
@@ -66,7 +66,7 @@ public class PlayerController{
 				player.setPoint(point[id1]);
 				
 			}
-			else if(point[id1]==0&&die.roll>=1)
+			else if(point[id1]==0&&die.roll>=2)
 			{
 				point[id1]=0;
 				player.setPoint(point[id1]);
@@ -79,7 +79,7 @@ public class PlayerController{
 				snakeCheck(id1);
 				ladderCheck(id1);	
 			}
-			else if(point[id1]>94){
+			else if(point[id1]>94&&point[id1]<=100){
 				finalFinishing(id1);
 					
 			}
@@ -91,28 +91,31 @@ public class PlayerController{
 		
 
 	}
-	//int sh1=board.sh1;
 	public void snakeCheck(int sid){
 		snake.createSnake();
 		if(point[sid]==snake.sh1)
 		{
-			point[sid]=point[sid]-(snake.sh1-snake.st1);
+			point[sid]=snake.st1;
 			player.setPoint(point[sid]);
+			System.out.println("Snake1 Entry");
 		}
 		else if(point[sid]==snake.sh2){
 
-			point[sid]=point[sid]-(snake.sh2-snake.st2);
+			point[sid]=snake.st2;
 			player.setPoint(point[sid]);
+			System.out.println("Snake2 Entry");
 		}
 		else if(point[sid]==snake.sh3){
 
-			point[sid]=point[sid]-(snake.sh3-snake.st3);
+			point[sid]=snake.st3;
 			player.setPoint(point[sid]);
+			System.out.println("Snake3 Entry");
 		}
 		else if(point[sid]==snake.sh4){
 
-			point[sid]=point[sid]-(snake.sh4-snake.st4);
+			point[sid]=snake.st4;
 			player.setPoint(point[sid]);
+			System.out.println("Snake4 Entry");
 		}
 
 		
@@ -124,26 +127,30 @@ public class PlayerController{
 
 		if(point[lid]==ladder.lh1)
 		{
-			point[lid]=point[lid]+(ladder.lh1+ladder.lt1);
+			point[lid]=ladder.lt1;
 			player.setPoint(point[lid]);
+			System.out.println("Ladder1 Entry");
 			rollDie(lid);
 		}
 		else if(point[lid]==ladder.lh2){
 
-			point[lid]=point[lid]+(ladder.lh2+ladder.lt2);
+			point[lid]=ladder.lt2;
 			player.setPoint(point[lid]);
+			System.out.println("Ladder2 Entry");
 			rollDie(lid);
 		}
 		else if(point[lid]==ladder.lh3){
 
-			point[lid]=point[lid]+(ladder.lh3+ladder.lt3);
+			point[lid]=ladder.lt3;
 			player.setPoint(point[lid]);
+			System.out.println("Ladder3 Entry");
 			rollDie(lid);
 		}
 		else if(point[lid]==ladder.lh4){
 
-			point[lid]=point[lid]+(ladder.lh4+ladder.lt4);
+			point[lid]=ladder.lt4;
 			player.setPoint(point[lid]);
+			System.out.println("Ladder4 Entry");
 			rollDie(lid);
 		}
 		
@@ -170,6 +177,7 @@ public class PlayerController{
 		point[id2]+=die.roll;
 		player.setPoint(point[id2]);
 	}
+
 
 }
 }
