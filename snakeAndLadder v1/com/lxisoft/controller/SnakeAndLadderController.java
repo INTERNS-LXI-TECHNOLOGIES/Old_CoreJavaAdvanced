@@ -46,7 +46,6 @@ public class SnakeAndLadderController{
 		do{
 		for(i=1;i<=users;i++){
 		playerController.startPlay(i);
-    //  System.out.println(playerController.score[users]);
 		}
 		}while(playerController.score[users]<=100);
 		

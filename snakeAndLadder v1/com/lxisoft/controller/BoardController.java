@@ -8,12 +8,12 @@ public class BoardController{
 	
 	Board[][] board = new Board[20][20];
 	Cell[] cell = new Cell[150];
-	Snake[] snake=new Snake[10]; 
-	Ladder[] ladder= new Ladder[10];
+	SnakeController snakeController=new SnakeController();
+	LadderController ladderController=new LadderController();
 	
-	int head1,head2,head3,head4,tail1,tail2,tail3,tail4,start1,start2,start3,start4,end1,end2,end3,end4,cellNumber;
-	int row,column;
+	int row,column,cellNumber;
 	int w=4,x=4,y=4,z=4;
+	
 	public void initBoard(){
 		for (row=1;row<=10;row++){
 			
@@ -22,70 +22,27 @@ public class BoardController{
 			board[row][column]=null;
 			
 			}
-		}
-			
-		printBoard();
-		
+		}			
+		printBoard();		
 	}
+	
 	public void printBoard(){
 	
 	initCell();
-	constructSnakePosition();
-	constructLadderPosition();
+	snakeController.constructSnakePosition();
+	ladderController.constructLadderPosition();
 	printCell();
 	}
 
 	public void initCell(){
-		int i;
+	int i;
 	for ( i= 1;i<=100;i++){
 			cell[i] = new Cell(i);
 			cellNumber=cell[i].getCellNumber();
 			
-		}
+		}		
+	}
 		
-	}
-	
-	public void constructSnakePosition(){
-
-			snake[1] = new Snake(40,2);
-			snake[2] = new Snake(56,24);
-			snake[3] = new Snake(61,29);
-			snake[4] = new Snake(92,34);
-			
-			head1 = snake[1].getHeadPosition();
-			tail1 = snake[1].getTailPosition();
-			
-			head2 = snake[2].getHeadPosition();
-			tail2 = snake[2].getTailPosition();
-			
-			head3 = snake[3].getHeadPosition();
-			tail3 = snake[3].getTailPosition();
-			
-			head4 = snake[4].getHeadPosition();
-			tail4 = snake[4].getTailPosition();
-		
-	}
-
-	public void constructLadderPosition() {
-			ladder[1] = new Ladder(10,22);
-			ladder[2] = new Ladder(4,44);
-			ladder[3] = new Ladder(26,60);
-			ladder[4] = new Ladder(32,88);
-			
-			
-			start1 = ladder[1].getStartPosition();
-			end1 = ladder[1].getEndPosition();
-			
-			start2 = ladder[2].getStartPosition();
-			end2 = ladder[2].getEndPosition();
-			
-			start3 = ladder[3].getStartPosition();
-			end3 = ladder[3].getEndPosition();
-			
-			start4 = ladder[4].getStartPosition();
-			end4 = ladder[4].getEndPosition();
-
-	}
 	public void printCell(){
 	
 	System.out.println("\n\t\t\t************Snake And Ladder************\n\n");
@@ -97,50 +54,44 @@ public class BoardController{
 			for(column=1;column<=10;column++){
 				
 			
-				if(cellNumber==head1||cellNumber==head2||cellNumber==head3||cellNumber==head4){
+				if(cellNumber==snakeController.head1||cellNumber==snakeController.head2||cellNumber==snakeController.head3||cellNumber==snakeController.head4){
 					addSnakeHead();
 				}
 			
-				else if(cellNumber==tail1||cellNumber==tail2||cellNumber==tail3||cellNumber==tail4){
+				else if(cellNumber==snakeController.tail1||cellNumber==snakeController.tail2||cellNumber==snakeController.tail3||cellNumber==snakeController.tail4){
 					addSnakeTail();
 				}
-				else if(cellNumber==start1||cellNumber==start2||cellNumber==start3||cellNumber==start4){
+				else if(cellNumber==ladderController.start1||cellNumber==ladderController.start2||cellNumber==ladderController.start3||cellNumber==ladderController.start4){
 					addLadderStart();
 				}
-				else if(cellNumber==end1||cellNumber==end2||cellNumber==end3||cellNumber==end4){
+				else if(cellNumber==ladderController.end1||cellNumber==ladderController.end2||cellNumber==ladderController.end3||cellNumber==ladderController.end4){
 					addLadderEnd();
 				}
 				else{				
 					System.out.print("["+cellNumber+"]\t");			
-					}
-			
+					}			
 					cellNumber--;
 			}
 			}	
 			
-			else{
-				
-			 cellNumber=cellNumber-10;
-			 
-				for(column=1;column<=10;column++){
-					
+			else{				
+			 cellNumber=cellNumber-10;			 
+				for(column=1;column<=10;column++){					
 					cellNumber++;
 					
-					if(cellNumber==head1||cellNumber==head2||cellNumber==head3||cellNumber==head4){
+					if(cellNumber==snakeController.head1||cellNumber==snakeController.head2||cellNumber==snakeController.head3||cellNumber==snakeController.head4){
 					addSnakeHead();
 				}
-				else if(cellNumber==tail1||cellNumber==tail2||cellNumber==tail3||cellNumber==tail4){
+				else if(cellNumber==snakeController.tail1||cellNumber==snakeController.tail2||cellNumber==snakeController.tail3||cellNumber==snakeController.tail4){
 					addSnakeTail();
 				}
-				else if(cellNumber==start1||cellNumber==start2||cellNumber==start3||cellNumber==start4){
+				else if(cellNumber==ladderController.start1||cellNumber==ladderController.start2||cellNumber==ladderController.start3||cellNumber==ladderController.start4){
 					addLadderStart();
 				}
-				else if(cellNumber==end1||cellNumber==end2||cellNumber==end3||cellNumber==end4){
+				else if(cellNumber==ladderController.end1||cellNumber==ladderController.end2||cellNumber==ladderController.end3||cellNumber==ladderController.end4){
 					addLadderEnd();
-				}
-				
-				else{
-					
+				}	
+				else{	
 					System.out.print("["+cellNumber+"]\t");
 				}
 				}
