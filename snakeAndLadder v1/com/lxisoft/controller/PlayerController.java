@@ -38,7 +38,7 @@ public class PlayerController {
 	
 	public void selectCoinColour(){
 		String key;
-		System.out.println("****Choose a coin****\n[1.Green] [2.Blue] [3.Red] [4.Yellow]");
+		System.out.println(">>>>Choose a coin::\n[1.Green] [2.Blue] [3.Red] [4.Yellow]");
 		key=scanner.nextLine();
 		int num = Integer.parseInt(key);			
 
@@ -56,13 +56,13 @@ public class PlayerController {
 	}
 	public void showPlayerList(){
 		
-	System.out.println("Player"+player[i].getPlayerId()+":\nName:"+player[i].getName()+"\nCoin:"+player[i].getCoinColour());
+	System.out.println("Player "+player[i].getPlayerId()+":\nName::"+player[i].getName()+"\nCoin::"+player[i].getCoinColour());
 		
 	}
 	
 	public void startPlay(int k){
 		if(player[k].getScore()<=100){
-		System.out.println("*********************\nTurn of Player"+player[k].getPlayerId());
+		System.out.println("\n*********************\nTurn of Player  "+player[k].getName());
 		startRollDice(k);
 		
 		}
@@ -79,11 +79,11 @@ public class PlayerController {
 			if(player[id].getScore()<100){
 
 				if(diceValue==1||diceValue==6){
-					System.out.println("Roll Again......."+player[id].getName());
+					System.out.println("Roll Again.......  "+player[id].getName());
 					startRollDice(id);
 				}
 			}else{
-				System.out.println("Congrats..........You Win the Game..........\nWinner:"+player[id].getName());
+				System.out.println("Congrats.........."+player[id].getName()+"  You Win the Game..........\n");
 				System.exit(0);
 			}		
 		}
@@ -93,24 +93,24 @@ public class PlayerController {
 		if(score[id]==0&&diceValue==1){
 			score[id]=1;
 			player[id].setScore(score[id]);
-			System.out.println("Score:"+player[id].getScore());
+			System.out.println("Score::"+player[id].getScore());
 		}
 		else if(score[id]==0&&diceValue>=1){
 			score[id]=0;
 			player[id].setScore(score[id]);
-			System.out.println("Score:"+player[id].getScore());
+			System.out.println("Score::"+player[id].getScore());
 
 		}
 		else if(score[id]>=1&&score[id]<=94&&diceValue>=1){
 			score[id]+=diceValue;
 			player[id].setScore(score[id]);
-			System.out.println("Score:"+player[id].getScore());
+			System.out.println("Score::"+player[id].getScore());
 			checkForSnake(id);
 			checkForLadder(id);
 		}
 		else if(score[id]>94&&score[id]<=100){
 			finalRound(id);
-			System.out.println("Score:"+player[id].getScore());
+			System.out.println("Score::"+player[id].getScore());
 		}
 	}
 

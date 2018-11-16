@@ -2,25 +2,25 @@ package com.lxisoft.controller;
 
 import java.util.*;
 
-import com.lxisoft.model.*;
-import com.lxisoft.controller.*;
+import com.lxisoft.clearscreen.*;
 
-public class SnakeAndLadderController{
+public class SnakeAndLadderController {
 	
 	BoardController boardController = new BoardController();
 	PlayerController playerController = new PlayerController();
 	DiceController diceController;
 	Scanner scanner = new Scanner(System.in);
+	Cls clr=new Cls();
 
 	int i,key,noOfUsers;
 	String string;
 
-	public SnakeAndLadderController(){
+	public SnakeAndLadderController() throws Exception{
 		boardController.initBoard();
 		startGame();
 	}
 	
-	public void startGame(){
+	public void startGame()throws Exception{
 				
 		System.out.println("Select Number of Players....\n[1.2Players]\t[2.3Palyers]\t[3.4Players]");
 		key= scanner.nextInt();
@@ -30,9 +30,11 @@ public class SnakeAndLadderController{
 				break;
 				
 				case 2:playerController.createPlayer(noOfUsers=3);
+					playGame(noOfUsers=3);
 				break;
 				
 				case 3:playerController.createPlayer(noOfUsers=4);
+					playGame(noOfUsers=4);
 				break;
 				
 				default:System.out.println("Invalied......");
@@ -40,12 +42,13 @@ public class SnakeAndLadderController{
 			}
 	}
 			
-	public void playGame(int users){
+	public void playGame(int users)throws Exception{
 		
 		System.out.println("<<<<<<<<<<<<<<<<GAME STARTS>>>>>>>>>>>>>>");
 		do{
 		for(i=1;i<=users;i++){
 		playerController.startPlay(i);
+		clr.cls();
 		}
 		}while(playerController.score[users]<=100);
 		
