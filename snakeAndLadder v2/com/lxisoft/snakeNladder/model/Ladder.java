@@ -1,19 +1,11 @@
 package com.lxisoft.snakeNladder.model;
 
-public class Ladder{
-	int startPosition;
-	int endPosition;
-	public Ladder(int startPosition, int endPosition){
-		this.startPosition = startPosition;
-		this.endPosition = endPosition;
-	}
+public class Ladder extends Component{
+		public Ladder(int id,Cell startCell,Cell endCell){
+		setId(id);
+		setStart(startCell);
+		setEnd(endCell);
 	
-	public int getEndPosition(){
-	return endPosition;
-	}
-
-	public int getStartPosition(){
-	return startPosition;
 	}
 	
 }

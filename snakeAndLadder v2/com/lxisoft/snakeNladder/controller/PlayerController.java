@@ -10,45 +10,60 @@ public class PlayerController{
 	Scanner scanner= new Scanner(System.in);
 	
 	
-	int i,users;
+	int users,i,key;
+	String k;
+	String  Orange,Green,Blue,Red,Yellow,Rose,Violet,Black,White,Brown;
 	
-	
-		public void createPlayer(int users){
+	public void createPlayer(int users){
 		
 		for(i =1;i<=users;i++){
 			player[i] = new Player(i);
 			System.out.println("Name::");
 			player[i].setName(scanner.nextLine());
-			coin = new Coin(i);
-			System.out.println("Select coin::");
 			
+			System.out.println("Select coin::");
+			coin=selectCoin(i);
+			player[i].setCoin(coin);
 			
 		}
 		for(i=1;i<=users;i++){
 			showPlayerList();
 		}
-		}
+	}
 	
 	public void showPlayerList(){
 		
-	System.out.println("Player "+player[i].getPlayerId()+":\nName::"+player[i].getName()+"Coin"+player[i].getCoin());
+	System.out.println("Player "+player[i].getPlayerId()+":\nName::"+player[i].getName()+"\tCoin::"+player[i].getCoin().getCoinColour());
 		
 	}
-	public void selectCoin(int id){
-		String key;
-		System.out.println(">>>[] [1.Green] [2.Blue] [3.Red] [4.Yellow] [5.Rose] [6.Violet] [7.Black] [8.White] [9.Brown] ");
-		key=scanner.nextLine();
-		int num = Integer.parseInt(key);			
-
-		/* switch(num){
-				 case 1:player[i].setCoin("Green\n");
-				 break;
-				 case 2:player[i].setCoin("Blue\n");
-				 break;
-				 case 3:player[i].setCoinColour("Red\n");
-				 break;
-				 case 4:player[i].setCoinColour("Yellow\n");
-				 break;
-				 default:System.out.println("Invalied");
-			 }*/
+	
+	public Coin selectCoin(int i){
+		
+			System.out.println(">>>[0.Orange] [1.Green] [2.Blue] [3.Red] [4.Yellow] [5.Rose] [6.Violet] [7.Black] [8.White] [9.Brown] ");
+			k=scanner.nextLine();
+			int key=Integer.parseInt(k);
+			if(key==0){
+			coin = new Coin(i,"Orange");}
+			else if(key==1){
+			coin=new Coin(i,"Green");}
+			else if(key==2){
+			coin = new Coin(i,"Blue");}
+			else if(key==3){
+			coin = new Coin(i,"Red");}
+			else if(key==4){
+			coin= new Coin(i,"Yellow");}
+			else if(key==5){
+			coin=new Coin(i,"Rose");}
+			else if(key==6){
+			coin= new Coin(i,"Violet");}
+			else if(key==7){
+			coin= new Coin(i,"Black");}
+			else if(key==8){
+			coin= new Coin(i,"White");}
+			else if(key==9){
+			coin=new Coin(i,"Brown");}
+			
+			return coin;
+			
+	}
 }

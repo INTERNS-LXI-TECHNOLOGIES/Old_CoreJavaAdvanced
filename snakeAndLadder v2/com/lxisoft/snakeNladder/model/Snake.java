@@ -1,17 +1,11 @@
 package com.lxisoft.snakeNladder.model;
 
-public class Snake{
-	int headPosition;
-	int tailPosition;
-	public Snake(int headPosition, int tailPosition){
-	this. headPosition= headPosition;
-	this.tailPosition=tailPosition;
-}
+public class Snake extends Component{
 
-public int getHeadPosition(){
-	return headPosition;
-}
-public int getTailPosition(){
-	return tailPosition;
-}
+	public Snake(int id,Cell startCell,Cell endCell){
+		setId(id);
+		setStart(startCell);
+		setEnd(endCell);
+	
+	}
 }
