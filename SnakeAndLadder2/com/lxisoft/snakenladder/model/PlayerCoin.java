@@ -2,7 +2,7 @@ package com.lxisoft.snakenladder.model;
 
 public class PlayerCoin{
 
-	String coin[]={"Red","Blue","Yellow","Green","white","black","orange","brown","purple","violet","pink","rose",""};
+	String coin[]={"Red","Blue","Yellow","Green","pink","orange","black","brown","rose","violet",""};
 	int val;
 	public PlayerCoin(int value){
 		val=value;

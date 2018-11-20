@@ -1,11 +1,12 @@
 package com.lxisoft.snakenladder.controller;
-
 import com.lxisoft.snakenladder.model.*;
 
 public class CellController{
 
-	Cell cell[]=new Cell[100];
+	Cell[] cell=new Cell[150];
+
 	int Num;
+
 	public void createCell(){
 
 		for(int num=1;num<=100;num++){
@@ -14,5 +15,6 @@ public class CellController{
 			Num=cell[num].getNumber();
 
 		}
-}
+
+	}
 }
