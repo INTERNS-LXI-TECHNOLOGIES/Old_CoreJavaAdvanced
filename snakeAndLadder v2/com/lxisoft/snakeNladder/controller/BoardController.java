@@ -12,6 +12,10 @@ public class BoardController{
 	int row,column,cellNumber;
 
 	
+	
+	public BoardController(){
+		initBoard();
+	}
 	public void initBoard(){
 		for (row=1;row<=10;row++){
 			
@@ -27,7 +31,7 @@ public class BoardController{
 	public void printBoard(){
 	
 	initCell();
-	}
+	printCell();	}
 
 	public void initCell(){
 	int i;
@@ -37,5 +41,34 @@ public class BoardController{
 			
 		}
 	
-}
+	}
+	
+	public void printCell(){
+		
+		for(row=1;row<=10;row++){
+			
+			if(row%2==1){
+				
+			for(column=1;column<=10;column++){
+							
+					System.out.print("["+cellNumber+"]\t");						
+					cellNumber--;
+			}
+			}	
+			
+			else{				
+			 cellNumber=cellNumber-10;			 
+				for(column=1;column<=10;column++){					
+					cellNumber++;
+					System.out.print("["+cellNumber+"]\t");
+				}
+			
+				cellNumber=cellNumber-10;
+			}
+			
+			System.out.println("\n\n\n");
+			}
+	}
+
+
 }

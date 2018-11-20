@@ -5,7 +5,7 @@ import com.lxisoft.snakeNladder.model.*;
 public class ComponentController{
 ArrayList<Component> components=new ArrayList<Component>();
 
-	public void setComponents(Component... addComponents) { 
+	public void setComponents(Component[] addComponents) { 
 		for(Component addComponent:addComponents){
 		
 			components.add(addComponent);
