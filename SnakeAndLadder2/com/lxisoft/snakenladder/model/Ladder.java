@@ -3,11 +3,15 @@ package com.lxisoft.snakenladder.model;
 public class Ladder {
 
 
-int ladderStart,ladderEnd;
-	public Ladder(int ladderStart, int ladderEnd) {
+private int ladderStart,ladderEnd;
+	public void setLadderStart(int ladderStart) {
+
 		this.ladderStart=ladderStart;
-		this.ladderEnd=ladderEnd;
+
+	}
+	public void setLadderEnd(int ladderEnd) {
 		
+		this.ladderEnd=ladderEnd;
 	}
 	public int getLadderStart()
 	{

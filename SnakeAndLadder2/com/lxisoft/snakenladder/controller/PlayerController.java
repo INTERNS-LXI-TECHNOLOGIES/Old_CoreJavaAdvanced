@@ -5,9 +5,6 @@ import com.lxisoft.snakenladder.model.*;
 public class PlayerController{
 
 	BoardController board=new BoardController();
-	SnakeController snake=new SnakeController();
-	LadderController ladder=new LadderController();
-
 	Player player;
 	DieController die;
 	PlayerCoin coin;
@@ -76,8 +73,8 @@ public class PlayerController{
 
 				point[id1]+=die.roll;
 				player.setPoint(point[id1]);
-				snakeCheck(id1);
-				ladderCheck(id1);	
+				//snakeCheck(id1);
+				//ladderCheck(id1);	
 			}
 			else if(point[id1]>94&&point[id1]<=100){
 				finalFinishing(id1);
@@ -91,7 +88,7 @@ public class PlayerController{
 		
 
 	}
-	public void snakeCheck(int sid){
+/**	public void snakeCheck(int sid){
 		snake.createSnake();
 		if(point[sid]==snake.sh1)
 		{
@@ -154,24 +151,24 @@ public class PlayerController{
 			rollDie(lid);
 		}
 		
-	}
+	}*/
 	public void finalFinishing(int id2){
 
 	if(point[id2]==95&&die.roll<=5){
 		point[id2]+=die.roll;
 		player.setPoint(point[id2]);
-		snakeCheck(id2);
+		//snakeCheck(id2);
 	}
 	else if(point[id2]==96&&die.roll<=4){
 		point[id2]+=die.roll;
 		player.setPoint(point[id2]);
-		snakeCheck(id2);
+	//	snakeCheck(id2);
 
 	}
 	else if(point[id2]==97&&die.roll<=3){
 		point[id2]+=die.roll;
 		player.setPoint(point[id2]);
-		snakeCheck(id2);
+	//	snakeCheck(id2);
 	}
 	else if(point[id2]==99&&die.roll==1){
 		point[id2]+=die.roll;

@@ -2,11 +2,13 @@ package com.lxisoft.snakenladder.model;
 
 public class Snake{
 
-	int snakeHead,snakeTail;
-	public Snake(int snakeHead, int snakeTail) {
-		this.snakeHead=snakeHead;
+	private int snakeHead,snakeTail;
+	
+	public void setSnakeHead(int snakeHead){
+		this.snakeHead=snakeHead;		
+	}
+	public void setSnakeTail(int snakeTail){
 		this.snakeTail=snakeTail;
-		
 	}
 	public int getSnakeHead()
 	{

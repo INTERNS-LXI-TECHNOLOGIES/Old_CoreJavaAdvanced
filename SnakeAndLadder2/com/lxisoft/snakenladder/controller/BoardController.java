@@ -4,15 +4,18 @@ public class BoardController{
 
 
 	CellController cell=new CellController();
-	SnakeController s=new SnakeController();
-	LadderController l=new LadderController();
-	int i=4,j=4,k=4,m=4;
+
+	ComponentController c=new ComponentController();
+	//SnakeController s=new SnakeController();
+	//LadderController l=new LadderController();
+	int i=1,j=1,k=1,m=1;
 
 	public void printCell(){
 
 		cell.createCell();
-		s.createSnake();
-		l.createLadder();
+		c.createComponent();
+		//s.createSnake();
+		//l.createLadder();
 
 		for(int row=1;row<=10;row++)
 		{
@@ -21,19 +24,28 @@ public class BoardController{
 				for(int column=1;column<=10;column++)
 				{
 
-					if((s.sh1==cell.Num)||(s.sh2==cell.Num)||(s.sh3==cell.Num)||(s.sh4==cell.Num))
+					if((c.sh1==cell.Num)||(c.sh2==cell.Num)||(c.sh3==cell.Num)||(c.sh4==cell.Num))
 					{
 			
 						printSnakeHead();
 					}
 
-					else if(l.lh1==cell.Num||l.lh2==cell.Num||l.lh3==cell.Num||l.lh4==cell.Num)
+					else if(c.lh1==cell.Num||c.lh2==cell.Num||c.lh3==cell.Num||c.lh4==cell.Num)
 					{
 				
 						printLadderStart();
 					
 					}
-				
+					else if((c.st1==cell.Num)||(c.st2==cell.Num)||(c.st3==cell.Num)||(c.st4==cell.Num)){
+
+						printSnakeTail();
+
+					}
+					else if(c.lt1==cell.Num||c.lt2==cell.Num||c.lt3==cell.Num||c.lt4==cell.Num){
+
+						printLadderEnd();
+
+					}
 					else
 					{
 						System.out.print(cell.Num+"\t");
@@ -52,16 +64,25 @@ public class BoardController{
 				{
 					cell.Num++;
 					
-					if((s.st1==cell.Num)||(s.st2==cell.Num)||(s.st3==cell.Num)||(s.st4==cell.Num))
+					if((c.st1==cell.Num)||(c.st2==cell.Num)||(c.st3==cell.Num)||(c.st4==cell.Num))
 					{
 				
 						printSnakeTail();
 					}
-					else if(l.lt1==cell.Num||l.lt2==cell.Num||l.lt3==cell.Num||l.lt4==cell.Num)
+					else if(c.lt1==cell.Num||c.lt2==cell.Num||c.lt3==cell.Num||c.lt4==cell.Num)
 					{
 				
 						printLadderEnd();
 					
+					}
+					else if((c.sh1==cell.Num)||(c.sh2==cell.Num)||(c.sh3==cell.Num)||(c.sh4==cell.Num)){
+
+						printSnakeHead();
+					}
+					else if(c.lh1==cell.Num||c.lh2==cell.Num||c.lh3==cell.Num||c.lh4==cell.Num){
+						
+						printLadderStart();
+
 					}
 					else
 					{
@@ -80,25 +101,25 @@ public class BoardController{
 	public void printSnakeHead(){
 
 		System.out.print("[SH"+i+"]"+"\t");
-		i--;
+		i++;
 
 	}
 
 	public void printSnakeTail(){
 
 		System.out.print("[ST"+j+"]"+"\t");
-						j--;
+						j++;
 	}
 	public void printLadderStart(){
 
 		System.out.print("[LS"+k+"]"+"\t");
-						k--;
+						k++;
 
 	}
 	public void printLadderEnd(){
 
 		System.out.print("[LE"+m+"]"+"\t");
-						m--;
+						m++;
 
 	}
 
