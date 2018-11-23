@@ -5,7 +5,7 @@ public class CellController{
 
 	Cell[] cell=new Cell[150];
 
-	int Num;
+	int Num,snh1;
 
 	public void createCell(){
 
@@ -15,6 +15,6 @@ public class CellController{
 			Num=cell[num].getNumber();
 
 		}
-
+	
 	}
 }

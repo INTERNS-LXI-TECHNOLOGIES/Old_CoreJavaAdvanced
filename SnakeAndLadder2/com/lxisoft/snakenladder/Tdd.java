@@ -7,5 +7,6 @@ public class Tdd{
 	public static void main(String args[]) throws Exception{
 
 		SnakeAndLadderController snakeandladder=new SnakeAndLadderController();
+		
 	}
 }

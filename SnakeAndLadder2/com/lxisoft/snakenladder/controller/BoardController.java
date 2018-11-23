@@ -6,16 +6,21 @@ public class BoardController{
 	CellController cell=new CellController();
 
 	ComponentController c=new ComponentController();
-	//SnakeController s=new SnakeController();
-	//LadderController l=new LadderController();
-	int i=1,j=1,k=1,m=1;
+	
+	int i=4,j=4,k=4,m=4;
+	int sh1,sh2,sh3,sh4,st1,st2,st3,st4;
+
+	int lh1,lh2,lh3,lh4,lt1,lt2,lt3,lt4;
+
 
 	public void printCell(){
 
 		cell.createCell();
 		c.createComponent();
-		//s.createSnake();
-		//l.createLadder();
+		sh1=c.sh1;sh2=c.sh2;sh3=c.sh3;sh4=c.sh4;
+		st1=c.st1;st2=c.st2;st3=c.st3;st4=c.st4;
+		lh1=c.lh1;lh2=c.lh2;lh3=c.lh3;lh4=c.lh4;
+		lt1=c.lt1;lt2=c.lt2;lt3=c.lt3;lt4=c.lt4;
 
 		for(int row=1;row<=10;row++)
 		{
@@ -101,25 +106,25 @@ public class BoardController{
 	public void printSnakeHead(){
 
 		System.out.print("[SH"+i+"]"+"\t");
-		i++;
+		i--;
 
 	}
 
 	public void printSnakeTail(){
 
 		System.out.print("[ST"+j+"]"+"\t");
-						j++;
+						j--;
 	}
 	public void printLadderStart(){
 
 		System.out.print("[LS"+k+"]"+"\t");
-						k++;
+						k--;
 
 	}
 	public void printLadderEnd(){
 
 		System.out.print("[LE"+m+"]"+"\t");
-						m++;
+						m--;
 
 	}
 

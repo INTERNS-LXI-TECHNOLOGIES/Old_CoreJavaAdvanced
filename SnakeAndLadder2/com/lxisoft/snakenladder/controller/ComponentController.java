@@ -16,7 +16,6 @@ public class ComponentController{
 		Set<Integer> mySet = new LinkedHashSet<Integer>();
 		Map<Integer,Integer> hashMap=new HashMap<Integer,Integer>();
 		int a,b;
-		
 
 	Snake snake1=new Snake();
 	Snake snake2=new Snake();
@@ -59,19 +58,12 @@ public class ComponentController{
 			ladder3.setLadderEnd(setIterator.next());
 			snake4.setSnakeHead(setIterator.next());
 			ladder4.setLadderEnd(setIterator.next());
-       /** snake1=new Snake(setIterator.next(),setIterator.next()); 
-		snake2=new Snake(setIterator.next(),setIterator.next());
-		snake3=new Snake(setIterator.next(),setIterator.next());
-		snake4=new Snake(setIterator.next(),setIterator.next()); 
-		ladder1=new Ladder(setIterator.next(),setIterator.next());
-		ladder2=new Ladder(setIterator.next(),setIterator.next());
-		ladder3=new Ladder(setIterator.next(),setIterator.next());
-		ladder4=new Ladder(setIterator.next(),setIterator.next());
-*/
 		
-	}
+		}
+		getComponent();
 	
-
+	}
+	public void getComponent(){
 		sh1=snake1.getSnakeHead();
 		st1=snake1.getSnakeTail();
 
@@ -95,5 +87,6 @@ public class ComponentController{
 
 		lh4=ladder4.getLadderStart();
 		lt4=ladder4.getLadderEnd();
+	
 	}
 }
