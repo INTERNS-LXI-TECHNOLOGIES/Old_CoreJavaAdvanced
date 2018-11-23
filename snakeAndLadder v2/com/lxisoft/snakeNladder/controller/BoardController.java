@@ -11,9 +11,9 @@ public class BoardController{
 	
 	int row,column,cellNumber;
 	int x=4,y=4,z=4,w=4;
+	int sh1,sh2,sh3,sh4,st1,st2,st3,st4,sh5,st5;
+	int ls1,ls2,ls3,ls4,le1,le2,le3,le4;
 
-	
-	
 	public BoardController(){
 		initBoard();
 	}
@@ -33,7 +33,7 @@ public class BoardController{
 	
 	initCell();	
 	component.createComponent();
-	component.getComponents();
+	getComponents();
 	printCell();	}
 
 	public void initCell(){
@@ -47,23 +47,23 @@ public class BoardController{
 	}
 		
 	public void printCell(){
-			System.out.println(component.sh1);
+			//System.out.println(sh1);
 		
 		for(row=1;row<=10;row++){
 			
 			if(row%2==1){
 				
 			for(column=1;column<=10;column++){
-				if(cellNumber==component.sh1||cellNumber==component.sh2||cellNumber==component.sh3||cellNumber==component.sh4||cellNumber==component.sh5){
+				if(cellNumber==sh1||cellNumber==sh2||cellNumber==sh3||cellNumber==sh4||cellNumber==sh5){
 					addSnakeHead();
 				}
-				else if(cellNumber==component.st1||cellNumber==component.st2||cellNumber==component.st3||cellNumber==component.st4||cellNumber==component.st5){
+				else if(cellNumber==st1||cellNumber==st2||cellNumber==st3||cellNumber==st4||cellNumber==st5){
 					addSnakeTail();
 				}
-				else if(cellNumber==component.ls1||cellNumber==component.ls2||cellNumber==component.ls3||cellNumber==component.ls4){
+				else if(cellNumber==ls1||cellNumber==ls2||cellNumber==ls3||cellNumber==ls4){
 					addLadderStart();
 				}
-				else if(cellNumber==component.le1||cellNumber==component.le2||cellNumber==component.le3||cellNumber==component.le4){
+				else if(cellNumber==le1||cellNumber==le2||cellNumber==le3||cellNumber==le4){
 					addLadderEnd();
 				}	
 				else {		
@@ -79,16 +79,16 @@ public class BoardController{
 				for(column=1;column<=10;column++){					
 					cellNumber++;
 					
-				if(cellNumber==component.sh1||cellNumber==component.sh2||cellNumber==component.sh3||cellNumber==component.sh4||cellNumber==component.sh5){
+				if(cellNumber==sh1||cellNumber==sh2||cellNumber==sh3||cellNumber==sh4||cellNumber==sh5){
 					addSnakeHead();
 				}
-				else if(cellNumber==component.st1||cellNumber==component.st2||cellNumber==component.st3||cellNumber==component.st4||cellNumber==component.st5){
+				else if(cellNumber==st1||cellNumber==st2||cellNumber==st3||cellNumber==st4||cellNumber==st5){
 					addSnakeTail();
 				}
-				else if(cellNumber==component.ls1||cellNumber==component.ls2||cellNumber==component.ls3||cellNumber==component.ls4){
+				else if(cellNumber==ls1||cellNumber==ls2||cellNumber==ls3||cellNumber==ls4){
 					addLadderStart();
 				}
-				else if(cellNumber==component.le1||cellNumber==component.le2||cellNumber==component.le3||cellNumber==component.le4){
+				else if(cellNumber==le1||cellNumber==le2||cellNumber==le3||cellNumber==le4){
 					addLadderEnd();
 				}	
 				else{
@@ -120,4 +120,35 @@ public class BoardController{
 		z--;
 	}
 
+	public void getComponents(){
+	
+	
+	sh1=component.snake1.getSnakeHead();
+	st1=component.snake1.getSnakeTail();
+	
+	sh2=component.snake2.getSnakeHead();
+	st2=component.snake2.getSnakeTail();
+	
+	sh3=component.snake3.getSnakeHead();
+	st3=component.snake3.getSnakeTail();
+	
+	sh4=component.snake4.getSnakeHead();
+	st4=component.snake4.getSnakeTail();
+	
+	sh5=component.snake5.getSnakeHead();
+	st5=component.snake5.getSnakeTail();
+	
+	ls1=component.ladder1.getLadderStart();
+	le1=component.ladder1.getLadderEnd();
+	
+	ls2=component.ladder2.getLadderStart();
+	le2=component.ladder2.getLadderEnd();
+	
+	ls3=component.ladder3.getLadderStart();
+	le3=component.ladder3.getLadderEnd();
+
+	ls4=component.ladder4.getLadderStart();
+	le4=component.ladder4.getLadderEnd();	
+	
+	} 
 }

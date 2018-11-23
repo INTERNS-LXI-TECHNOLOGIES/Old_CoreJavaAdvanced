@@ -10,8 +10,7 @@ public class ComponentController{
 		Random random=new Random();
 		Set<Integer> componentSet = new LinkedHashSet<Integer>();
 		Map<Integer,Integer> hashMap=new HashMap<Integer,Integer>();
-		int sh1,sh2,sh3,sh4,st1,st2,st3,st4,sh5,st5;
-		int ls1,ls2,ls3,ls4,le1,le2,le3,le4;
+
 		
 		
 		Snake snake1= new Snake();
@@ -38,7 +37,6 @@ public class ComponentController{
 		TreeSet<Integer> sorted=new TreeSet<Integer>(componentSet);
 		Iterator<Integer> setIterator = sorted.iterator();
 		while(setIterator.hasNext()){
-		//System.out.print("\n"+setIterator.next()+"\n");
 			
 			snake1.setSnakeTail(setIterator.next());
 			ladder1.setLadderStart(setIterator.next());
@@ -73,35 +71,5 @@ public class ComponentController{
 		}
 	
 
-	public void getComponents(){
 	
-	
-	sh1=snake1.getSnakeHead();
-	st1=snake1.getSnakeTail();
-	
-	sh2=snake2.getSnakeHead();
-	st2=snake2.getSnakeTail();
-	
-	sh3=snake3.getSnakeHead();
-	st3=snake3.getSnakeTail();
-	
-	sh4=snake4.getSnakeHead();
-	st4=snake4.getSnakeTail();
-	
-	sh5=snake5.getSnakeHead();
-	st5=snake5.getSnakeTail();
-	
-	ls1=ladder1.getLadderStart();
-	le1=ladder1.getLadderEnd();
-	
-	ls2=ladder2.getLadderStart();
-	le2=ladder2.getLadderEnd();
-	
-	ls3=ladder3.getLadderStart();
-	le3=ladder3.getLadderEnd();
-
-	ls4=ladder4.getLadderStart();
-	le4=ladder4.getLadderEnd();	
-	
-	} 
 }

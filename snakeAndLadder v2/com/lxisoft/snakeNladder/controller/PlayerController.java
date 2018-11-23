@@ -73,79 +73,18 @@ public class PlayerController{
 		if(player[k].getScore()<=100){
 		System.out.println("\n*********************\nTurn of Player  "+player[k].getName());
 		startRollDice(k);
-		
+
 		}
 	}
 	
 	public void startRollDice(int id){
-			
 			System.out.println("Press 0 to Roll Dice..");
 			int n=scanner.nextInt();
 			if(n==0){
 			diceController=new DiceController();
 			diceValue=diceController.dice.getDiceValue();
-			changeScore(id);
-			if(player[id].getScore()<100){
-
-				if(diceValue==1||diceValue==6){
-					System.out.println("Roll Again.......  "+player[id].getName());
-					startRollDice(id);
-				}
-			}else{
-				System.out.println("Congrats.........."+player[id].getName()+"  You Win the Game..........\n");
-				System.exit(0);
-			}		
-		}
-	}
-
-		public void changeScore(int id){
-		if(score[id]==0&&diceValue==1){
-			score[id]=1;
-			player[id].setScore(score[id]);
-			System.out.println("Score::"+player[id].getScore());
-		}
-		else if(score[id]==0&&diceValue>=1){
-			score[id]=0;
-			player[id].setScore(score[id]);
-			System.out.println("Score::"+player[id].getScore());
-
-		}
-		else if(score[id]>=1&&score[id]<=94&&diceValue>=1){
-			score[id]+=diceValue;
-			player[id].setScore(score[id]);
-			System.out.println("Score::"+player[id].getScore());
-			//checkForSnake(id);
-			//checkForLadder(id);
-		}
-		else if(score[id]>94&&score[id]<=100){
-			finalRound(id);
-			System.out.println("Score::"+player[id].getScore());
-		}
-	}
-
-	public void finalRound(int id1){
-		if(score[id1]==95&&diceValue<6){
-			score[id1]+=diceValue;
-			player[id1].setScore(score[id1]);
-		}
-		else if(score[id1]==96&&diceValue<5){
-			score[id1]+=diceValue;
-			player[id1].setScore(score[id1]);
-		}
-		else if(score[id1]==97&&diceValue<4){
-			score[id1]+=diceValue;
-			player[id1].setScore(score[id1]);
-		}
-		else if(score[id1]==98&&diceValue<3){
-			score[id1]+=diceValue;
-			player[id1].setScore(score[id1]);
 			
 		}
-		else if(score[id1]==99&&diceValue==1){
-			score[id1]+=diceValue;
-			player[id1].setScore(score[id1]);
-		}
-	
 	}
-	
+
 }
