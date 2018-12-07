@@ -29,15 +29,16 @@ public class PlayerController{
 			
 		}
 		for(i=1;i<=users;i++){
-			showPlayerList();
+			System.out.println(player[i]);	
 		}
 	}
 	
-	public void showPlayerList(){
+	/*public void showPlayerList(){
+	
 		
-	System.out.println("Player "+player[i].getPlayerId()+":\nName::"+player[i].getName()+"\tCoin::"+player[i].getCoin().getCoinColour());
+	//System.out.println("Player "+player[i].getPlayerId()+":\nName::"+player[i].getName()+"\tCoin::"+player[i].getCoin().getCoinColour());
 		
-	}
+	}*/
 	
 	public Coin selectCoin(int i){
 		

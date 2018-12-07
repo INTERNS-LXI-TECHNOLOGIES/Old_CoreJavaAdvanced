@@ -12,7 +12,7 @@ public class BoardController{
 	int row,column,cellNumber;
 	int x=4,y=4,z=4,w=4;
 	int sh1,sh2,sh3,sh4,st1,st2,st3,st4,sh5,st5;
-	int ls1,ls2,ls3,ls4,le1,le2,le3,le4;
+	int ls1,ls2,ls3,ls4,le1,le2,le3,le4,ls,le;
 
 	public BoardController(){
 		initBoard();
@@ -47,35 +47,35 @@ public class BoardController{
 	}
 		
 	public void printCell(){
-			//System.out.println(sh1);
-		
-		for(row=1;row<=10;row++){
-			
+	
+	for(row=1;row<=10;row++){
+
 			if(row%2==1){
-				
+
 			for(column=1;column<=10;column++){
-				if(cellNumber==sh1||cellNumber==sh2||cellNumber==sh3||cellNumber==sh4||cellNumber==sh5){
-					addSnakeHead();
-				}
-				else if(cellNumber==st1||cellNumber==st2||cellNumber==st3||cellNumber==st4||cellNumber==st5){
-					addSnakeTail();
-				}
-				else if(cellNumber==ls1||cellNumber==ls2||cellNumber==ls3||cellNumber==ls4){
-					addLadderStart();
-				}
-				else if(cellNumber==le1||cellNumber==le2||cellNumber==le3||cellNumber==le4){
-					addLadderEnd();
-				}	
+				
+						if(cellNumber==sh1||cellNumber==sh2||cellNumber==sh3||cellNumber==sh4||cellNumber==sh5){
+						addSnakeHead();
+						}
+						else if(cellNumber==st1||cellNumber==st2||cellNumber==st3||cellNumber==st4||cellNumber==st5){
+						addSnakeTail();
+						}
+						else if(cellNumber==ls1||cellNumber==ls2||cellNumber==ls3||cellNumber==ls4){
+						addLadderStart();
+						}
+						else if(cellNumber==le1||cellNumber==le2||cellNumber==le3||cellNumber==le4){
+						addLadderEnd();
+						}	
 				else {		
 				System.out.print("["+cellNumber+"]\t");
 				}				
-				cellNumber--;
+				cellNumber--;	
 				
 			}
-			}	
-			
+			}
 			else{				
-			 cellNumber=cellNumber-10;			 
+			 cellNumber=cellNumber-10;	
+		 
 				for(column=1;column<=10;column++){					
 					cellNumber++;
 					

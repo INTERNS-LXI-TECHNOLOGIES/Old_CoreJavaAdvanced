@@ -10,9 +10,46 @@ public class ComponentController{
 		Random random=new Random();
 		Set<Integer> componentSet = new LinkedHashSet<Integer>();
 		Map<Integer,Integer> hashMap=new HashMap<Integer,Integer>();
-
+		Snake[] snake=new Snake[20];
+		Ladder[] ladder=new Ladder[20];
 		
+	/*	System.out.println("Choose level of Game::[1.Simple]\n [2.Medium]\n [3.Hard]");
+		level = scanner.nextInt();
+		switch(level){
+				case 1:simpleLevel();
+				break;
+				
+				case 2:mediumLevel();
+				break;
+				
+				case 3:hardLevel();
+				break;
+			}	
 		
+		public void simpleLevel(){
+			for(i=1;i<=3;i++){
+				 snake[i]= new Snake(i);
+			}
+		
+			for(i=1;i<=5;i++){
+				ladder[i]= new Ladder(i);
+			}
+		}
+		
+		public void mediumLevel(){
+			
+			for(i=1;i<=4;i++){
+				 snake[i]= new Snake(i);
+			}
+		
+			for(i=1;i<=4;i++){
+				ladder[i]= new Ladder(i);
+			}
+		
+		}
+		
+		public void hardLevel(){*/
+			
 		Snake snake1= new Snake();
 		Snake snake2= new Snake();
 		Snake snake3= new Snake();
@@ -24,9 +61,7 @@ public class ComponentController{
 		Ladder ladder3= new Ladder();
 		Ladder ladder4= new Ladder();
 		
-
 		public void createComponent(){
-
 
 		do{
 			

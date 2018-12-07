@@ -3,9 +3,9 @@ package com.lxisoft.snakeNladder.model;
 public class Player{
 String name;
 
-int score;
+private int score;
 
-int playerId;
+private int playerId;
 
 Coin coin;
 
@@ -48,4 +48,7 @@ public void setScore(int score) {
 	this.score= score;
 
 }
+public String toString(){ 
+  return "Player::"+playerId+" "+" Name::"+name+" "+" Coin::"+coin+" ";  
+ }  
 }

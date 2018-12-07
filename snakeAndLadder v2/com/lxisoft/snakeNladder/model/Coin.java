@@ -12,4 +12,8 @@ public String getCoinColour() {
 	return coinColour;
 	
 }
+
+public String toString(){ 
+  return coinColour+" ";  
+ }  
 }

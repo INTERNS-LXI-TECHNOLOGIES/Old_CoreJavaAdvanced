@@ -1,6 +1,7 @@
 package com.lxisoft.snakeNladder.controller;
 
 import java.util.*;
+import java.io.*;
 
 public class SnakeAndLadderController{
 	BoardController boardController;
@@ -10,6 +11,7 @@ public class SnakeAndLadderController{
 	Scanner scanner= new Scanner(System.in);
 	
 	public SnakeAndLadderController(){
+		
 		System.out.println("\t\t\t\t---------------------");
 		System.out.println("\t\t\t\t<<<SNAKE & LADDER>>>");
 		System.out.println("\t\t\t\t---------------------");
@@ -18,17 +20,32 @@ public class SnakeAndLadderController{
 	}
 	
 	
-	public void startGame(){				
-		System.out.println("Enter number of users::");
-		noOfUsers=scanner.nextInt();
+	public void startGame(){	
+	while(noOfUsers<=0){
+	 try {
+       System.out.print("Enter the number of Players:: ");
+       noOfUsers = scanner.nextInt();
+
+         }
+
+        catch(InputMismatchException e) {
+			 System.out.println("Enter Again......");
+			break;
+
+         }
+	
+	
+		startGame();	
 		playerController = new PlayerController();
 		playerController.createPlayer(noOfUsers);
 		playGame(noOfUsers);
+	}
 	}
 	
 	public void playGame(int users){
 		
 		System.out.println("<<<<<<<<<<<<<<<<GAME STARTS>>>>>>>>>>>>>>");
+		
 		do{
 		for(i=1;i<=users;i++){
 		playerController.startPlay(i);
@@ -55,8 +72,9 @@ public class SnakeAndLadderController{
 	
 	public void changeScore(int id){
 		if(playerController.score[id]==0&&playerController.diceValue==1){
-			playerController.score[id]=1;
-			playerController.player[id].setScore(playerController.score[id]);
+			scoreSetting(id);
+			//playerController.score[id]=1;
+			//playerController.player[id].setScore(playerController.score[id]);
 			System.out.println("Score::"+playerController.player[id].getScore());
 		}
 		else if(playerController.score[id]==0&&playerController.diceValue>=1){
@@ -66,8 +84,7 @@ public class SnakeAndLadderController{
 
 		}
 		else if(playerController.score[id]>=1&&playerController.score[id]<=94&&playerController.diceValue>=1){
-			playerController.score[id]+=playerController.diceValue;
-			playerController.player[id].setScore(playerController.score[id]);
+			scoreSetting(id);
 			System.out.println("Score::"+playerController.player[id].getScore());
 			snakeCheck(id);
 			ladderCheck(id);
@@ -80,32 +97,32 @@ public class SnakeAndLadderController{
 
 	public void finalRound(int id1){
 		if(playerController.score[id1]==95&&playerController.diceValue<6){
-			playerController.score[id1]+=playerController.diceValue;
-			playerController.player[id1].setScore(playerController.score[id1]);
+			scoreSetting(id1);
 		}
 		else if(playerController.score[id1]==96&&playerController.diceValue<5){
-			playerController.score[id1]+=playerController.diceValue;
-			playerController.player[id1].setScore(playerController.score[id1]);
+			scoreSetting(id1);
 		}
 		else if(playerController.score[id1]==97&&playerController.diceValue<4){
-			playerController.score[id1]+=playerController.diceValue;
-			playerController.player[id1].setScore(playerController.score[id1]);
+			scoreSetting(id1);
 		}
 		else if(playerController.score[id1]==98&&playerController.diceValue<3){
-			playerController.score[id1]+=playerController.diceValue;
-			playerController.player[id1].setScore(playerController.score[id1]);	
+			scoreSetting(id1);
 		}
 		else if(playerController.score[id1]==99&&playerController.diceValue==1){
-			playerController.score[id1]+=playerController.diceValue;
-			playerController.player[id1].setScore(playerController.score[id1]);
+			scoreSetting(id1);
 		}
 	
 	}
 	
+	public void scoreSetting(int id4){
+			playerController.score[id4]+=playerController.diceValue;
+			playerController.player[id4].setScore(playerController.score[id4]);
+	}
+	
 	public void snakeCheck(int id2){
-		
+
 		if(playerController.score[id2]==boardController.sh1){
-			System.out.println("Ooops..... Snake1!");
+			System.out.println("Ooops..... Snake!");
 			playerController.score[id2]=boardController.st1;
 			playerController.player[id2].setScore(playerController.score[id2]);
 			System.out.println("Fall to "+playerController.player[id2].getScore());
@@ -131,30 +148,30 @@ public class SnakeAndLadderController{
 	}
 	
 	public void ladderCheck(int id3){
-		
+	
 		if(playerController.score[id3]==boardController.ls1){
-			System.out.println("Wow..... Ladder1 ");
+			System.out.println("Wow..... Ladder1!");
 			playerController.score[id3]=boardController.le1;
 			playerController.player[id3].setScore(playerController.score[id3]);
 			System.out.println(">>>>>>>>>>Jumb to "+playerController.player[id3].getScore()+"<<<<<<<<<<\nRoll again......"+playerController.player[id3].getName());
 			playerController.startRollDice(id3);
 			}
 		else if(playerController.score[id3]==boardController.ls2){
-			System.out.println("Wow..... Ladder2 ");
+			System.out.println("Wow..... Ladder2!");
 			playerController.score[id3]=boardController.le2;
 			playerController.player[id3].setScore(playerController.score[id3]);
 			System.out.println(">>>>>>>>>>Jumb to "+playerController.player[id3].getScore()+"<<<<<<<<<<\nRoll again......"+playerController.player[id3].getName());
 			playerController.startRollDice(id3);
 		}
 		else if(playerController.score[id3]==boardController.ls3){
-			System.out.println("Wow..... Ladder3 ");
+			System.out.println("Wow..... Ladder3!");
 			playerController.score[id3]=boardController.le3;
 			playerController.player[id3].setScore(playerController.score[id3]);
 			System.out.println(">>>>>>>>>>Jumb to "+playerController.player[id3].getScore()+"<<<<<<<<<<\nRoll again......"+playerController.player[id3].getName());
 			playerController.startRollDice(id3);
 		}
 		else if(playerController.score[id3]==boardController.ls4){
-			System.out.println("Wow..... Ladder4 ");
+			System.out.println("Wow..... Ladder4!");
 			playerController.score[id3]=boardController.le4;
 			playerController.player[id3].setScore(playerController.score[id3]);
 			System.out.println(">>>>>>>>>>Jumb to "+playerController.player[id3].getScore()+"<<<<<<<<<<\nRoll again......"+playerController.player[id3].getName());

@@ -4,7 +4,7 @@ public class Snake {
 	
 	private int snakeHead;
 	private int snakeTail;
-
+	
 	public int getSnakeHead() {
 	return snakeHead;
 	}
@@ -19,4 +19,7 @@ public class Snake {
 	public void setSnakeTail(int snakeTail) {
 	this.snakeTail = snakeTail;
 	}
+	public String toString(){ 
+	return snakeHead+" ";  
+ }  
 }
