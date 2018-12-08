@@ -12,7 +12,7 @@ public class BoardController{
 	int row,column,cellNumber;
 	int x=4,y=4,z=4,w=4;
 	int sh1,sh2,sh3,sh4,st1,st2,st3,st4,sh5,st5;
-	int ls1,ls2,ls3,ls4,le1,le2,le3,le4,ls,le;
+	int ls1,ls2,ls3,ls4,le1,le2,le3,le4;
 
 	public BoardController(){
 		initBoard();

@@ -21,26 +21,22 @@ public class SnakeAndLadderController{
 	
 	
 	public void startGame(){	
-	while(noOfUsers<=0){
 	 try {
        System.out.print("Enter the number of Players:: ");
-       noOfUsers = scanner.nextInt();
-
+       noOfUsers = scanner.nextInt();	
+		
+		}
+		catch(InputMismatchException e) {
+			System.out.println("Enter Again......\n");
+			Scanner scan = new Scanner(System.in);
+			noOfUsers=scan.nextInt();
          }
-
-        catch(InputMismatchException e) {
-			 System.out.println("Enter Again......");
-			break;
-
-         }
-	
-	
-		startGame();	
 		playerController = new PlayerController();
 		playerController.createPlayer(noOfUsers);
 		playGame(noOfUsers);
+	
 	}
-	}
+	
 	
 	public void playGame(int users){
 		

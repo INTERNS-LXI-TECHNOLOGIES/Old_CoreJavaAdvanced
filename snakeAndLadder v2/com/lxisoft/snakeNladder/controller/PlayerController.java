@@ -1,6 +1,7 @@
 package com.lxisoft.snakeNladder.controller;
 
 import com.lxisoft.snakeNladder.model.*;
+import com.lxisoft.snakeNladder.exception.*;
 import java.util.*;
 
 public class PlayerController{
@@ -12,12 +13,12 @@ public class PlayerController{
 	Scanner scanner= new Scanner(System.in);
 	
 	
-	int users,i,key,diceValue;
+	int users,i,key,diceValue,l;
 	String k;
 	String  Orange,Green,Blue,Red,Yellow,Rose,Violet,Black,White,Brown;
 	
 	public void createPlayer(int users){
-		
+	
 		for(i =1;i<=users;i++){
 			player[i] = new Player(i);
 			System.out.println("Name::");
@@ -25,9 +26,10 @@ public class PlayerController{
 			
 			System.out.println("Select coin::");
 			coin=selectCoin(i);
-			player[i].setCoin(coin);
+			player[i].setCoin(coin);	
 			
 		}
+		
 		for(i=1;i<=users;i++){
 			System.out.println(player[i]);	
 		}
@@ -41,12 +43,19 @@ public class PlayerController{
 	}*/
 	
 	public Coin selectCoin(int i){
+		try{
 		
-			System.out.println(">>>[0.Orange][1.Green][2.Blue][3.Red][4.Yellow][5.Rose][6.Violet][7.Black][8.White][9.Brown] ");
+		
+			System.out.println(">>>[1.Green][2.Blue][3.Red][4.Yellow][5.Rose][6.Violet][7.Black][8.White][9.Brown] ");
 			k=scanner.nextLine();
+			
 			int key=Integer.parseInt(k);
+			
 			if(key==0){
-			coin = new Coin(i,"Orange");}
+			throw new MyException();}
+		
+			/*if(key==0){
+			coin = new Coin(i,"Orange");}*/
 			else if(key==1){
 			coin=new Coin(i,"Green");}
 			else if(key==2){
@@ -64,18 +73,24 @@ public class PlayerController{
 			else if(key==8){
 			coin= new Coin(i,"White");}
 			else if(key==9){
-			coin=new Coin(i,"Brown");}
+			coin=new Coin(i,"Brown");}	
 			
-			return coin;
+		}
+		catch(MyException e){
+			System.out.println("Hai Friend Please select ur coin Properly::");
 			
+			selectCoin(l);
+		}
+		
+		return coin;
 	}
-	
 	public void startPlay(int k){
+	
 		if(player[k].getScore()<=100){
 		System.out.println("\n*********************\nTurn of Player  "+player[k].getName());
 		startRollDice(k);
 
-		}
+	}
 	}
 	
 	public void startRollDice(int id){
@@ -87,5 +102,5 @@ public class PlayerController{
 			
 		}
 	}
-
+		
 }
