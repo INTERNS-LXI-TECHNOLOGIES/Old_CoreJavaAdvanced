@@ -45,6 +45,22 @@ public class PlayerController{
 	public void setPoint(int id2,int points){
 		player.setPoint(points);
 	}
+	public void rollAgain(int id1){
+
+
+		//System.out.println(player.getPoint());
+		System.out.println("Roll again: "+player.getName());
+		rollDie(id1);
+
+	/**	if(point[id1]>1&&point[id1]<100){
+		point[id1]+=dieno;
+		player.setPoint(point[id1]);
+		
+	}*/
+		//setPoint(point[id1]);
 		
 
+	}
+			
 }
+		

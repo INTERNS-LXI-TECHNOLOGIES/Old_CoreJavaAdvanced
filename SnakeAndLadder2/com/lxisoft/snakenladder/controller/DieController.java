@@ -1,4 +1,4 @@
-package com.lxisoft.snakenladder.controller;
+ package com.lxisoft.snakenladder.controller;
 
 import com.lxisoft.snakenladder.model.Die;
 import java.util.*;
