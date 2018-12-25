@@ -19,7 +19,7 @@ public class PlayersController{
 			FileWriter details=new FileWriter(playersDetails);
 			for(int j=1;j<=limit;j++){
 				details.write("Players"+j+"Details"+";");
-				System.out.println("<<<<<<<Register>>>>>>>>");
+				System.out.println("*******<<<<<<<REGISTER>>>>>>>>*******");
 				System.out.println("Full Name:");
 				players.setPlayersName(input.nextLine());
 				details.write(players.getPlayersName()+";");
@@ -31,11 +31,12 @@ public class PlayersController{
 				details.write(players.getPlayersEmailId()+";");
 				System.out.println("Password");
 				players.setPlayersPassword(input.nextLine());
-				details.write(players.getPlayersPassword()+";");
+				details.write(players.getPlayersPassword()+"\n");
 				System.out.println("Registered Successfully");
 				
 			}
 			details.close();
+			System.out.println("Please Login.....any one player\n");
 			playersLogin();
 
 		}
@@ -47,7 +48,7 @@ public class PlayersController{
 	}
 	public void playersLogin(){
 
-		System.out.println("<<<<<<<<Login>>>>>>> ");
+		System.out.println("*******<<<<<<<<LOGIN>>>>>>>******* ");
 		System.out.println("Email Id:");
 		email=input.nextLine();
 		System.out.println("Password");
@@ -61,11 +62,14 @@ public class PlayersController{
 		{
 			FileReader fr=new FileReader("./com/lxisoft/game/playersDetails.txt");
 			BufferedReader br=new BufferedReader(fr);
-			String line;
+			String line,data1,data2;
+			
 			while((line=br.readLine())!=null)
 			{
 				String data[]=line.split(";");
-				checkLogin(data[3],data[4]);
+				data1=data[3];
+				data2=data[4];
+				checkLogin(data1,data2);
 			}	
 			
 		}	
@@ -76,11 +80,9 @@ public class PlayersController{
 	}
 	public void checkLogin(String uName,String pwd){
 
-			System.out.println(uName+pwd);
 			if(uName.equals(email)&&pwd.equals(pass)){
 
 				System.out.println("login Success");
-				//return true;
 			}
 	
 	}
