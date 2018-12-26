@@ -38,10 +38,8 @@ public class BoardController{
 	public void initCell(){
 	int i;
 	for ( i= 1;i<=100;i++){
-			cell[i] = new Cells
-			(i);
-			cellNumber=cell[i].getCellNumber();
-			
+			cell[i] = new Cells(i);
+			cellNumber=cell[i].getCellNumber();	
 		}
 	
 	}
@@ -67,7 +65,7 @@ public class BoardController{
 						addLadderEnd();
 						}	
 				else {		
-				System.out.print("["+cellNumber+"]\t");
+				System.out.print("["+cellNumber+"\t");
 				}				
 				cellNumber--;	
 				
@@ -92,7 +90,7 @@ public class BoardController{
 					addLadderEnd();
 				}	
 				else{
-					System.out.print("["+cellNumber+"]\t");
+				System.out.print(""+cellNumber+"]\t");
 				}
 				}
 			

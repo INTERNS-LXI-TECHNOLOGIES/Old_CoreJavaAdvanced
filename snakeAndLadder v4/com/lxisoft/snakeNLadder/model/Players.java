@@ -13,6 +13,7 @@ public class Players{
 		this.id=id;
 		this.name=name;
 		this.password=password;
+		this.coin=coin;
 	}
 	
 	public String getName() {

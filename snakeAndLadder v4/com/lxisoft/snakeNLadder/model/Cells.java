@@ -9,5 +9,9 @@ public class Cells{
 		
 	public int getCellNumber(){
 		return cellNumber;}
+		
+public String toString(){ 
+  return cellNumber+" ";  
+ } 
 	
 }

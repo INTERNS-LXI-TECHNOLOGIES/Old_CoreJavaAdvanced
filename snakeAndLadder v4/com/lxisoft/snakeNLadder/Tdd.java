@@ -4,7 +4,7 @@ import com.lxisoft.snakeNLadder.controller.*;
 
 public class Tdd{
 	
-	public static void main(String[] args){
+	public static void main(String[] args)throws InterruptedException{
 		
 		GameController gameControl = new GameController();
 		

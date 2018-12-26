@@ -12,12 +12,9 @@ public class DiceController{
 		dice= new Dice(diceValue);
 		System.out.println("\n You get:"+dice.getDiceValue());
 	}
-	public int rollDice()
-	{
-		
+	public int rollDice(){	
 	    int n = 0;
 	    n=ran.nextInt(7);
 	    return (n==0?1:n);
-	}
-	
+	}	
 }
