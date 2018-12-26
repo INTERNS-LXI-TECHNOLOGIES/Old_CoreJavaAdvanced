@@ -35,22 +35,6 @@ public class GameController{
 		System.out.println(pName+":  Choose your Coin");
 		String[] coins={"RED","GREEN","BLUE","ORANGE","YELLOW"};
 		List<String> coinsList=new ArrayList<String>(Arrays.asList(coins));
-		//System.out.println("[1.RED] [2.GREEN] [3.BLUE] [4.ORANGE] [5.YELLOW]");
-		/**int ch=input.nextInt();
-		switch(ch){
-
-			case 1:System.out.println("Red");
-			break;
-			case 2:System.out.println("Green");
-			break;
-			case 3:System.out.println("Blue");
-			break;
-			case 4:System.out.println("Orange");
-			break;
-			case 5:System.out.println("Yellow");
-			break;
-		}*/
-		//for(int i=0;i<5;i++)
 		System.out.println(coinsList);
 		Scanner in=new Scanner(System.in);
 	 String color=in.nextLine();
@@ -60,6 +44,8 @@ public class GameController{
 
 	}
 
+	
+	board.printCells();
 	}
 	public void loadFile(){
 
