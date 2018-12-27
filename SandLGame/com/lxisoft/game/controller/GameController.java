@@ -14,7 +14,6 @@ public class GameController{
 	Scanner input=new Scanner(System.in);
 	
 	public void homePage(){
-
 		System.out.println("Enter number of Players");
 		int limit=input.nextInt();
 		System.out.println(" 1.New User Register here     2.Login");
@@ -45,7 +44,7 @@ public class GameController{
 	}
 
 	
-	board.printCells();
+	//board.createCells();
 	}
 	public void loadFile(){
 
