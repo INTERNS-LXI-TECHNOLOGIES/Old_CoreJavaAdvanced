@@ -4,36 +4,39 @@ import java.util.*;
 
 public class Board{
 
-	private ArrayList<Cells> cellNum=new ArrayList<Cells>();
-	private ArrayList<Snakes> snakes=new ArrayList<Snakes>();
-	private ArrayList<Ladders> ladders=new ArrayList<Ladders>();
+	private ArrayList<Cell> cells=new ArrayList<Cell>();
+	private ArrayList<Snake> snakes=new ArrayList<Snake>();
+	private ArrayList<Ladder> ladders=new ArrayList<Ladder>();
 
 
-	public void setCells(ArrayList<Cells> cellNum){
+	public void setCells(ArrayList<Cell> cells){
 
-		this.cellNum=cellNum;
+		this.cells=cells;
+		
 	}
-	public ArrayList<Cells> getCells(){
+	public ArrayList<Cell> getCells(){
 
-		return cellNum;
+		return cells;
 	}
-	public void setSnakes(ArrayList<Snakes> snakes){
+	public void setSnakes(ArrayList<Snake> snakes){
 
 		this.snakes=snakes;
 	}
-	public ArrayList<Snakes> getSnakes(){
+	public ArrayList<Snake> getSnakes(){
 
 		return snakes;
 	}
-	public void setLadders(ArrayList<Ladders> ladders){
+	public void setLadders(ArrayList<Ladder> ladders){
 
 		this.ladders=ladders;
 	}
-	public ArrayList<Ladders> getLadders(){
+	public ArrayList<Ladder> getLadders(){
 
 		return ladders;
 	}
 
-
+	/**public String toString(){
+		return getCells();
+	}*/
 
 }

@@ -1,6 +1,6 @@
 package com.lxisoft.game.model;
 
-public class Players{
+public class Player{
 
 	private String playersName;
 	private String playersPhNo;

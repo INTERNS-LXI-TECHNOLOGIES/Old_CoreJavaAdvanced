@@ -1,6 +1,6 @@
 package com.lxisoft.game.model;
 
-public class Cells{
+public class Cell{
 
 	private int cellNum;
 
@@ -13,3 +13,4 @@ public class Cells{
 		return cellNum;
 	}
 }
+

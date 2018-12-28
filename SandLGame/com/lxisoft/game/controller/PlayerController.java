@@ -3,12 +3,12 @@ package com.lxisoft.game.controller;
 import java.util.Scanner;
 import java.io.*;
 import java.util.regex.Pattern;
-import com.lxisoft.game.model.Players;
+import com.lxisoft.game.model.Player;
 
 
-public class PlayersController{
+public class PlayerController{
 
-	Players players=new Players();
+	Player players=new Player();
 	Scanner input=new Scanner(System.in);
 	String email,pass;
 	public void playersRegistration(int limit){

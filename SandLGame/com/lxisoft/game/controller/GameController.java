@@ -7,13 +7,14 @@ import java.util.*;
 public class GameController{
 
 	BoardController board=new BoardController();
-	PlayersController players=new PlayersController();
-	CoinsController coins=new CoinsController();
+	PlayerController players=new PlayerController();
+	CoinController coins=new CoinController();
 	DiceController dice=new DiceController();
 
 	Scanner input=new Scanner(System.in);
 	
 	public void homePage(){
+		board.printCells();
 		System.out.println("Enter number of Players");
 		int limit=input.nextInt();
 		System.out.println(" 1.New User Register here     2.Login");
@@ -44,7 +45,7 @@ public class GameController{
 	}
 
 	
-	//board.createCells();
+	
 	}
 	public void loadFile(){
 

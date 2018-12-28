@@ -1,5 +1,5 @@
 package com.lxisoft.game.controller;
 
-public class CoinsController{
+public class CoinController{
 	
 }
