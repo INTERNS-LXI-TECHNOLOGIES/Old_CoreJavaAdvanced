@@ -5,20 +5,15 @@ public class Ladder{
 	private int ladderHead;
 	private int ladderTail;
 
-	public void setLadderHead(int ladderHead){
+	public Ladder(int ladderHead,int ladderTail){
 
 		this.ladderHead=ladderHead;
+		this.ladderTail=ladderTail;
 	}
 	public int getLadderHead(){
 
 		return ladderHead;
 	}
-
-	public void setLadderTail(int ladderTail){
-
-		this.ladderTail=ladderTail;
-	}
-
 	public int getLadderTail(){
 
 		return ladderTail;

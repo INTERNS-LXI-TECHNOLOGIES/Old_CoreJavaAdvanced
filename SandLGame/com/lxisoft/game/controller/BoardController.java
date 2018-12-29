@@ -8,6 +8,7 @@ public class BoardController{
 	Board board=new Board();
 	ArrayList<Cell> cells=new ArrayList<Cell>();
 	HashMap<String,Snake> snakes=new HashMap<String,Snake>();
+	HashMap<String,Ladder> ladders=new HashMap<String,Ladder>();
 
 	public void printBoard(){
 
@@ -22,6 +23,8 @@ public class BoardController{
 			cells.add(cels);
 		}
 		board.setCells(cells);
+		createSnakes();
+		createLadders();
 	}
     public void createSnakes(){
 
@@ -35,11 +38,22 @@ public class BoardController{
 		snakes.put("s4",sk4);
 		board.setSnakes(snakes);
 	}
+	public void createLadders(){
+		Ladder ld1=new Ladder(12,45);
+		Ladder ld2=new Ladder(25,50);
+		Ladder ld3=new Ladder(32,79);
+		Ladder ld4=new Ladder(54,94);
+		ladders.put("l1",ld1);
+		ladders.put("l2",ld2);
+		ladders.put("l3",ld3);
+		ladders.put("l4",ld4);
+		board.setLadders(ladders);
+
+	}
 	public void printCells(){
   
 		int cels[]=new int[100];
 		createCells();
-		createSnakes();
 		cells=board.getCells();
 		snakes=board.getSnakes();
 		int index=99;
@@ -54,7 +68,16 @@ public class BoardController{
 			if((cells.get(index).getCellNum())==(s.getSnakeHead())||(cells.get(index).getCellNum())==(s.getSnakeTail())){
 					System.out.print(key);
 				}
-			}			
+			}	
+			for(Map.Entry<String,Ladder> m1:ladders.entrySet()){
+
+				String lkey=m1.getKey();
+				Ladder l=m1.getValue();
+
+				if((cells.get(index).getCellNum())==(l.getLadderHead())||(cells.get(index).getCellNum())==(l.getLadderTail())){
+					System.out.print(lkey);
+				}
+			}		
 			System.out.print("["+cells.get(index).getCellNum()+"]"+"	");
 			index--;
 
@@ -73,6 +96,15 @@ public class BoardController{
 			
 			if((cels[k])==(s.getSnakeHead())||(cels[k])==(s.getSnakeTail())){
 					System.out.print(key);
+				}
+			}	
+			for(Map.Entry<String,Ladder> m1:ladders.entrySet()){
+
+				String lkey=m1.getKey();
+				Ladder l=m1.getValue();
+
+				if((cels[k])==(l.getLadderHead())||(cels[k])==(l.getLadderTail())){
+					System.out.print(lkey);
 				}
 			}		
 		System.out.print("["+cels[k]+"]"+"	");
