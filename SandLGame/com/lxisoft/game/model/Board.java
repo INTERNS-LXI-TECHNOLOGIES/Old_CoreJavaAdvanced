@@ -5,8 +5,8 @@ import java.util.*;
 public class Board{
 
 	private ArrayList<Cell> cells=new ArrayList<Cell>();
-	private ArrayList<Snake> snakes=new ArrayList<Snake>();
-	private ArrayList<Ladder> ladders=new ArrayList<Ladder>();
+	private HashMap<String,Snake> snakes=new HashMap<String,Snake>();
+	private HashMap<String,Ladder> ladders=new HashMap<String,Ladder>();
 
 
 	public void setCells(ArrayList<Cell> cells){
@@ -18,19 +18,19 @@ public class Board{
 
 		return cells;
 	}
-	public void setSnakes(ArrayList<Snake> snakes){
+	public void setSnakes(HashMap<String,Snake> snakes){
 
 		this.snakes=snakes;
 	}
-	public ArrayList<Snake> getSnakes(){
+	public HashMap<String,Snake> getSnakes(){
 
 		return snakes;
 	}
-	public void setLadders(ArrayList<Ladder> ladders){
+	public void setLadders(HashMap<String,Ladder> ladders){
 
 		this.ladders=ladders;
 	}
-	public ArrayList<Ladder> getLadders(){
+	public HashMap<String,Ladder> getLadders(){
 
 		return ladders;
 	}
