@@ -9,11 +9,7 @@ public class BoardController{
 	ArrayList<Cell> cells=new ArrayList<Cell>();
 	HashMap<String,Snake> snakes=new HashMap<String,Snake>();
 	HashMap<String,Ladder> ladders=new HashMap<String,Ladder>();
-
-	public void printBoard(){
-
-		
-	}
+	
 	public void createCells(){
 
 		for(int num=1;num<=100;num++){

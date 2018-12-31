@@ -12,9 +12,13 @@ public class GameController{
 	DiceController dice=new DiceController();
 
 	Scanner input=new Scanner(System.in);
+	String[] playerCoins={"RED","GREEN","BLUE","ORANGE","YELLOW"};
+	List<String> coinsList=new ArrayList<String>(Arrays.asList(playerCoins));
 	
-	public void homePage(){
+	public void homePage(){  
 		board.printCells();
+		dice.createDice();
+		dice.getDiceValue();
 		System.out.println("Enter number of Players");
 		int limit=input.nextInt();
 		System.out.println(" 1.New User Register here     2.Login");
@@ -33,18 +37,10 @@ public class GameController{
 	public void startGame(String pName){
 
 		System.out.println(pName+":  Choose your Coin");
-		String[] coins={"RED","GREEN","BLUE","ORANGE","YELLOW"};
-		List<String> coinsList=new ArrayList<String>(Arrays.asList(coins));
 		System.out.println(coinsList);
 		Scanner in=new Scanner(System.in);
-	 String color=in.nextLine();
-	if(color.equals(coins)){
+	 	String color=in.nextLine();
 		coinsList.remove(color);
-		coins = coinsList.toArray(new String[0]);
-
-	}
-
-	
 	
 	}
 	public void loadFile(){
