@@ -8,7 +8,7 @@ public class CoinController{
 	Coin[] coin= new Coin[10];
 	String coinColour;
 	int i;
-	int coinCount,coinNumber=0;
+	//int coinCount,coinNumber=0;
 	
 	Scanner scan= new Scanner(System.in);
 	
@@ -39,39 +39,15 @@ public class CoinController{
 			coin[i-1] =coin[i];
 			//return coin[key];
 		}
-		coinNumber = coinCount -1;
+		//coinNumber = coinCount -1;
 	
 			return coin[key-1];	
 	}
 		
 
 	public void printCoinList(){
-		for( i=0;i<10;i++) {
+		for( i=1;i<10;i++) {
 			System.out.println(i + ": " + coin[i]);
 		}
 }		
-		
-			
-			
-			
-		
-	
-		/*	if(key==1){
-			coin = new Coin("Green");}
-			else if(key==2){
-			coin = new Coin("Blue");}
-			else if(key==3){
-			coin = new Coin("Red");}
-			else if(key==4){
-			coin = new Coin("Yellow");}
-			else if(key==5){
-			coin =new Coin("Rose");}
-			else if(key==6){
-			coin = new Coin("Violet");}
-			else if(key==7){
-			coin = new Coin("Black");}
-			else if(key==8){
-			coin = new Coin("White");}
-			else if(key==9){
-			coin =new Coin("Brown");}	*/
 }	

@@ -4,7 +4,7 @@ package com.lxisoft.snakeNLadder.model;
 */
 public class Game{
 	
-	private player players;
+	private Player player;
 	
 	private Dice dice;
 	

@@ -13,7 +13,7 @@ public class GameController{
 	
 	
 	PlayerController playerControl;
-	//BoardController boardControl ;
+	BoardController boardControl ;
 	//Dice dice =new Dice();;
 	CoinController coinControl= new CoinController();
 	
@@ -43,7 +43,8 @@ public class GameController{
 						playerControl.playerRegestration(i);
 						//cls();}
 		}
-						printPlayerCoins(playerNumber);		
+						printPlayerCoins(playerNumber);	
+						boardControl = new BoardController();
 						//playGame(playerNumber);
 						//playGame(playerNumber);
 					break;
