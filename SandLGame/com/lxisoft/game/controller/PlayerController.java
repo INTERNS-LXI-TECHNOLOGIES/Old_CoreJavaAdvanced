@@ -19,6 +19,8 @@ public class PlayerController{
 			FileWriter details=new FileWriter(playersDetails);
 			for(int j=1;j<=limit;j++){
 				details.write("Players"+j+"Details"+";");
+			
+
 				System.out.println("*******<<<<<<<REGISTER>>>>>>>>*******");
 				System.out.println("Full Name:");
 				players.setPlayersName(input.nextLine());
@@ -36,9 +38,7 @@ public class PlayerController{
 				
 			}
 			details.close();
-			System.out.println("Please Login.....any one player\n");
-			playersLogin();
-
+			
 		}
 		catch(Exception e){
 
@@ -120,4 +120,5 @@ public class PlayerController{
 		}
 		
 	}
+	
 }

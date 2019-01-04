@@ -7,7 +7,7 @@ public class Game{
 
 
 	private Board board=new Board();
-	private ArrayList<Player> players=new ArrayList<Player>();
+	private Player players=new Player();
 	private Coin coins=new Coin();
 	private Dice dice=new Dice();
 
@@ -35,11 +35,11 @@ public class Game{
 
 		return dice;
 	}
-	public void setPlayers(ArrayList<Player> players){
+	public void setPlayers(Player players){
 
 		this.players=players;
 	}
-	public ArrayList<Player> getPlayers(){
+	public Player getPlayers(){
 
 		return players;
 	}

@@ -3,16 +3,15 @@ package com.lxisoft.game.model;
 import java.util.ArrayList;
 public class Dice{
 
-	private ArrayList<Integer> dice_No=new ArrayList<Integer>();
+	private int  dice_No;
 
-	public void setDice_No(ArrayList<Integer> dice_No){
+	public void setDice_No(int dice_No){
 
 		this.dice_No=dice_No;
 	}
-	public ArrayList<Integer> getDice_No(){
+	public int getDice_No(){
 
 		return dice_No;
 	}
-
-	
 }
+	

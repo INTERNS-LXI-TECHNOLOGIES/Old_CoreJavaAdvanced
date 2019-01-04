@@ -10,7 +10,7 @@ public class BoardController{
 	HashMap<String,Snake> snakes=new HashMap<String,Snake>();
 	HashMap<String,Ladder> ladders=new HashMap<String,Ladder>();
 	
-	public void createCells(){
+	public void createBoard(){
 
 		for(int num=1;num<=100;num++){
 		
@@ -46,10 +46,9 @@ public class BoardController{
 		board.setLadders(ladders);
 
 	}
-	public void printCells(){
+	public void printBoard(Game game){
   
-		int cels[]=new int[100];
-		createCells();
+		int cels[]=new int[150];
 		cells=board.getCells();
 		snakes=board.getSnakes();
 		int index=99;
@@ -73,7 +72,13 @@ public class BoardController{
 				if((cells.get(index).getCellNum())==(l.getLadderHead())||(cells.get(index).getCellNum())==(l.getLadderTail())){
 					System.out.print(lkey);
 				}
-			}		
+			}
+
+				
+				if((cells.get(index).getCellNum())==(game.getPlayers().getPlayersScore())){
+
+					System.out.print("p");
+				}	
 			System.out.print("["+cells.get(index).getCellNum()+"]"+"	");
 			index--;
 
@@ -102,7 +107,11 @@ public class BoardController{
 				if((cels[k])==(l.getLadderHead())||(cels[k])==(l.getLadderTail())){
 					System.out.print(lkey);
 				}
-			}		
+			}
+			if((cels[k])==(game.getPlayers().getPlayersScore())){
+
+					System.out.print("p");
+				}		
 		System.out.print("["+cels[k]+"]"+"	");
 
 	}

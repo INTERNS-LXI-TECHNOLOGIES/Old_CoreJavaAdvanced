@@ -1,28 +1,37 @@
-
 package com.lxisoft.game.controller;
 
 import com.lxisoft.game.model.*;
 import java.util.Random;
 import java.util.ArrayList;
+
+enum DiceValues{ ONE(1),TWO(2),THREE(3),FOUR(4),FIVE(5),SIX(6);
+
+	DiceValues(int num){
+		this.num=num;
+	}
+	private int num;
+	public int getNum(){
+
+		return num;
+	} 
+ }
 public class DiceController{
 
 	Dice dice=new Dice();
 	Random ran=new Random();
 	int no_Of_Sides=6;
-	ArrayList<Integer> dice_No=new ArrayList<Integer>();
 	public void createDice(){
 
-		for(int i=1;i<=no_Of_Sides;i++){
-
-			dice_No.add(i);
-			dice.setDice_No(dice_No);
+		for(DiceValues dv:DiceValues.values()){
+			
+			dice.setDice_No(dv.getNum());
 		}
 
 	}
-	public void getDiceValue(){
+	public int getDiceValue(){
 
-		int diceValue=ran.nextInt(no_Of_Sides) + 1;
-		System.out.println(diceValue);
-
+		int diceValue=ran.nextInt(DiceValues.values().length)+1;
+		//System.out.println(diceValue);
+		return diceValue;
 	}
 }

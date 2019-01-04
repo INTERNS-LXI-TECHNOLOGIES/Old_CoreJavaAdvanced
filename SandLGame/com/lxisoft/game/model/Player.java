@@ -6,6 +6,7 @@ public class Player{
 	private String playersPhNo;
 	private String playersEmailId;
 	private String playersPassword;
+	private int playersScore=0;
 
 	public void setPlayersName(String playersName){
 
@@ -39,6 +40,14 @@ public class Player{
 	public String getPlayersPassword(){
 
 		return playersPassword;
+	}
+	public void setPlayersScore(int playersScore){
+
+		this.playersScore=playersScore;
+	}
+	public int getPlayersScore(){
+
+		return playersScore;
 	}
 
 }

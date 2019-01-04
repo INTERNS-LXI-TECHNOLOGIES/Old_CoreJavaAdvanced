@@ -7,6 +7,7 @@ public class Tdd{
 	public static void main(String args[]){
 
 		GameController game=new GameController();	
-		game.homePage();
+		//game.homePage();
+		game.moveCoins();
 	}
 }
