@@ -70,16 +70,55 @@ public class GameController{
 
 		do{
 			rollDie();
-			score+=diceval;
-			game.getPlayers().setPlayersScore(score);
+			
+
+				if(diceval==1&&score==0){
+					score=1;
+					game.getPlayers().setPlayersScore(score);
+				}
+				/**if(diceval==1||diceval==6)
+				{
+					score+=diceval;
+					game.getPlayers().setPlayersScore(score);
+
+					rollDie();
+				}*/
+				else if(diceval<=6&&score<=94){
+					score+=diceval;
+					game.getPlayers().setPlayersScore(score);
+
+				}
+				else if(diceval==5&&score==95){
+					score=100;
+					game.getPlayers().setPlayersScore(score);
+				}
+				else if(diceval==4&&score==96){
+					score=100;
+					game.getPlayers().setPlayersScore(score);
+
+				}
+				else if(diceval==3&&score==97){
+					score=100;
+					game.getPlayers().setPlayersScore(score);
+
+				}
+				else if(diceval==2&&score==98){
+					score=100;
+					game.getPlayers().setPlayersScore(score);
+
+				}
+				else if(diceval==1&&score==99){
+					score=100;
+					game.getPlayers().setPlayersScore(score);
+
+				}
+
+			//score+=diceval;
+			
 			System.out.println(game.getPlayers().getPlayersScore());
 			board.printBoard(game);
 
-		}while(game.getPlayers().getPlayersScore()<=100);
-		//int diceval=dice.getDiceValue();
-		//int score=game.getPlayers().getPlayersScore();
-
-			
+		}while(game.getPlayers().getPlayersScore()<100);
 			System.out.println(game.getPlayers().getPlayersScore());
 	
 	}
