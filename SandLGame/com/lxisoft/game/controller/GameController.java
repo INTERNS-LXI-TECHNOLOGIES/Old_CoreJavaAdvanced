@@ -36,8 +36,10 @@ public class GameController{
 
 		}
 		System.out.println("Please login any registered player");
+		players.playersLogin();
 		startGame();
-		//players.playersLogin();
+		//playGame();
+		moveCoins();
 		
 	}
 	public void startGame(){
@@ -65,13 +67,35 @@ public class GameController{
 		
 
 	}
+	public void playGame(){
+
+		try
+		{
+			FileReader fr=new FileReader("./com/lxisoft/game/playersDetails.txt");
+			BufferedReader br=new BufferedReader(fr);
+			String line,name;
+			
+			while((line=br.readLine())!=null)
+			{
+				String data[]=line.split(";");
+				name=data[1];
+				System.out.println(name+"Your Turn");
+				//moveCoins()
+			 	
+			}
+		}
+		catch(Exception e){
+
+			e.printStackTrace();
+		}
+	}
 	public void moveCoins(){
 
 
 		do{
 			rollDie();
 			
-
+				score=game.getPlayers().getPlayersScore();
 				if(diceval==1&&score==0){
 					score=1;
 					game.getPlayers().setPlayersScore(score);
@@ -83,27 +107,31 @@ public class GameController{
 
 					rollDie();
 				}*/
-				else if(diceval<=6&&score<=94){
+			
+				else if(score>=1&&score<=94){
+					score+=diceval;
+					game.getPlayers().setPlayersScore(score);
+					board.checkSnakes(game);
+					board.checkLadders(game);
+
+				}
+				else if(diceval<=5&&score==95){
+					score+=diceval;
+					game.getPlayers().setPlayersScore(score);
+					board.checkSnakes(game);
+				}
+				else if(diceval<=4&&score==96){
 					score+=diceval;
 					game.getPlayers().setPlayersScore(score);
 
 				}
-				else if(diceval==5&&score==95){
-					score=100;
-					game.getPlayers().setPlayersScore(score);
-				}
-				else if(diceval==4&&score==96){
-					score=100;
+				else if(diceval<=3&&score==97){
+					score+=diceval;
 					game.getPlayers().setPlayersScore(score);
 
 				}
-				else if(diceval==3&&score==97){
-					score=100;
-					game.getPlayers().setPlayersScore(score);
-
-				}
-				else if(diceval==2&&score==98){
-					score=100;
+				else if(diceval<=2&&score==98){
+					score+=diceval;
 					game.getPlayers().setPlayersScore(score);
 
 				}
@@ -112,14 +140,15 @@ public class GameController{
 					game.getPlayers().setPlayersScore(score);
 
 				}
+			
 
 			//score+=diceval;
-			
+			System.out.println(diceval);
 			System.out.println(game.getPlayers().getPlayersScore());
 			board.printBoard(game);
 
 		}while(game.getPlayers().getPlayersScore()<100);
-			System.out.println(game.getPlayers().getPlayersScore());
+			//System.out.println(game.getPlayers().getPlayersScore());
 	
 	}
 	public void rollDie(){

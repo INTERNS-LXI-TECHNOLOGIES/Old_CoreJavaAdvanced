@@ -120,5 +120,46 @@ public class BoardController{
 }
 		
 	}
+	public void checkSnakes(Game game){
+		//System.out.println(""+game.getPlayers().getPlayersScore()+snakes.get("s1").getSnakeHead());
+		if(game.getPlayers().getPlayersScore()==snakes.get("s1").getSnakeHead()){
+			game.getPlayers().setPlayersScore(snakes.get("s1").getSnakeTail());
+			System.out.println("Snake1 Entry");
 
+		}
+		else if(game.getPlayers().getPlayersScore()==snakes.get("s2").getSnakeHead()){
+			game.getPlayers().setPlayersScore(snakes.get("s2").getSnakeTail());
+			System.out.println("Snake2 Entry");
+		}
+		else if(game.getPlayers().getPlayersScore()==snakes.get("s3").getSnakeHead()){
+			game.getPlayers().setPlayersScore(snakes.get("s3").getSnakeTail());
+			System.out.println("Snake3 Entry");
+		}
+		else if(game.getPlayers().getPlayersScore()==snakes.get("s4").getSnakeHead()){
+			game.getPlayers().setPlayersScore(snakes.get("s4").getSnakeTail());
+			System.out.println("Snake4 Entry");
+		}
+
+			//System.out.println(snakes.get("s1").getSnakeHead());
+	}
+	public void checkLadders(Game game){
+		if(game.getPlayers().getPlayersScore()==ladders.get("l1").getLadderHead())
+		{
+			game.getPlayers().setPlayersScore(ladders.get("l1").getLadderTail());
+			System.out.println("Ladder1 Entry");
+		}
+		else if(game.getPlayers().getPlayersScore()==ladders.get("l2").getLadderHead()){
+			game.getPlayers().setPlayersScore(ladders.get("l2").getLadderTail());
+			System.out.println("Ladder2 Entry");
+		}
+		else if(game.getPlayers().getPlayersScore()==ladders.get("l3").getLadderHead()){
+			game.getPlayers().setPlayersScore(ladders.get("l3").getLadderTail());
+			System.out.println("Ladder3 Entry");
+		}
+
+		else if(game.getPlayers().getPlayersScore()==ladders.get("l4").getLadderHead()){
+			game.getPlayers().setPlayersScore(ladders.get("l4").getLadderTail());
+			System.out.println("Ladder4 Entry");
+		}
+	}
 }
