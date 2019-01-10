@@ -1,29 +1,34 @@
 package com.lxisoft.snakeNLadder.model;
 /** Represents a Player.
  * @author Deepthi E
-*/
+ */
 public class Player{
 	
 	private	String name;
-	private	int id;
-	private	int score;
+	//private	int id;
+	private	int score=0;
 	private	String password;
 	private	String regDate;
 	private	Coin coin;
 	
- /**
-   * Creates a  player with player's id, player's name and player's password.
-   * @param id This is the first paramter to the constructor.
-   * @param name  This is the second parameter to the constructor.
-   * @param password  This is the third parameter to the constructor.
-   */
 	
-	public Player(int id,String name,String password){
-		this.id=id;
-		this.name=name;
-		this.password=password;
-		}
+	public Player(){
 		
+	}
+	public Player(String name){
+		this.name= name;
+	}
+	
+	
+	
+/** Sets the player's name.
+  * @param name The player's name.
+  
+	public void setPlayerName(String name){
+
+		this.name=name;
+	}*/
+
 /** Gets the player's name.
   * @return A String representing The player's name.
   */
@@ -31,6 +36,14 @@ public class Player{
 		return name;
 		}
 		
+/** Sets the player's password.
+  * @param password The player's password.
+  */
+public void setPassword(String password){
+
+		this.password=password;
+	}	
+	
 /** Gets the player's password.
   * @return A String representing The player's password.
   */
@@ -68,6 +81,6 @@ public class Player{
 	
 	
 	public String toString(){ 
-		return "Player Name::"+name+" "+" Coin::"+coin+" ";  
+		return "Player Name::"+name+" "+coin+" ";  
 		}  
 }

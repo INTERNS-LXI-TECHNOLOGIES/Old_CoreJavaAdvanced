@@ -3,6 +3,9 @@ package com.lxisoft.snakeNLadder.controller;
 import com.lxisoft.snakeNLadder.model.*;
 import java.util.*;
 
+/** Represents a BoardController.
+ * @author Deepthi E
+ */
 
 
 public class BoardController{
@@ -11,35 +14,48 @@ public class BoardController{
 	ArrayList<Cell> cells = new ArrayList<Cell>();
 	HashMap<String,Snake> snakes= new HashMap<String,Snake>();
 	HashMap<String,Ladder> ladders= new HashMap<String,Ladder>();
-	
-	public BoardController(){
-		printBoard();
+
+	/**
+	 * The method to createBoard.
+	 */
+	public void createBoard(){
+		
+		createCells();
+		createSnakes();
+		createLadders();
+		
 	}
-	
-	public void printBoard(){
-		printCells();
-	}
-	
+	/**
+	 * The method to createCells on the board.
+	 */
 	public void createCells(){
 		for(int num=1;num<=100;num++){
 			Cell cell= new Cell(num);
 			cells.add(cell);	
 		}
 		board.setCells(cells);
+
 	}
-	
+	/**
+	 * The method to create Snakes on the board.
+	 * Snake objects are added to the HashMap<snakes>
+	 */
 	public void createSnakes(){
 		Snake snake1=new Snake(13,4);
 		Snake snake2=new Snake(36,10);
 		Snake snake3=new Snake(76,28);
 		Snake snake4=new Snake(95,34);
+		
 		snakes.put("s1",snake1);
 		snakes.put("s2",snake2);
 		snakes.put("s3",snake3);
 		snakes.put("s4",snake4);
 		board.setSnakes(snakes);
 	}
-	
+	/**
+	 * The method to create Ladders on the board.
+	 * Ladder objects are added to the HashMap<ladders>
+	 */
 	public void createLadders(){
 		Ladder lader1= new Ladder(7,24);
 		Ladder lader2= new Ladder(15,56);
@@ -51,12 +67,14 @@ public class BoardController{
 		ladders.put("l4",lader4);
 		board.setLadders(ladders);
 	}
-	public void printCells(){
+	
+	/**
+	 * The method to printBoard.
+	 * The cells Snakes and Ladders are on the Board.
+	 */
+	public void printBoard(Game game){
   
 		int cels[]=new int[100];
-		createCells();
-		createSnakes();
-		createLadders();
 		cells=board.getCells();
 		snakes=board.getSnakes();
 		ladders=board.getLadders();
@@ -80,7 +98,11 @@ public class BoardController{
 			if((cells.get(index).getCellNumber())==(l.getLadderStart())||(cells.get(index).getCellNumber())==(l.getLadderEnd())){
 					System.out.print(lkey);	
 				}
-			}	
+			}
+			if((cells.get(index).getCellNumber())==(game.getPlayer().getScore())){
+
+					System.out.print("p");
+				}	
 			System.out.print("["+cells.get(index).getCellNumber()+"	");
 			index--;
 		}
@@ -100,7 +122,6 @@ public class BoardController{
 					System.out.print(key);
 					}
 				}
-			
 			for(Map.Entry<String,Ladder> m1:ladders.entrySet()){
 				String lkey=m1.getKey();
 				Ladder l=m1.getValue();
@@ -108,15 +129,56 @@ public class BoardController{
 			if((cels[k])==(l.getLadderStart())||(cels[k])==(l.getLadderEnd())){
 					System.out.print(lkey);
 					}
-				}
-			
-		System.out.print(cels[k]+"]"+"	");
+			}
+			if((cels[k])==(game.getPlayer().getScore())){
 
+					System.out.print("p");
+				}
+		System.out.print(cels[k]+"]"+"	");
 			}
 		}
 	System.out.println("\n\n");
-		}
-		
+		}	
 	}
-
+	
+	
+	public void snakeCheck(Game game,int playerId){
+		if(game.getPlayer().getScore()==snakes.get("s1").getSnakeHead()){
+			game.getPlayer().setScore(snakes.get("s1").getSnakeTail());
+			System.out.println("Oooops.... Snake1");
+		}
+		else if(game.getPlayer().getScore()==snakes.get("s2").getSnakeHead()){
+			game.getPlayer().setScore(snakes.get("s2").getSnakeTail());
+			System.out.println("Oooops.... Snake2");
+		}
+		else if(game.getPlayer().getScore()==snakes.get("s3").getSnakeHead()){
+			game.getPlayer().setScore(snakes.get("s3").getSnakeTail());
+			System.out.println("Oooops.... Snake3");
+		}
+		else if(game.getPlayer().getScore()==snakes.get("s4").getSnakeHead()){
+			game.getPlayer().setScore(snakes.get("s4").getSnakeTail());
+			System.out.println("Oooops.... Snake4");
+		}
+	}
+	
+	public void ladderCheck(Game game,int playerId){
+		if(game.getPlayer().getScore()==ladders.get("l1").getLadderStart()){
+			game.getPlayer().setScore(ladders.get("l1").getLadderEnd());
+			System.out.println("Wow.... Ladder1");
+		}
+		else if(game.getPlayer().getScore()==ladders.get("l2").getLadderStart()){
+			game.getPlayer().setScore(ladders.get("l2").getLadderEnd());
+			System.out.println("Wow.... Ladder2");
+		}
+		else if(game.getPlayer().getScore()==ladders.get("l3").getLadderStart()){
+			game.getPlayer().setScore(ladders.get("l3").getLadderEnd());
+			System.out.println("Wow.... Ladder3");
+		}
+		else if(game.getPlayer().getScore()==ladders.get("l4").getLadderStart()){
+			game.getPlayer().setScore(ladders.get("l4").getLadderEnd());
+			System.out.println("Wow.... Ladder4");
+		}
+	}
+	
+	
 }

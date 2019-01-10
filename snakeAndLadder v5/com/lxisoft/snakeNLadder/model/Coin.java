@@ -1,27 +1,55 @@
 package com.lxisoft.snakeNLadder.model;
+
+import java.util.*;
+
 /** Represents a Coin.
   * @author Deepthi E
   */
 public class Coin{
 	
 	private String colour;
-
-/** Creates a coin with the specified colour.
-  * @param colour The coin’s colour.
-  */
+	
 	public Coin(String colour){
 		this.colour=colour;
-		}
+	}
+	public Coin(){
+	
+	}
+	
+	
+
+private ArrayList<String> coinList= new ArrayList<String>();
+
+/** Creates an ArrayList of playerCoins with the specified colour.
+  * @param playerCoin's The player’s coin with a String colour.
+  */
+public void setPlayerCoins(ArrayList<String> coinList){
+	this.coinList=coinList;
+}
+
+
+/** Gets the playerCoins from the ArrayList .
+  * @return An ArrayList of String representing the playerCoin's colour.
+  */
+public ArrayList<String> getPlayerCoins(){
+	return coinList;
+}
+
 
 	
-/** Gets the coin's Colour .
-  * @return A String representing the coin’s colour.
-  */
-	public String getColour() {
-		return colour;
-		}
-
-	public String toString(){ 
-		return colour+" ";  
+public String toString(){ 
+		return " Coin::"+colour+" ";  
 		}  
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }
