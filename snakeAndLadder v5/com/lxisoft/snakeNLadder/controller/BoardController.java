@@ -14,7 +14,9 @@ public class BoardController{
 	ArrayList<Cell> cells = new ArrayList<Cell>();
 	HashMap<String,Snake> snakes= new HashMap<String,Snake>();
 	HashMap<String,Ladder> ladders= new HashMap<String,Ladder>();
-
+	
+	int playerPosition;
+	int id;
 	/**
 	 * The method to createBoard.
 	 */
@@ -22,8 +24,7 @@ public class BoardController{
 		
 		createCells();
 		createSnakes();
-		createLadders();
-		
+		createLadders();	
 	}
 	/**
 	 * The method to createCells on the board.
@@ -34,7 +35,6 @@ public class BoardController{
 			cells.add(cell);	
 		}
 		board.setCells(cells);
-
 	}
 	/**
 	 * The method to create Snakes on the board.
@@ -45,7 +45,6 @@ public class BoardController{
 		Snake snake2=new Snake(36,10);
 		Snake snake3=new Snake(76,28);
 		Snake snake4=new Snake(95,34);
-		
 		snakes.put("s1",snake1);
 		snakes.put("s2",snake2);
 		snakes.put("s3",snake3);
@@ -66,14 +65,12 @@ public class BoardController{
 		ladders.put("l3",lader3);
 		ladders.put("l4",lader4);
 		board.setLadders(ladders);
-	}
-	
+	}	
 	/**
 	 * The method to printBoard.
 	 * The cells Snakes and Ladders are on the Board.
 	 */
 	public void printBoard(Game game){
-  
 		int cels[]=new int[100];
 		cells=board.getCells();
 		snakes=board.getSnakes();
@@ -88,96 +85,94 @@ public class BoardController{
 				Snake s=m.getValue();
 			
 			if((cells.get(index).getCellNumber())==(s.getSnakeHead())||(cells.get(index).getCellNumber())==(s.getSnakeTail())){
-					System.out.print(key);
-				}
+					System.out.print(key);}
 			}
 			for(Map.Entry<String,Ladder> m1:ladders.entrySet()){
 				String lkey=m1.getKey();
 				Ladder l=m1.getValue();
 			
 			if((cells.get(index).getCellNumber())==(l.getLadderStart())||(cells.get(index).getCellNumber())==(l.getLadderEnd())){
-					System.out.print(lkey);	
-				}
+					System.out.print(lkey);}
 			}
-			if((cells.get(index).getCellNumber())==(game.getPlayer().getScore())){
-
-					System.out.print("p");
+			if((cells.get(index).getCellNumber())==playerPosition){
+					System.out.print("*p"+id);
 				}	
-			System.out.print("["+cells.get(index).getCellNumber()+"	");
-			index--;
-		}
+			System.out.print("["+cells.get(index).getCellNumber()+"]	");
+			index--;}
 	}
 	else{
 		for(int j=0;j<10;j++){			
 		cels[j]=cells.get(index).getCellNumber();
 		index--;
 		}
-	
 	for(int k=9;k>=0;k--){
 		for(Map.Entry<String,Snake> m:snakes.entrySet()){
 				String key=m.getKey();
 				Snake s=m.getValue();
 			
 			if((cels[k])==(s.getSnakeHead())||(cels[k])==(s.getSnakeTail())){
-					System.out.print(key);
-					}
+					System.out.print(key);}
 				}
 			for(Map.Entry<String,Ladder> m1:ladders.entrySet()){
 				String lkey=m1.getKey();
 				Ladder l=m1.getValue();
 			
 			if((cels[k])==(l.getLadderStart())||(cels[k])==(l.getLadderEnd())){
-					System.out.print(lkey);
-					}
+					System.out.print(lkey);}
 			}
-			if((cels[k])==(game.getPlayer().getScore())){
-
-					System.out.print("p");
-				}
-		System.out.print(cels[k]+"]"+"	");
+			if((cels[k])==playerPosition){
+					System.out.print("*p"+id);
+					}
+		System.out.print("["+cels[k]+"]"+"	");
 			}
 		}
 	System.out.println("\n\n");
 		}	
 	}
-	
-	
-	public void snakeCheck(Game game,int playerId){
-		if(game.getPlayer().getScore()==snakes.get("s1").getSnakeHead()){
-			game.getPlayer().setScore(snakes.get("s1").getSnakeTail());
-			System.out.println("Oooops.... Snake1");
-		}
-		else if(game.getPlayer().getScore()==snakes.get("s2").getSnakeHead()){
-			game.getPlayer().setScore(snakes.get("s2").getSnakeTail());
-			System.out.println("Oooops.... Snake2");
-		}
-		else if(game.getPlayer().getScore()==snakes.get("s3").getSnakeHead()){
-			game.getPlayer().setScore(snakes.get("s3").getSnakeTail());
-			System.out.println("Oooops.... Snake3");
-		}
-		else if(game.getPlayer().getScore()==snakes.get("s4").getSnakeHead()){
-			game.getPlayer().setScore(snakes.get("s4").getSnakeTail());
-			System.out.println("Oooops.... Snake4");
-		}
+	public void playerGamePosition(Game game,int playerId){
+		playerPosition=game.getPlayers().get(playerId).getScore();
+		id=playerId;
 	}
 	
-	public void ladderCheck(Game game,int playerId){
-		if(game.getPlayer().getScore()==ladders.get("l1").getLadderStart()){
-			game.getPlayer().setScore(ladders.get("l1").getLadderEnd());
-			System.out.println("Wow.... Ladder1");
+	public int snakeCheck(Game game,int playerId){
+		if(game.getPlayers().get(playerId).getScore()==snakes.get("s1").getSnakeHead()){
+			game.getPlayers().get(playerId).setScore(snakes.get("s1").getSnakeTail());
+			System.out.println("Falling to....."+game.getPlayers().get(playerId).getScore()+"Oooops.... Snake1");
 		}
-		else if(game.getPlayer().getScore()==ladders.get("l2").getLadderStart()){
-			game.getPlayer().setScore(ladders.get("l2").getLadderEnd());
-			System.out.println("Wow.... Ladder2");
+		else if(game.getPlayers().get(playerId).getScore()==snakes.get("s2").getSnakeHead()){
+			game.getPlayers().get(playerId).setScore(snakes.get("s2").getSnakeTail());
+			System.out.println("Falling to....."+game.getPlayers().get(playerId).getScore()+"Oooops.... Snake2");
 		}
-		else if(game.getPlayer().getScore()==ladders.get("l3").getLadderStart()){
-			game.getPlayer().setScore(ladders.get("l3").getLadderEnd());
-			System.out.println("Wow.... Ladder3");
+		else if(game.getPlayers().get(playerId).getScore()==snakes.get("s3").getSnakeHead()){
+			game.getPlayers().get(playerId).setScore(snakes.get("s3").getSnakeTail());
+			System.out.println("Falling to....."+game.getPlayers().get(playerId).getScore()+"Oooops.... Snake3");
 		}
-		else if(game.getPlayer().getScore()==ladders.get("l4").getLadderStart()){
-			game.getPlayer().setScore(ladders.get("l4").getLadderEnd());
-			System.out.println("Wow.... Ladder4");
+		else if(game.getPlayers().get(playerId).getScore()==snakes.get("s4").getSnakeHead()){
+			game.getPlayers().get(playerId).setScore(snakes.get("s4").getSnakeTail());
+			System.out.println("Falling to....."+game.getPlayers().get(playerId).getScore()+"Oooops.... Snake4");
 		}
+		return game.getPlayers().get(playerId).getScore();
+	}
+	
+	public int ladderCheck(Game game,int playerId){
+		if(game.getPlayers().get(playerId).getScore()==ladders.get("l1").getLadderStart()){
+			game.getPlayers().get(playerId).setScore(ladders.get("l1").getLadderEnd());
+			System.out.println("jumbing to....."+game.getPlayers().get(playerId).getScore()+"Wow....Ladder1");
+
+		}
+		else if(game.getPlayers().get(playerId).getScore()==ladders.get("l2").getLadderStart()){
+			game.getPlayers().get(playerId).setScore(ladders.get("l2").getLadderEnd());
+			System.out.println("jumbing to....."+game.getPlayers().get(playerId).getScore()+"Wow.... Ladder2");
+		}
+		else if(game.getPlayers().get(playerId).getScore()==ladders.get("l3").getLadderStart()){
+			game.getPlayers().get(playerId).setScore(ladders.get("l3").getLadderEnd());
+			System.out.println("jumbing to....."+game.getPlayers().get(playerId).getScore()+"Wow.... Ladder3");
+		}
+		else if(game.getPlayers().get(playerId).getScore()==ladders.get("l4").getLadderStart()){
+			game.getPlayers().get(playerId).setScore(ladders.get("l4").getLadderEnd());
+			System.out.println("jumbing to....."+game.getPlayers().get(playerId).getScore()+"Wow.... Ladder4");
+		}
+		return game.getPlayers().get(playerId).getScore();
 	}
 	
 	

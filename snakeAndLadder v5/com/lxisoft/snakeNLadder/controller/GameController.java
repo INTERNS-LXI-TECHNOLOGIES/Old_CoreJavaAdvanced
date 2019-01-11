@@ -19,13 +19,14 @@ import java.util.regex.*;
 public class GameController{
 	
 	Game game = new Game();
-	PlayerController playerControl=new PlayerController();
+	//PlayerController playerControl=new PlayerController();
 	BoardController boardControl = new BoardController();
 	DiceController diceControl =new DiceController();
 	CoinController coinControl= new CoinController();
 	
 	Scanner scan= new Scanner(System.in);
-	int i,players,key,playerNumber,playerNumber1,diceValue,score;
+	int i,players,key,playerNumber,playerNumber1,diceValue;
+	int[] score = new int[100];
 	String noOfPlayers,coinColour;
 	FileWriter fw = null;
     BufferedWriter bw = null;
@@ -43,17 +44,16 @@ public class GameController{
 		coinControl.createCoins();	
 	}
 	/**
-	*  Method to print the homePage.
-	*/
+	 *  Method to print the homePage.
+	 */
 	public void homePage()throws InterruptedException{
 		System.out.println("\t\t\t\t---------------------");
 		System.out.println("\t\t\t\t<<<SNAKE & LADDER>>>");
 		System.out.println("\t\t\t\t---------------------\n");
 		Date date = new Date();
 	    System.out.println("Date:"+ date.toString());
-		playerControl = new PlayerController();
-		System.out.println(" <<[1.Player registration]>> <<[2.Player Login]>> <<[3.Exit]>>");
-		System.out.println("\n\n");
+		//playerControl = new PlayerController();
+		System.out.println(" <<[1.Player registration]>> <<[2.Player Login]>> <<[3.Exit]>>\n\n");
 		
 		String choice = scan.nextLine();
 		int key = Integer.parseInt(choice);			
@@ -77,8 +77,8 @@ public class GameController{
 		}
 	}
 	/**
-	* Method to input the Number of players.
-	*/
+	 * Method to input the Number of players.
+	 */
 	public int inputPlayerNum(){
 		try{
 		System.out.println("Enter Number of Players::");
@@ -91,19 +91,17 @@ public class GameController{
 		int playerNum = Integer.parseInt(noOfPlayers);
 		return playerNum;
 	}
-	
 	/**
 	 *  Method for player Registration throws InterruptedException. 
 	 */
 	public void playerRegestration(int id)throws InterruptedException{
-		
 		Date date = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");  
-        String strDate = dateFormat.format(date);
-		
-		System.out.println(id);
-		System.out.println("Name::"); name=scan.nextLine();
-		//player=new Player(name);
+        String strDate = dateFormat.format(date);	
+		System.out.println(id+">");
+		System.out.println("Name::");name=scan.nextLine();
+		//game.getPlayer().setPlayerName(name);
+		game.setPlayer(new Player(name));
 		System.out.println("Enter a Strong password ...\n# Must contains one lowercase characters.\n# Must contains one digit from 0-9.\n# Must contains one uppercase characters.\n\n# Must contains one special symbols in the list(@#$%) \n# Length at least 6 characters and maximum of 10 ");
 		System.out.println("Password::");
 		password=passwordValidation();
@@ -111,15 +109,12 @@ public class GameController{
 		game.getPlayers().add(game.getPlayer());
 		addToFile(strDate,name,password); 
 	}
-	
 	/**
 	 * Method for password Validation.
 	 * password validates using regex.
 	 * @returns  the password.
 	 */
-	public String passwordValidation(){
-		
-		
+	public String passwordValidation(){		
   /**
 	*(# Start of group
     *(?=.*\\d) # Must contains one digit from 0-9.
@@ -149,13 +144,10 @@ public class GameController{
 	try{
 		fw = new FileWriter(playerRegister,true);
 		bw = new BufferedWriter(fw);
-		
 		bw.write(regDate+",");
 		bw.write(name+",");
 		bw.write(password);
 		bw.newLine();
-		
-		
 		System.out.println("Register Successfully......");
 		Thread.sleep(1000);
 	}catch(IOException e){
@@ -170,12 +162,10 @@ public class GameController{
 				e.printStackTrace();}
 		}
 	}
-	
 	 /**
 	*Method for player Login throws InterruptedException.
 	*
 	*/
-
 	public void login()throws InterruptedException{
 		
 	  System.out.println("Name::"); lPlayerName = scan.nextLine();
@@ -184,37 +174,30 @@ public class GameController{
 		try{
 				FileReader fr=new FileReader(playerRegister);
 				BufferedReader br=new BufferedReader(fr);
-				while((line=br.readLine())!=null);
+				while((line=br.readLine())!=null)
 				do{
 					String[] data = line.split(",");
 					regDate=data[0];
 					playerName1=data[1];
 					password1=data[2];
 				if(lPlayerName.equals(playerName1) && lPassword.equals(password1)){
+					System.out.println("\n\nLOGIN SUCCESSFUL\nBEST OF LUCK\nDetails of Registration-->>"+line);
+				Thread.sleep(1000);
 					count++;}	
 			}while(false);
 			if(count>0){
 				current=count;
 				count=0;
 				lPassword="";lPlayerName="";
-				//break;
+				}
+				else{
+					System.out.println("LOGIN UNSUCCESSFULL\nPLEASE RETRY.............!!");
+					Thread.sleep(1000);
 				}
 			playerName1="";password1="";
-			c1=0;
-		if(current>0){
-			System.out.println("\n\nLOGIN SUCCESSFUL\n");
-			System.out.println("BEST OF LUCK\n");
-			System.out.println("Details of Registration-->>"+line);
-			Thread.sleep(1000);
-			}
-		else{
-			System.out.println("LOGIN UNSUCCESSFULL\n");
-			System.out.println("PLEASE RETRY.............!!");
-			Thread.sleep(1000);}
 	}catch(IOException e){
 			System.out.println("Error");}
-}
-	
+	}	
 	/**
 	 *  Method to print the PlayerCoins.
 	 */
@@ -226,37 +209,29 @@ public class GameController{
 		coinColour=scan.nextLine();
 		coinControl.createPlayerCoin(coinColour);	
 		coinControl.coinList.remove(coinColour);
-		playerControl.playerList.get(i-1).setCoins(coinControl.getPlayerCoin());
-		Thread.sleep(1000);
-			//cls();
-			//playerControl.player.setCoins(coinControl.coinList(coinColour));	
-			}
-
+		game.getPlayers().get(i-1).setCoins(coinControl.getPlayerCoin());
+		Thread.sleep(1000);}
 			System.out.println("Players are-->>");
-			System.out.println(playerControl.playerList);
+			System.out.println(game.getPlayers());
 			System.out.println("\n\n         <<<<<<<<<<<<<***********************>>>>>>>>>>>>\n\n");	
 			Thread.sleep(2000);
 			cls();
 		}	
-
 		/**
 		* Method to playGame.
 		*/
-		
 		public void playGame(int players)throws InterruptedException{
 		System.out.println("              <<<<<<<<<<<<<<<<GAME STARTS>>>>>>>>>>>>>>\n\n");
+		boardControl.printBoard(game);	Thread.sleep(2000);
+		cls();
 		do{
 		for(i=0;i<players;i++){
-		boardControl.printBoard(game);	
 		
-		Thread.sleep(2000);
-		//cls();
-		
-		//System.out.println(players);
 		startPlay(i);
-		//changeScore(i);
-		//playerPosition(i);
-		//System.out.println("Score::"+game.getPlayer().getScore());
+		boardControl.playerGamePosition(game,i);
+		boardControl.printBoard(game);	
+		Thread.sleep(2500);
+		cls();
 		}
 		}while(game.getPlayer().getScore()<=100);
 		
@@ -264,99 +239,84 @@ public class GameController{
 		
 		public void startPlay(int playerId){
 			
-		System.out.println( "playerScore"  +game.getPlayer().getScore());
-		if(playerControl.playerList.get(playerId).getScore()<=100){
-		System.out.println("\n*********************\nTurn of Player  "+playerControl.playerList.get(playerId).getName());
-		diceValue=playerControl.startRollDice(game);
-		changeScore(playerId);
+		if(game.getPlayers().get(playerId).getScore()<=100){
+		System.out.println("\n*********************\nTurn of Player  "+game.getPlayers().get(playerId).getName());
+		startRollDice(playerId);
 			}
 		}
-		
-		
-		
+		public void startRollDice(int playerId){
+			System.out.println("Press 0 to Roll Dice..");
+			int n=scan.nextInt();
+			if(n==0){
+			diceValue=diceControl.getDiceValue();	
+			System.out.println("Dicevalue::"+diceValue);
+			}
+			changeScore(playerId);
+			playerPosition(playerId);
+		}
 		public void changeScore(int playerId){
-		if(playerControl.score[playerId]==0&&diceValue>=1){
-			playerControl.score[playerId]=0;
-			playerControl.playerList.get(playerId).setScore(playerControl.score[playerId]);
-			System.out.println("Score::"+playerControl.playerList.get(playerId).getScore());
-
+		if(game.getPlayers().get(playerId).getScore()==0&&diceValue>1){
+			score[playerId]=0;
+			game.getPlayers().get(playerId).setScore(score[playerId]);
+			System.out.println("Score::"+game.getPlayers().get(playerId).getScore());
 		}
-		
-		else if(playerControl.score[playerId]==0&&diceValue==1){
-			System.out.println(playerControl.score[playerId]);
+		else if(score[playerId]==0&&diceValue==1){
 			scoreSetting(playerId);
-			//playerController.score[id]=1;
-			//playerController.player[id].setScore(playerController.score[id]);
-			System.out.println("Score::"+playerControl.playerList.get(playerId).getScore());
-		}
-		
-		else if(playerControl.score[playerId]>=1&&playerControl.score[playerId]<=94&&diceValue>=1){
+			System.out.println("Score::"+game.getPlayers().get(playerId).getScore());
+		}	
+		else if(score[playerId]>=1&&score[playerId]<=94&&diceValue>=1){
 			scoreSetting(playerId);
-			System.out.println("Score::"+playerControl.playerList.get(playerId).getScore());
-			boardControl.snakeCheck(game,playerId);
-			boardControl.ladderCheck(game,playerId);
+			int fallingScore=boardControl.snakeCheck(game,playerId);
+			game.getPlayers().get(playerId).setScore(fallingScore);
+			int jumbingScore=boardControl.ladderCheck(game,playerId);
+			game.getPlayers().get(playerId).setScore(jumbingScore);
+			System.out.println("Score::"+game.getPlayers().get(playerId).getScore());
 		}
-		else if(playerControl.score[playerId]>94&&playerControl.score[playerId]<=100){
+		else if(score[playerId]>94&&score[playerId]<=100){
 			finalRound(playerId);
-			System.out.println("Score::"+playerControl.playerList.get(playerId).getScore());
+			System.out.println("Score::"+game.getPlayers().get(playerId).getScore());
 		}
 		//boardControl.printBoard(game);
 		}
 		
+		public void scoreSetting(int playerId){
+			score[playerId]=game.getPlayers().get(playerId).getScore();
+			//System.out.println(score[playerId]);
+			score[playerId]+=diceValue;
+			game.getPlayers().get(playerId).setScore(score[playerId]);
+			
+	}
 		
 		public void finalRound(int playerId){
-		if(playerControl.score[playerId]==95&&diceValue<6){
+		if(score[playerId]==95&&diceValue<6){
 			scoreSetting(playerId);
 		}
-		else if(playerControl.score[playerId]==96&&diceValue<5){
+		else if(score[playerId]==96&&diceValue<5){
 			scoreSetting(playerId);
 		}
-		else if(playerControl.score[playerId]==97&&diceValue<4){
+		else if(score[playerId]==97&&diceValue<4){
 			scoreSetting(playerId);
 		}
-		else if(playerControl.score[playerId]==98&&diceValue<3){
+		else if(score[playerId]==98&&diceValue<3){
 			scoreSetting(playerId);
 		}
-		else if(playerControl.score[playerId]==99&&diceValue==1){
+		else if(score[playerId]==99&&diceValue==1){
 			scoreSetting(playerId);
 		}
-	
 	}
 	
-	public void scoreSetting(int playerId){
-		System.out.println(playerControl.playerList.get(playerId).getName());
-		System.out.println("PlayerScore ))"+game.getPlayer().getScore());
-		System.out.println("Dice>>>>>>>"+playerControl.score[playerId]);
-			playerControl.score[playerId]+=diceValue;
-			playerControl.playerList.get(playerId).setScore(playerControl.score[playerId]);
-			int playerScore1=playerControl.playerList.get(playerId).getScore();
-			//game.getPlayers().playerList.get(playerId).setScore(playerScore1);
-			System.out.println("playerScore on board"+game.getPlayer().getScore());
-	}
-	
-	
-	
-	public void snakeSwallowing(int playerId){
-		playerControl.playerList.get(playerId).setScore(playerControl.score[playerId]);
-		System.out.println("Fall to "+playerControl.playerList.get(playerId).getScore());
-		
-	}
-	
+	public void playerPosition(int playerId){
+		if(game.getPlayers().get(playerId).getScore()<100){
 
-	public void jumbingThrowLadder(int playerId){
-			playerControl.playerList.get(playerId).setScore(playerControl.score[playerId]);
-			System.out.println(">>>>>>>>>>Jumb to "+playerControl.playerList.get(playerId).getScore()+"<<<<<<<<<<\nRoll again......"+playerControl.playerList.get(playerId).getName());
-			playerContol.startRollDice(playerId);
-	}	
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			if(diceValue==1||diceValue==6){
+				System.out.println("Roll Again.......  "+game.getPlayers().get(playerId).getName());
+				startRollDice(playerId);
+				}
+			}else{
+				System.out.println("Congrats.........."+game.getPlayers().get(playerId).getName()+"  You Win the Game..........\n");
+				System.exit(0);
+			}			
+	}
 		
 		
 	public void cls(){

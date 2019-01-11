@@ -23,11 +23,11 @@ public class Player{
 	
 /** Sets the player's name.
   * @param name The player's name.
-  
+  */
 	public void setPlayerName(String name){
 
 		this.name=name;
-	}*/
+	}
 
 /** Gets the player's name.
   * @return A String representing The player's name.
