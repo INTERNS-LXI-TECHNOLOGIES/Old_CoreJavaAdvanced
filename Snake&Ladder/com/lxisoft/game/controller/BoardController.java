@@ -49,7 +49,6 @@ public class BoardController{
   
 		int cels[]=new int[150];
 		cells=board.getCells();
-		snakes=board.getSnakes();
 		int index=99;
 		for(int i=0;i<10;i++){
 			if(i%2==0){

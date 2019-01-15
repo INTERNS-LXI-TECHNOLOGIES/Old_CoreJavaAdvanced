@@ -6,10 +6,10 @@ import java.util.*;
 public class Game{
 
 
-	private Board board=new Board();
+	private Board board;
 	private ArrayList<Player> players=new ArrayList<Player>();
-	private Coin coins=new Coin();
-	private Dice dice=new Dice();
+	private ArrayList<Coin> coinsList=new ArrayList<Coin>();
+	private Dice dice;
 
 	public void setBoard(Board board){
 
@@ -19,13 +19,13 @@ public class Game{
 
 		return board;
 	}
-	public void setCoins(Coin coins){
+	public void setCoins(ArrayList<Coin> coinsList){
 
-		this.coins=coins;
+		this.coinsList=coinsList;
 	}
-	public Coin getCoins(){
+	public ArrayList<Coin> getCoins(){
 
-		return coins;
+		return coinsList;
 	}
 	public void setDice(Dice dice){
 

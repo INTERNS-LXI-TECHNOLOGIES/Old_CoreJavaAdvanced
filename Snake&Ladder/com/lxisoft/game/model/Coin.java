@@ -3,17 +3,15 @@ package com.lxisoft.game.model;
 import java.util.*;
 
 public class Coin{
-
-	//String[] playerCoins={"RED","GREEN","BLUE","ORANGE","YELLOW"};
 	
-	private ArrayList<String> playerCoins=new ArrayList<String>();
+	private String color;
 
-	public void setPlayerCoins(ArrayList<String> playerCoins){
+	public Coin(String color){
 
-		this.playerCoins=playerCoins;
+		this.color=color;
 	}
-	public ArrayList<String> getPlayerCoins(){
+	public String getColor(){
 
-		return playerCoins;
+		return color;
 	}
 }
