@@ -33,10 +33,11 @@ import java.util.Random;
 		return diceValue;
 	}
 	
-	public void printDiceValue(){
+	public int printDiceValue(){
 	DiceValues value=getDiceValue().get(ran.nextInt(getDiceValue().size()));
 	int rollDiceValue=value.getNumber();
-	System.out.println(rollDiceValue);
+	//System.out.println(rollDiceValue);
+	return rollDiceValue;
 
 	}
 	

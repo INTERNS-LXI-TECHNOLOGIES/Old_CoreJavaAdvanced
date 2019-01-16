@@ -1,21 +1,21 @@
 package com.lxisoft.snakeNLadder.model;
 
+
 import java.util.*;
 /** Represents a Board.
  * @author Deepthi E
  */
 public class Game{
 	
-	//private ArrayList<Player> playerList=new ArrayList<Player>();
+	private Player player;
 	
-	//private Player player = new Player();
+	private Dice dice;
 	
-	//private Dice dice= new Dice();
-	
-	//private Board board= new Board();
+	private Board board;
 	
 	private Coin coin;
 		
+	private ArrayList<Player> playerList=new ArrayList<Player>();
 	
 	private ArrayList<Coin> coinList= new ArrayList<Coin>();
 
@@ -40,14 +40,14 @@ public ArrayList<Coin> getPlayerCoins(){
   * @param cell the game's player.
   */
 
-/*	public void setPlayers(ArrayList<Player> playerList){
+	public void setPlayers(ArrayList<Player> playerList){
 		this.playerList=playerList;	
-	}*/
+	}
 	
 /** Gets the player in the Game.
   * @return the player.
   */
-/*	public ArrayList<Player> getPlayers(){
+	public ArrayList<Player> getPlayers(){
 		return playerList;
 	}
 	
@@ -55,21 +55,21 @@ public ArrayList<Coin> getPlayerCoins(){
   * @param player the player for the game.
   */
 	
-/*	public void setPlayer(Player player){
+	public void setPlayer(Player player){
 		this.player=player;	
 	}
 	
 /** Gets the player.
   * @return the player.
   */
-/*	public Player getPlayer(){
+	public Player getPlayer(){
 		return player;
 	}
 
 /**Sets the Board.
   *@param board the board object.
   */
-/*  public void setBoard(Board board){
+ public void setBoard(Board board){
 	  this.board= board;
 	  
   }
@@ -77,23 +77,23 @@ public ArrayList<Coin> getPlayerCoins(){
   * @return A board.
   */
   
-/*	public Board getBoard(){
+	public Board getBoard(){
 		return board;
 		}	
 /**Sets the Dice.
   *@param dice the Dice object.
   */
-/*  public void setDice(Dice dice){
+   public void setDice(Dice dice){
 	  this.dice= dice;
 	  
-  }
+      }
 	
 
 /** Gets the Dice.
   * @return A dice.
   */
   
-/*	public Dice getDice(){
+	public Dice getDice(){
 		return dice;
 		}
 	

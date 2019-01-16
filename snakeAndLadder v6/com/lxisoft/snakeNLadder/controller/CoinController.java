@@ -24,9 +24,5 @@ public class CoinController{
 
 	}
 	
-	/*public ArrayList<Coin> getCoinList(){
-		return coinList;
-	}*/
-	
 	
 }

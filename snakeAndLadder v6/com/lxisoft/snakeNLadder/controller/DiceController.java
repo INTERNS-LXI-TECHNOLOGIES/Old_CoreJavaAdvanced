@@ -14,9 +14,10 @@ public class DiceController{
 	
 	//List<DiceValues> diceValueList= dice.getDiceValue();
 	
-	public void getDiceValues(){
+	public int getDiceValues(){
 		
-	dice.printDiceValue();
-
+	int diceValue=dice.printDiceValue();
+	
+	return diceValue;
 	}
 }
