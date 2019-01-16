@@ -11,9 +11,9 @@ import java.text.SimpleDateFormat;
 
 public class GameController{
 
-	Game game=new Game();
-	BoardController board=new BoardController();
-	CoinController coins=new CoinController();
+	Game game;
+	BoardController board;
+	CoinController coins;
 	DiceController dice;
 	Scanner input=new Scanner(System.in);
 	ArrayList<Player> players=new ArrayList<Player>();
@@ -22,20 +22,26 @@ public class GameController{
 	FileReader fr;
 	BufferedReader br;
 	int diceval;
+	int score=0;
 	Date date=new Date();
 	String plyrDate; 
 	public GameController(){
-		
+		game=new Game();
+		board=new BoardController();
+		coins=new CoinController();
 		board.createBoard();
-		 dice=new DiceController();
+		dice=new DiceController();
 		coins.createCoins();
 
 	}
 	public void homePage(){  
 		System.out.println("Enter number of Players");
-		int limit=input.nextInt();
+		String li=input.nextLine();
+		int limit=Integer.parseInt(li);
 		System.out.println("1.New User Register here     2.Login");
-		int choice=input.nextInt();
+		String ch=input.nextLine();
+		int choice=Integer.parseInt(ch);
+
 		switch(choice){
 			case 1:playersRegistration(limit);
 					break;
@@ -48,38 +54,36 @@ public class GameController{
 		
 	}
 	public void startGame(int limit){
-		try{
-			
-				fr=new FileReader("./com/lxisoft/game/playersDetails.txt");
-				br=new BufferedReader(fr); 
-				String name,line;
-				int i=1;
-				while((line=br.readLine())!=null)
-				{
-					String data[]=line.split(";");
-					name=data[1];
+		
+			for(int num=0;num<limit;num++){
 					game.setCoins(coins.getCoinsList());
-					System.out.println(name+":Choose Your coin");
-					for(i=0;i<coins.coinsList.size();i++){
-					System.out.println(""+i +game.getCoins().get(i).getColor());
+					for(int i=0;i<coins.coinsList.size();i++){
+					System.out.print(i+"  "+game.getCoins().get(i).getColor()+"  ");
 				}
+				 	System.out.println(game.getPlayers().get(num).getPlayersName()+":Choose Your coin");
+					
 				int ch=input.nextInt();
 				switch(ch){
 				
 						
 						case 0: System.out.println(game.getCoins().get(0).getColor());
+								game.getPlayers().get(num).setCoin(game.getCoins().get(0));
 								coins.remove(game.getCoins().get(0));
 								break;
 						case 1:	System.out.println(game.getCoins().get(1).getColor());
+								game.getPlayers().get(num).setCoin(game.getCoins().get(1));
 								coins.remove(game.getCoins().get(1));
 								break;
 						case 2:	System.out.println(game.getCoins().get(2).getColor());
+								game.getPlayers().get(num).setCoin(game.getCoins().get(2));
 								coins.remove(game.getCoins().get(2));
 								break;
 						case 3:	System.out.println(game.getCoins().get(3).getColor());
+								game.getPlayers().get(num).setCoin(game.getCoins().get(3));
 								coins.remove(game.getCoins().get(3));
 								break;
 						case 4:	System.out.println(game.getCoins().get(4).getColor());
+								game.getPlayers().get(num).setCoin(game.getCoins().get(4));	
 								coins.remove(game.getCoins().get(4));
 								break;
 
@@ -88,25 +92,31 @@ public class GameController{
 				}
 				
 				}
-			
-				}
-
-			catch(Exception e){
-
-				e.printStackTrace();
-			}
+		
 			playGame(limit);
-
 		}
 		public void playGame(int plyNum){
 
-			int score=0;
+			
 		do{
 			
 				for(int i=0;i<plyNum;i++){
+		
+				System.out.println(game.getPlayers().get(i).getPlayersName()+":"+game.getPlayers().get(i).getCoin().getColor());
 				rollDie();
-				System.out.println(game.getPlayers().get(i).getPlayersName());
-				score=game.getPlayers().get(i).getPlayersScore();
+				calculateScore(i,plyNum);
+				
+				
+		}
+
+		}while(score<100);
+		
+
+	
+	}
+	public void calculateScore(int i,int plyNum){
+
+		score=game.getPlayers().get(i).getPlayersScore();
 				if(diceval==1&&score==0){
 					score=1;
 					game.getPlayers().get(i).setPlayersScore(score);
@@ -144,8 +154,6 @@ public class GameController{
 					
 				}
 			
-
-			//score+=diceval;
 			System.out.println(diceval);
 			System.out.println(score);
 			board.printBoard(game,i);
@@ -154,12 +162,13 @@ public class GameController{
 				playerWon(i,plyNum);
 				System.exit(0);
 			}
-		}
-
-		}while(score<100);
-		
-
-	
+			if(diceval==1||diceval==6){
+				System.out.println("you get:"+diceval+" Roll again.......");
+				rollDie();
+				calculateScore(i,plyNum);
+				
+			}
+			
 	}
 public void playerWon(int plyId,int plyNum){
 
@@ -221,24 +230,16 @@ public void playerWon(int plyId,int plyNum){
 				file=new File("./com/lxisoft/game/playersDetails.txt");
 				details=new FileWriter(file);
 				for(int i=1;i<=limit;i++){
-				
-				Player playrs=new Player();
+				details.write(plyrDate+";");
 				input=new Scanner(System.in);
 				System.out.println("Full Name:");
-				playrs.setPlayersName(input.nextLine());
+				details.write(input.nextLine()+";");
 				System.out.println("Phone Number:");
-				playrs.setPlayersPhNo(input.nextLine());
+				details.write(input.nextLine()+";");
 				System.out.println("Email Id:");
-				playrs.setPlayersEmailId(input.nextLine());
+				details.write(input.nextLine()+";");
 				System.out.println("Password");
-				playrs.setPlayersPassword(input.nextLine());
-				players.add(playrs);
-				game.setPlayers(players);
-				details.write(plyrDate+";");
-				details.write(playrs.getPlayersName()+";");
-				details.write(playrs.getPlayersPhNo()+";");
-				details.write(playrs.getPlayersEmailId()+";");
-				details.write(playrs.getPlayersPassword()+"\n");
+				details.write(input.nextLine()+"\n");
 				System.out.println("Registered Successfully");
 
 				
@@ -275,10 +276,14 @@ public void playerWon(int plyId,int plyNum){
 				String line,data1,data2;
 				while((line=br.readLine())!=null)
 				{
+					Player playrs=new Player();
 					String data[]=line.split(";");
-					data1=data[3];
-					data2=data[4];
-					System.out.println(data1+" "+data2);
+					playrs.setPlayersName(data[1]);
+					playrs.setPlayersPhNo(data[2]);
+					playrs.setPlayersEmailId(data[3]);
+					playrs.setPlayersPassword(data[4]);
+					players.add(playrs);
+					game.setPlayers(players);
 					if(data[3].equals(email)&&data[4].equals(pass)){
 						flag=1;
 						break;

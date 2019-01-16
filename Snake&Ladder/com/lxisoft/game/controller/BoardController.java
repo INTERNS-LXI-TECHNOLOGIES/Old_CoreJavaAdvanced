@@ -75,7 +75,7 @@ public class BoardController{
 				
 				if((cells.get(index).getCellNum())==(game.getPlayers().get(plyId).getPlayersScore())){
 
-					System.out.print("p"+plyId);
+					System.out.print(game.getPlayers().get(plyId).getCoin().getColor().charAt(0));
 				}	
 			System.out.print("["+cells.get(index).getCellNum()+"]"+"	");
 			index--;
@@ -107,7 +107,7 @@ public class BoardController{
 			}
 			if((cels[k])==(game.getPlayers().get(plyId).getPlayersScore())){
 
-					System.out.print("p"+plyId);
+					System.out.print(game.getPlayers().get(plyId).getCoin().getColor().charAt(0));
 				}		
 		System.out.print("["+cels[k]+"]"+"	");
 
@@ -118,7 +118,7 @@ public class BoardController{
 		
 	}
 	public void checkSnakes(Game game,int plyId){
-		//System.out.println(""+game.getPlayers().getPlayersScore()+snakes.get("s1").getSnakeHead());
+	
 		if(game.getPlayers().get(plyId).getPlayersScore()==snakes.get("s1").getSnakeHead()){
 			game.getPlayers().get(plyId).setPlayersScore(snakes.get("s1").getSnakeTail());
 			System.out.println("Snake1 Entry");

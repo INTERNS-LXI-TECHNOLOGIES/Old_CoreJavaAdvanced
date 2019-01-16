@@ -5,6 +5,7 @@ package com.lxisoft.game.model;
 
 public class Player{
 
+	private Coin coin;
 	private String playersName;
 	private String playersPhNo;
 	private String playersEmailId;
@@ -81,6 +82,19 @@ public class Player{
 	public int getPlayersScore(){
 
 		return playersScore;
+	}
+	/**Sets the player's coin 
+	*@param coin A Coin containing the player's coin
+	*/
+	public void setCoin(Coin coin){
+
+		this.coin=coin;
+	}
+	/**Get's the player's coin
+	*@return A Coin representing player's coin
+	*/
+	public Coin getCoin(){
+		return coin;
 	}
 
 }
