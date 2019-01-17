@@ -212,18 +212,16 @@ public class GameController{
 		int i;
 		System.out.println("              <<<<<<<<<<<<<<<<GAME STARTS>>>>>>>>>>>>>>\n\n");
 		game.setBoard(boardControl.board);
-		System.out.println(	game.getBoard());
-		boardControl.printBoard(game);	Thread.sleep(2000);
-		cls();
+
 		do{
 		for(i=0;i<players;i++){
 		
 		startPlay(i);
-		boardControl.playerGamePosition(game,i);
-		boardControl.printBoard(game);	
-		Thread.sleep(2500);
-		cls();
+		boardControl.printBoard(game,players,i);	
+		//Thread.sleep(2500);
+		//cls();
 		}
+
 		}while(game.getPlayer().getScore()<=winPoint);
 		
 		}

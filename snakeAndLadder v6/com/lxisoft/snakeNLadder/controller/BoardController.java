@@ -73,15 +73,16 @@ public class BoardController{
 	 * The method to printBoard.
 	 * The cells Snakes and Ladders are on the Board.
 	 */
-	public void printBoard(Game game){
+	public void printBoard(Game game,int players,int playerId){
 		int cels[]=new int[100];
+		int i,j,k;
 		cells=board.getCells();
 		snakes=board.getSnakes();
 		ladders=board.getLadders();
 		int index=99;
-		for(int i=0;i<10;i++){
+		for(i=0;i<10;i++){
 			if(i%2==0){
-			for(int j=1;j<=10;j++){
+			for(j=1;j<=10;j++){
 
 				for(Map.Entry<String,Snake> m:snakes.entrySet()){
 				String key=m.getKey();
@@ -97,18 +98,28 @@ public class BoardController{
 			if((cells.get(index).getCellNumber())==(l.getLadderStart())||(cells.get(index).getCellNumber())==(l.getLadderEnd())){
 					System.out.print(lkey);}
 			}
-			if((cells.get(index).getCellNumber())==playerPosition){
-					System.out.print("*p"+id);
-				}	
-			System.out.print("["+cells.get(index).getCellNumber()+"]	");
+	
+			if((cells.get(index).getCellNumber())==game.getPlayers().get(playerId).getScore()){
+					System.out.print(game.getPlayers().get(playerId).getCoin().getColour().charAt(0));
+				}
+				for(int id=0;id<players;id++){
+					if(id!=playerId){
+						if((cells.get(index).getCellNumber())==game.getPlayers().get(id).getScore())
+						{
+							System.out.print(game.getPlayers().get(id).getCoin().getColour().charAt(0));
+						}
+					}
+				}
+					
+			System.out.print("["+cells.get(index).getCellNumber()+"]"+"	");
 			index--;}
-	}
+			}
 	else{
-		for(int j=0;j<10;j++){			
+		for( j=0;j<10;j++){			
 		cels[j]=cells.get(index).getCellNumber();
 		index--;
 		}
-	for(int k=9;k>=0;k--){
+	for(k=9;k>=0;k--){
 		for(Map.Entry<String,Snake> m:snakes.entrySet()){
 				String key=m.getKey();
 				Snake s=m.getValue();
@@ -123,18 +134,23 @@ public class BoardController{
 			if((cels[k])==(l.getLadderStart())||(cels[k])==(l.getLadderEnd())){
 					System.out.print(lkey);}
 			}
-			if((cels[k])==playerPosition){
-					System.out.print("*p"+id);
+			
+			if((cels[k])==game.getPlayers().get(playerId).getScore()){
+					System.out.print(game.getPlayers().get(playerId).getCoin().getColour().charAt(0));
 					}
+			for(int id=0;id<players;id++){
+				
+				if(id!=playerId){
+					if((cels[k])==game.getPlayers().get(id).getScore()){
+					System.out.print(game.getPlayers().get(id).getCoin().getColour().charAt(0));
+					}
+				}
+			}
 		System.out.print("["+cels[k]+"]"+"	");
 			}
 		}
 	System.out.println("\n\n");
 		}	
-	}
-	public void playerGamePosition(Game game,int playerId){
-		playerPosition=game.getPlayers().get(playerId).getScore();
-		id=playerId;
 	}
 	
 	public int snakeCheck(Game game,int playerId){
@@ -166,9 +182,10 @@ public class BoardController{
 		int playerScore;
 		if(game.getPlayers().get(playerId).getScore()==ladders.get("l1").getLadderStart()){
 			game.getPlayers().get(playerId).setScore(ladders.get("l1").getLadderEnd());
-			playerScore=game.getPlayers().get(playerId).getScore();
+			 playerScore=game.getPlayers().get(playerI4d).getScore();
 			boardView.printLadderReached(playerScore,1);
 		}
+		
 		else if(game.getPlayers().get(playerId).getScore()==ladders.get("l2").getLadderStart()){
 			game.getPlayers().get(playerId).setScore(ladders.get("l2").getLadderEnd());
 			playerScore=game.getPlayers().get(playerId).getScore();

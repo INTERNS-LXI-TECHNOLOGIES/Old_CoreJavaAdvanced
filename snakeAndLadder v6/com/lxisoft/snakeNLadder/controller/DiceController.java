@@ -9,14 +9,13 @@ public class DiceController{
 
 	Dice dice;
 	public void createDice(){
+		
 		dice=new Dice();
 	}
 	
-	//List<DiceValues> diceValueList= dice.getDiceValue();
-	
 	public int getDiceValues(){
 		
-	int diceValue=dice.printDiceValue();
+		int diceValue=dice.printDiceValue();
 	
 	return diceValue;
 	}

@@ -5,6 +5,5 @@ public class Tdd{
 	public static void main(String[] args)throws InterruptedException{
 		
 		GameController gameControl = new GameController();
-		//gameControl.homePage();
 	}
 }

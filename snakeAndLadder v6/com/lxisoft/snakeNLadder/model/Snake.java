@@ -31,4 +31,7 @@ public class Snake {
 	return snakeTail;
 	}
  
+ public String toString(){ 
+		return " "+snakeHead+""+snakeTail;  
+		}  
 }
