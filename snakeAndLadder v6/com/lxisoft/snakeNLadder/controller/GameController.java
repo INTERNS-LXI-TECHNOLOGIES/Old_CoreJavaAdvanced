@@ -11,7 +11,7 @@ import com.lxisoft.snakeNLadder.cls.*;
 public class GameController{
 	
 	Game game= new Game();
-	Date date ;
+	Date date = new Date();;
 	GameView gameView;
 	
 	CoinController coinControl;
@@ -19,13 +19,17 @@ public class GameController{
 	BoardController boardControl;
 	
 	File playerRegister= new File("./PlayerRegister.txt");	
+	File winnerDetails= new File("./WinnerDetails.txt");
 	Scanner scan= new Scanner(System.in);
 	final int winPoint=100;
 	int[] score=new int[100]; 
+	FileWriter fw=null;
+	BufferedWriter bw=null;
 	
 	
 	public GameController()throws InterruptedException{
 
+		
 		coinControl=new CoinController();
 		coinControl.createCoins();
 		diceControl= new DiceController();
@@ -33,13 +37,13 @@ public class GameController{
 		boardControl=new BoardController();
 		boardControl.createBoard();
 		gameHome();
+		
 		//selectPlayerCoin();
 		//diceControl.getDiceValues();
 	}
 	private void gameHome()throws InterruptedException{
 
 		gameView=new GameView();
-		date = new Date();
 		gameView.homePage(date);
 		selectOption();
 	}
@@ -61,13 +65,14 @@ public class GameController{
 					for(i=1;i<=playerNumber;i++){
 						login(i);
 						}
+						selectPlayerCoin(playerNumber);	
+						playGame(playerNumber);
 					break;
 					
 		case 3: System.exit(0);break;
 		default: System.out.println("YOU ENTERED A WRONG CHOICE");
 		}
 	}
-
 	private int inputPlayerNum(){
 		String noOfPlayers ;
 		try{
@@ -88,7 +93,7 @@ public class GameController{
 		date = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");  
         strDate = dateFormat.format(date);	
-		gameView.enterPlayerName(id);name=scan.nextLine();
+		gameView.enterPlayerName(id);name=scan.next();
 		game.setPlayer(new Player(name));
 		gameView.passwordInstructions();
 		gameView.enterPassword();
@@ -97,6 +102,7 @@ public class GameController{
 		game.getPlayers().add(game.getPlayer());
 		addToFile(strDate,name,password); 
 	}
+	
 	
 	private String passwordValidation(){		
   /**
@@ -108,22 +114,22 @@ public class GameController{
              	# Match anything with previous condition checking
     *{6,20}	#Length at least 6 characters and maximum of 20	
     *) # End of group*/	
-		
-	String password_Regex="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,10}"; 	
-	String pass=scan.nextLine();
+	String pass;int x=0;	
+	String password_Regex="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,10}"; 
+	do{	
+	x=0;
+	pass=scan.next();
 	boolean validate=Pattern.matches(password_Regex, pass);
-	if(validate==true){
-		return pass;	
-	}
-	else{
+	if(validate!=true){
 		System.out.println("Re-enter the password:");
-		passwordValidation();	}
+		x=1;
+		}
+	}while(x==1);
 		return pass;
 	}
 	
 	private void addToFile(String regDate,String name,String password)throws InterruptedException{
-		FileWriter fw=null;
-		BufferedWriter bw=null;
+		
 	try{
 		fw = new FileWriter(playerRegister,true);
 		bw = new BufferedWriter(fw);
@@ -158,14 +164,16 @@ public class GameController{
 				BufferedReader br=new BufferedReader(fr);
 				while((line=br.readLine())!=null)
 				do{
+					
 					String[] data = line.split(",");
 					regDate=data[0];
 					playerName1=data[1];
 					password1=data[2];
 				if(lPlayerName.equals(playerName1) && lPassword.equals(password1)){
 					count++;
-					System.out.println(count);
+					game.setPlayer(new Player(playerName1));
 					gameView.printLoginStatus(count,line);
+					game.getPlayers().add(game.getPlayer());
 					Thread.sleep(1000);
 					}	
 			}while(false);
@@ -187,7 +195,7 @@ public class GameController{
 		game.setPlayerCoins(coinControl.coinList);
 		for(i=1;i<=playerNumber;i++){
 		gameView.printCoinList(game);
-		String coinColour=scan.nextLine();
+		String coinColour=scan.next();
 		removeCoin(coinColour,i);
 		Thread.sleep(1000);}
 		System.out.println(game.getPlayers());
@@ -198,7 +206,7 @@ public class GameController{
 		int i,size;
 		Coin coin=null;
 		size=game.getPlayerCoins().size();
-		for (i=0;i<=size;i++){
+		for (i=0;i<size;i++){
 		String colour=game.getPlayerCoins().get(i).getColour();
 		if(coinColour.equals(colour)){
 			coin=game.getPlayerCoins().get(i);
@@ -215,11 +223,10 @@ public class GameController{
 
 		do{
 		for(i=0;i<players;i++){
-		
 		startPlay(i);
 		boardControl.printBoard(game,players,i);	
-		//Thread.sleep(2500);
-		//cls();
+		Thread.sleep(2500);
+		cls();
 		}
 
 		}while(game.getPlayer().getScore()<=winPoint);
@@ -273,9 +280,8 @@ public class GameController{
 		public void scoreSetting(int playerId,int diceValue){
 			score[playerId]=game.getPlayers().get(playerId).getScore();
 			score[playerId]+=diceValue;
-			game.getPlayers().get(playerId).setScore(score[playerId]);
-			
-	}
+			game.getPlayers().get(playerId).setScore(score[playerId]);		
+		}
 		
 		public void finalRound(int playerId,int diceValue){
 		if(score[playerId]==95&&diceValue<6){
@@ -303,11 +309,34 @@ public class GameController{
 				startRollDice(playerId);
 				}
 			}else{
-				System.out.println("Congrats.........."+game.getPlayers().get(playerId).getName()+"  You Win the Game..........\n");
-				System.exit(0);
-			}			
+				winnerDetailsToFile(playerId);
+			System.out.println("Congrats.........."+game.getPlayers().get(playerId).getName()+"  You Win the Game..........\n");
+			System.exit(0);
+			
 	}
-		
+	}	
+			
+	public void winnerDetailsToFile(int playerId){
+		try{
+		fw = new FileWriter(winnerDetails,true);
+		bw = new BufferedWriter(fw);
+	
+		bw.write(date.toString()+":: Current Players are ::"+game.getPlayers()+";");
+		bw.write("Winner is..."+game.getPlayers().get(playerId).getName());
+		bw.newLine();
+
+	}catch(IOException e){
+		System.out.println("Error");}	
+		finally{
+			try{
+				if (bw != null)
+					bw.close();
+				if (fw != null)
+					fw.close();}
+		catch(IOException e){
+				e.printStackTrace();}
+		}
+	}	
 		
 	public void cls(){
 		Cls clrscr=new Cls();

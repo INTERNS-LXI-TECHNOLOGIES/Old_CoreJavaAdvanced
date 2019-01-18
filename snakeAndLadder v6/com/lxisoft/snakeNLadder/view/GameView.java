@@ -27,7 +27,7 @@ public class GameView{
 	}
 	public void printCoinList(Game game){
 		System.out.println(game.getPlayerCoins());
-		System.out.println("Player Select coin ::");
+		System.out.println("Select your coin ::");
 	}
 	public void printPlayerCoins(Game game){
 		System.out.println("Players are-->>");
