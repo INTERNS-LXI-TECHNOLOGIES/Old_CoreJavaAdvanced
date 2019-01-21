@@ -4,11 +4,8 @@ import java.util.*;
 public class Metro{
 private Admin admin;
 private Train train;
-private ArrayList<Train> trainList=new ArrayList<Train>(); 	
-	public Metro(){
-		admin = new Admin();
-		train= new Train();
-	}
+private ArrayList<Train> trainList=new ArrayList<Train>(); 
+	
 	
 public void setTrainList(ArrayList<Train> trainList){
 	this.trainList=trainList;
