@@ -1,4 +1,4 @@
-package com.lxisoft.metro.model.*;
+package com.lxisoft.metro.model;
 
 public class Compartment{
 	

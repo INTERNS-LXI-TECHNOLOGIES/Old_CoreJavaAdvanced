@@ -1,0 +1,7 @@
+parasuRam,111,8.00am,8.10am,palakkad,kottayam
+intercity,1222,2.00am,2.30am,palakkad,ernamkulam
+sathabthi,13334,7.10pm,8.00pm,palakkad,trivandram
+adfg,1245,16.00,16.12,palakkad,kollam
+jjefllj,23453,17.00,23.00,palakkas,pala
+poouejf,233553,22,10.00,palakkad,kozhikod
+ipj,1324,11.00,12.00,palakkad,vayana

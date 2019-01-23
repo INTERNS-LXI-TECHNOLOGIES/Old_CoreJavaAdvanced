@@ -1,4 +1,5 @@
 package com.lxisoft.metro.view;
+import com.lxisoft.metro.model.*;
 import java.util.*;
 
 public class MetroView{
@@ -8,7 +9,7 @@ public class MetroView{
 		System.out.println(">>>>>>>>>>>METRO<<<<<<<<<<<<");
 		System.out.println("---------------------------");
 		System.out.println(date);
-		System.out.println("1.Admin ");
+		System.out.println("1.Admin 2.Train details");
 		
 	}
 	public void enterUserName(){
@@ -21,13 +22,17 @@ public class MetroView{
 		System.out.println("Password::");
 		
 	}
+	public void defaultCase(){
+		System.out.println("Invalied Input..... Try Again");
+	}
 	public void loginSucceed(){
 		
 		System.out.println("Login Successfull......");
+		System.out.println("1.Add Train details ");
 	}
 	public void loginFailed(){
 		
-		System.out.println("Login Unsuccessfull......");
+		System.out.println("Login Failed......Try Again.........");
 	}
 	
 	public void enterTrainName(){
@@ -50,5 +55,12 @@ public class MetroView{
 	}
 	public void enterOption(){
 		System.out.println("Do you want to continue?  [1.Continue]  [0.Exit] ");
+	}
+	public void printTrainDetails(Train trains){
+		System.out.println("Train:"+trains);
+	}
+	public void selectSortOrder(){
+		System.out.println("Select your order.......\n[1.Sort by Train Names][2.Sort by ArraivalTimes][3.Sort By Destination]");
+		
 	}
 }

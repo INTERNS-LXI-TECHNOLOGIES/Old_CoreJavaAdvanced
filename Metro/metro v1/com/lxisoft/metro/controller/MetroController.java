@@ -6,8 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+
 import java.io.IOException;
-import java.io.BufferedReader;
+
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;  
 
@@ -18,7 +19,7 @@ public class MetroController{
 	Scanner scan= new Scanner(System.in);
 	Date date=new Date();
 	File adminDetails= new File("./com/lxisoft/metro/file/AdminDetails.txt");
-	
+
 	public MetroController(){
 		metro = new Metro();
 		metroView = new MetroView();
@@ -32,11 +33,13 @@ public class MetroController{
 		String choice = scan.nextLine();
 		int key = Integer.parseInt(choice);			
 		switch(key){
-		case 1: adminLogin();	
-		break;
-		default: System.out.println("Invalied Input... Please Try Again......");
+		case 1: adminLogin();
 		
-			}
+		break;
+		case 2:trainControl.loadTrainDetailsFile(metro);
+			   printTrains();
+		break;
+		default: metroView.defaultCase();}
 	}
 	private void dateFormating(){
 	String strDate;
@@ -66,40 +69,41 @@ public class MetroController{
 				do{		
 				if(userName.equals(metro.getAdmin().getUserName()) && passWord.equals(metro.getAdmin().getPassWord())){
 					metroView.loginSucceed();
-					addTrainDetails();
+					String choice = scan.next();
+					int key = Integer.parseInt(choice);			
+					switch(key){
+					case 1: trainControl.addTrainDetails(metro,metroView);
+							//printTrains();					
+					break;
+					//case 3:
+					//break;
+					default: metroView.defaultCase();}
 					count++;
 				}else {
 					metroView.loginFailed();
+					adminLogin();
 					}
 				}while(false);
 			}catch(IOException e){
-			System.out.println("Error");}
+			System.out.println("Error");}		
 	}
 	
-	public void addTrainDetails(){
-		String trainName,trainId,startPoint,destination,arraivalTime,departureTime,choice;
-		int key;
-		do{
-		metroView.enterTrainName();
-		trainName=scan.next();
-		metroView.enterTrainNum();
-		trainId=scan.next();
-		metroView.enterArraivalTime();
-		arraivalTime=scan.next();
-		metroView.enterDepartureTime();
-		departureTime=scan.next();
-		metroView.enterStartPoint();
-		startPoint=scan.next();
-		metroView.enterDestination();
-		destination=scan.next();
-		metroView.enterOption();
-		metro.setTrain(new Train(trainName,trainId,arraivalTime,departureTime,startPoint,destination));
-		metro.getTrainList().add(metro.getTrain());
-		choice= scan.next();
-		key = Integer.parseInt(choice);			
-		}while(key==1);
-		for(Train trains:metro.getTrainList()){
-		System.out.println("Train::"+trains);}
-	}
 	
+	public void printTrains(){
+		
+		metroView.selectSortOrder();
+		String choice = scan.next();
+		int key = Integer.parseInt(choice);			
+		switch(key){
+			case 1: trainControl.sortTrainsByName(metro);;					
+			break;
+			case 2:trainControl.sortTrainsByArraivalTime(metro);
+			break;
+			case 3:trainControl.sortByDestination(metro);
+			break;
+		/*for(Train trains:metro.getTrainList()){
+		metroView.printTrainDetails(trains);}*/
+		
+	}
+	}
 }

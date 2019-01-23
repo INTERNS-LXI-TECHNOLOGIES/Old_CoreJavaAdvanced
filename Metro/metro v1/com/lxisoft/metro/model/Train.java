@@ -1,6 +1,9 @@
 package com.lxisoft.metro.model;
+import java.util.*;
+import java.io.*;
 
-public class Train{
+
+public class Train implements Comparable<Train>{
 	
 	private String trainName;
 	private String trainId;
@@ -53,7 +56,9 @@ public class Train{
 public String toString(){ 
 return  trainName+" "+trainId+" "+arraivalTime+" "+departureTime+" "+startPoint+" "+destination+" ";  
  } 
-	
-	
-	
+	 
+    public int compareTo(Train train) 
+    { 
+        return trainName.compareTo(train.getTrainName()); 
+    } 
 }
