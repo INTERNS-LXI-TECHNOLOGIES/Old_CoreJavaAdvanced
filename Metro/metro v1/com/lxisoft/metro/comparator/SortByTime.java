@@ -8,5 +8,4 @@ public class SortByTime implements Comparator<Train>{
         return a.getArraivalTime().compareTo(b.getArraivalTime()); 
     } 
 	
-	
-}
+}   

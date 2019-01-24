@@ -53,12 +53,11 @@ public class Train implements Comparable<Train>{
 		return startPoint;
 	}
 	
-public String toString(){ 
-return  trainName+" "+trainId+" "+arraivalTime+" "+departureTime+" "+startPoint+" "+destination+" ";  
- } 
-	 
-    public int compareTo(Train train) 
-    { 
+	public String toString(){ 
+		return  trainName+" "+trainId+" "+arraivalTime+" "+departureTime+" "+startPoint+" "+destination+" ";  
+	} 
+	
+    public int compareTo(Train train){ 
         return trainName.compareTo(train.getTrainName()); 
     } 
 }

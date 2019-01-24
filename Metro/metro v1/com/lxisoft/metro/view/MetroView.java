@@ -9,7 +9,7 @@ public class MetroView{
 		System.out.println(">>>>>>>>>>>METRO<<<<<<<<<<<<");
 		System.out.println("---------------------------");
 		System.out.println(date);
-		System.out.println("1.Admin 2.Train details");
+		System.out.println("1.Admin 2.Train details 3.Passenger Details");
 		
 	}
 	public void enterUserName(){
@@ -62,5 +62,14 @@ public class MetroView{
 	public void selectSortOrder(){
 		System.out.println("Select your order.......\n[1.Sort by Train Names][2.Sort by ArraivalTimes][3.Sort By Destination]");
 		
+	}
+	public void enterSearchKey(){
+		System.out.println("Enter the search key");
+	}
+	public void enterPassengerName(){
+		System.out.println("Name::");
+	}
+	public void enterMobileNumber(){
+		System.out.println("Mobile Number::");
 	}
 }
