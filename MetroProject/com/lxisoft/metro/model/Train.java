@@ -9,6 +9,44 @@ public class Train implements Comparable<Train>{
 	private String startPoint;
 	private String destinationPoint;
 
+	public Train(){
+
+	}
+	public static Train tn(String trainName){
+		Train t=new Train();
+
+		t.trainName=trainName;
+		return t;
+
+	}
+	/**public Train(String trainId){
+
+		this.trainId=trainId;
+
+	}
+	public Train(String arraivalTime){
+
+		this.arraivalTime=arraivalTime;
+		
+	}
+	public Train(String departureTime){
+
+		this.departureTime=departureTime;
+	}
+	*/
+
+	public static Train dp(String destinationPoint){
+		Train t=new Train();
+
+		t.destinationPoint=destinationPoint;
+		return t;
+	}
+	public Train(String startPoint,String destinationPoint){
+
+		this.startPoint=startPoint;
+		this.destinationPoint=destinationPoint;
+	}
+
 	public Train(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destinationPoint){
 
 		this.trainName=trainName;

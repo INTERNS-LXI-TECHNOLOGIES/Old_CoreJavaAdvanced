@@ -25,7 +25,7 @@ public class MetroController{
 	public void homePage(){
 		String con;
 		do{
-		System.out.println("1.Admin Login.......2.Train Details........3.searchDetails");
+		System.out.println("1.Admin Login.......2.Train Details........3.searchDetails........4.search By Start and Destination");
 		String ch=input.next();
 		int choice=Integer.parseInt(ch);
 		switch(choice)
@@ -34,7 +34,10 @@ public class MetroController{
 					break;
 			case 2:traincntrl.trainDetails(metro);
 					break;
-			//case 3:traincntrl.searchDetails();
+			case 3:traincntrl.searchDetails();
+					break;
+			case 4:traincntrl.sortDestination(metro);
+					break;
 		}
 			System.out.println("Do u wanna continue(Y/N)");
 			con=input.next();
