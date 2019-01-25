@@ -5,8 +5,6 @@ import java.util.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
-
-
 import java.io.IOException;
 
 import java.text.DateFormat;  
@@ -29,6 +27,7 @@ public class MetroController{
 	
 	public void homePage(){	
 	dateFormating();
+	int x;
 	metroView.printHomeView(date);
 		String choice = scan.nextLine();
 		int key = Integer.parseInt(choice);			
@@ -42,7 +41,8 @@ public class MetroController{
 				searchForPassenger();
 		//printPassengerDeatils();
 		break;
-		default: metroView.defaultCase();}
+		default: metroView.defaultCase();
+		homePage();}
 	}
 	private void dateFormating(){
 	String strDate;
@@ -107,6 +107,10 @@ public class MetroController{
 			break;
 			case 4:trainControl.iteratorMethod(metro);
 			break;
+			case 5:trainControl.searchForTrains(metro,metroView);
+			break;
+			case 6:trainControl.searchByStartAndDestination(metro,metroView);
+			break;
 			default:metroView.defaultCase();
 		}
 		metroView.enterOption();String choice = scan.next();
@@ -122,10 +126,10 @@ public class MetroController{
 		metro.getPassenger().setMobileNumber(scan.next());
 		metro.getPassengers().put(metro.getPassenger().getName(),metro.getPassenger());
 		metroView.enterOption();String choice = scan.next();
-		
 		x = Integer.parseInt(choice);}while(x==1);	
 		
 	}
+	
 	public void printPassengerDeatils(){
 		System.out.println(metro.getPassengers());
 		searchForPassenger();
@@ -135,9 +139,8 @@ public class MetroController{
 		String search;int x;
 		do{
 		metroView.enterSearchKey();
-		search=scan.next();
+		search=scan.next();	
 		System.out.println(metro.getPassengers().get(search));
-		//System.out.println(metro.getPassengers().get();
 		metroView.enterOption();String choice = scan.next();
 		x = Integer.parseInt(choice);}while(x==1);	
 

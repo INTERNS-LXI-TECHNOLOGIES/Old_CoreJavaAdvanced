@@ -21,21 +21,43 @@ public class Train implements Comparable<Train>{
 		this.startPoint=startPoint;			
 	}
 	
+	public Train(){
+		
+	}
+	public static Train tn(String trainName){
+		Train t=new Train();
+		t.trainName=trainName;
+		return t;
+	}
+	public static  Train tId(String trainId){
+		Train t=new Train();
+		t.trainId=trainId;
+		return t;
+	}
+	public static Train aT(String arraivalTime){
+		Train t=new Train();
+		t.arraivalTime=arraivalTime;
+		return t;		
+	}
+	public static Train dn(String destination){
+		Train t=new Train();
+		t.destination=destination;
+		return t;
+	}
+	
+	public Train(String startPoint,String destination){
+		this.startPoint=startPoint;
+		this.destination=destination;
+
+	}
 	public String  getTrainName(){
 		return trainName;
 	}
 
 	public String  getTrainId(){
+		
 		return trainId;
 	}
-	
-/*	public void setCompartment(Compartment compartment){
-		this.compartment=compartment;	
-	}
-	
-	public Compartment getCompartment(){
-		return compartment;
-	}*/
 	
 	public String  getArraivalTime(){
 		return arraivalTime;

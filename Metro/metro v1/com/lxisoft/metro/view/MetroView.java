@@ -60,7 +60,7 @@ public class MetroView{
 		System.out.println("Train:"+trains);
 	}
 	public void selectSortOrder(){
-		System.out.println("Select your order.......\n[1.Sort by Train Names][2.Sort by ArraivalTimes][3.Sort By Destination]");
+		System.out.println("Select your order.......\n[1.Sort by Train Names][2.Sort by ArraivalTimes][3.Sort By Destination][4.Iterated view] [5.Search Train] [6.Search.. To.. From..");
 		
 	}
 	public void enterSearchKey(){
@@ -71,5 +71,11 @@ public class MetroView{
 	}
 	public void enterMobileNumber(){
 		System.out.println("Mobile Number::");
+	}
+	public void enterDestinationForSearch(){
+		System.out.println("Destination:");	
+	}
+	public void enterStartPointForSearch(){
+		System.out.println("Start Point:");
 	}
 }

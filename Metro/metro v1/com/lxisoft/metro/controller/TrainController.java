@@ -88,31 +88,41 @@ public class TrainController{
 		printTrainList(metro);
 	}
 	public void printTrainList(Metro metro){
-		System.out.println("*****");
+		System.out.println("********************");
 		int listSize=metro.getTrainList().size();
-		for(Train t:metro.getTrainList()){
-			System.out.println(t.getTrainName()+"\t"+t.getTrainId()+"\t"+t.getArraivalTime()+"\t"+t.getDepartureTime()+"\t"+t.getStartPoint()+"\t"+t.getDestination());
+		int i;
+		/*for(Train t:metro.getTrainList()){
+			System.out.println(i+" "+t.getTrainName()+"\t"+t.getTrainId()+"\t"+t.getArraivalTime()+"\t"+t.getDepartureTime()+"\t"+t.getStartPoint()+"\t"+t.getDestination());  
+		}*/
+		for(i=0;i<listSize;i++){
+			System.out.println((i+1)+" "+metro.getTrainList().get(i).getTrainName()+"\t"+metro.getTrainList().get(i).getTrainId()+"\t"+metro.getTrainList().get(i).getArraivalTime()+"\t"+metro.getTrainList().get(i).getDepartureTime()+"\t"+metro.getTrainList().get(i).getStartPoint()+"\t"+metro.getTrainList().get(i).getDestination());  
 		}
+	}
+	public void searchForTrains(Metro metro,MetroView metroView){
+		Train searchTrain;
+		String search;int x;
 		
 		
+		do{
+		metroView.enterSearchKey();
+		search=scan.next();	
+		searchTrain=Train.tn(search);
+		Collections.sort(metro.getTrainList());
+		int index=	Collections.binarySearch(metro.getTrainList(), searchTrain);
+		System.out.println(metro.getTrainList().get(index));
+		metroView.enterOption();String choice = scan.next();
+		x = Integer.parseInt(choice);}while(x==1);	
+	}	
 		
 	/*	for (int i=0; i<listSize; i++) {
             System.out.println(metro.getTrainList().get(i)); 
 		}*/
-	}
 	public void sortTrainsByArraivalTime(Metro metro){
 		SortByTime sortByTime= new SortByTime();
 		Collections.sort(metro.getTrainList(),sortByTime);
 		System.out.println("\nSorted by Train Time"); 
-		printTrainList(metro);
-		
+		printTrainList(metro);	
 	}
-	
-/*	public void addSearchKey(){
-		String choice=scan.next();
-		System.out.println("\n"+choice+"="+ Arrays.binarySearch(,"one"));
-	}*/
-	
 	
 	public void sortByDestination(Metro metro){
 		SortByDestination sortByDestination=new SortByDestination();
@@ -122,12 +132,25 @@ public class TrainController{
 	}
 	
 	public void iteratorMethod(Metro metro){ 
-	
 	Iterator<Train> i3 = metro.getTrainList().iterator();
 	while (i3.hasNext()) {
 	Train train = i3.next(); 
 	System.out.println(train.getTrainName());
 	}
 	}
+	
+	public void searchByStartAndDestination(Metro metro,MetroView metroView){
+		metroView.enterStartPointForSearch();
+		String spoint=scan.next();
+		metroView.enterDestinationForSearch();
+		String dpoint=scan.next();
+		Train train2=new Train(spoint,dpoint);
+		int index=Collections.binarySearch(metro.getTrainList(),train2,new SortByDestination());
+		if(index>=0){
+			train2=metro.getTrainList().get(index);
+			System.out.println(train2);
+		}
+	
+		}
 	
 }

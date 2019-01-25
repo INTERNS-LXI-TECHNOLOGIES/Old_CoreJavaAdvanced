@@ -1,6 +1,6 @@
 package com.lxisoft.metro.model;
 
-public class Passenger{
+public class Passenger implements Comparable<Passenger>{
 	private String name;
 	private String mobileNumber;
 	
@@ -11,6 +11,7 @@ public class Passenger{
 	public String  getName(){
 		return name;
 	}
+	
 	
 	public void setMobileNumber(String mobileNumber){
 		this.mobileNumber=mobileNumber;	
@@ -31,4 +32,8 @@ public class Passenger{
 	public String toString(){ 
 		return name+" "+mobileNumber+" ";  
 	}
+	
+	public int compareTo(Passenger passenger){ 
+        return name.compareTo(passenger.getName()); 
+    } 
 }
