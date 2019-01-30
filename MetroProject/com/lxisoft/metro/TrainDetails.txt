@@ -1,5 +1,2 @@
-MumbaiExp;123;1:am;12am;Mumbai;chennai
-AmrithaExp;213;9:pm;6am;palakkad;trivandrum
-ChennaiMail;765;1:00am;12:am;chennai;mumbai
-Paasenger;234;8:00am;10:00am;palakkad;coimbatore
-KanykumariExp;3456;1:pm;2:am;kanyakumari;trivandrum
+amrithaExp;123;6:00am;9:pm;palakkad;trivandrum
+chennaimail;1234;1:00pm;3:00am;chennai;coimbatore

@@ -1,7 +1,9 @@
 package com.lxisoft.metro.model;
+import java.io.Serializable;
 
 public class Train implements Comparable<Train>{
 
+	
 	private String trainName;
 	private String trainId;
 	private String arraivalTime;

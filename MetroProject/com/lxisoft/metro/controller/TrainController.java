@@ -26,10 +26,10 @@ Scanner input=new Scanner(System.in);
 			{	
 				String data[]=line.split(";");
 				
-				Train train=new Train(data[0],data[1],data[2],data[3],data[4],data[5]);
+				Train train=new Train(data[0].toUpperCase(),data[1],data[2].toUpperCase(),data[3].toUpperCase(),data[4].toUpperCase(),data[5].toUpperCase());
 				trainList.add(train);
-				nameList.add(data[0]);
-				destList.add(data[5]);
+				nameList.add(data[0].toUpperCase());
+				destList.add(data[5].toUpperCase());
 		
 			}
 			metro.setTrain(trainList);
@@ -50,9 +50,9 @@ Scanner input=new Scanner(System.in);
 
 		String sPoint,dPoint;
 			System.out.println("Enter the Starting Point");
-			sPoint=input.next();
+			sPoint=input.next().toUpperCase();
 			System.out.println("Enter the Destination Point");
-			dPoint=input.next();
+			dPoint=input.next().toUpperCase();
 			//ArrayList<Train> newList=new ArrayList<Train>();
 			Train train1=new Train(sPoint,dPoint);
 			int index=Collections.binarySearch(metro.getTrain(),train1,new SortByDestination());
@@ -112,39 +112,30 @@ Scanner input=new Scanner(System.in);
 	public void searchDetails(){
 
 		System.out.println("Enter Search key");
-		String searchKey=input.next();
+		String searchKey=input.next().toUpperCase();
 		System.out.println("No."+"\t*Train Name*\t*Train Id*\t*Arraival Time*\t*Departure Time*\t*Start point*\t*Destination Point*  ");
 		for(int i=0;i<trainList.size();i++)
 		{
 			if(searchKey.equals(nameList.get(i))){
-
+				int j=1;
 				Collections.sort(trainList);
 				Train train=Train.tn(searchKey);
 				int index2=Collections.binarySearch(trainList,train);
 				if(index2>=0){
-					for(int ind=0;ind<index2;ind++){
-					train=trainList.get(ind);                                                                
-					System.out.println("\n"+i+"\t"+train.getTrainName()+"\t"+train.getTrainId()+"\t\t"+train.getArraivalTime()+"\t\t"+train.getDepartureTime()+"       \t\t"+train.getStartPoint()+"     \t\t"+train.getDestinationPoint());
-				}
+					
+					train=trainList.get(index2);                                                                
+					System.out.println("\n"+j+"\t"+train.getTrainName()+"\t"+train.getTrainId()+"\t\t"+train.getArraivalTime()+"\t\t"+train.getDepartureTime()+"       \t\t"+train.getStartPoint()+"     \t\t"+train.getDestinationPoint());
+				j++;
 				}
 			}
 			else if(searchKey.equals(destList.get(i))){
 				ArrayList<Train> list=new ArrayList<Train>();
-				Train train=Train.dp(searchKey);
-				int index;
-			do{
-				index=Collections.binarySearch(trainList,train,new SortByDest());
+				Train trai=Train.dp(searchKey);
+				int index=Collections.binarySearch(trainList,trai,new SortByDest());
 				if(index>=0){
-
-					train=trainList.get(index);
-					list.add(train);
-					System.out.println(list);
-					
-				}
-			}while(index==0);
-				for(Train trai:list){
+					trai=trainList.get(index);
 					System.out.println("\n"+i+"\t"+trai.getTrainName()+"\t"+trai.getTrainId()+"\t\t"+trai.getArraivalTime()+"\t\t"+trai.getDepartureTime()+"       \t\t"+trai.getStartPoint()+"     \t\t"+trai.getDestinationPoint());
-				}
+				
 
 			}
 		}
@@ -152,7 +143,7 @@ Scanner input=new Scanner(System.in);
 
 
 
-
+	}
 
 	}
 }
