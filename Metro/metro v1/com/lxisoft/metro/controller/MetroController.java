@@ -2,6 +2,7 @@ package com.lxisoft.metro.controller;
 import com.lxisoft.metro.model.*;
 import com.lxisoft.metro.view.*;
 import java.util.*;
+import java.io.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -38,8 +39,8 @@ public class MetroController{
 			   printTrains();
 		break;
 		case 3:addPassengerDetails();
+				printPassengerDeatils();
 				searchForPassenger();
-		//printPassengerDeatils();
 		break;
 		default: metroView.defaultCase();
 		homePage();}
@@ -55,6 +56,8 @@ public class MetroController{
 	public void adminLogin(){
 		String userName,passWord,line;
 		Admin admin;
+		//Console con = System.console(); 
+       
 		int count=0;
 		metroView.enterUserName();userName=scan.next();
 		metroView.enterPassWord();passWord=scan.next();
@@ -111,6 +114,7 @@ public class MetroController{
 			break;
 			case 6:trainControl.searchByStartAndDestination(metro,metroView);
 			break;
+			//case 7:addPlatform();break;
 			default:metroView.defaultCase();
 		}
 		metroView.enterOption();String choice = scan.next();
@@ -121,7 +125,7 @@ public class MetroController{
 		String name,mobileNumber;int x;
 		do{
 		metroView.enterPassengerName();
-		metro.setPassenger(new Passenger(scan.next()));
+		metro.setPassenger(new Passenger(scan.next().toUpperCase()));
 		metroView.enterMobileNumber();
 		metro.getPassenger().setMobileNumber(scan.next());
 		metro.getPassengers().put(metro.getPassenger().getName(),metro.getPassenger());
@@ -129,21 +133,76 @@ public class MetroController{
 		x = Integer.parseInt(choice);}while(x==1);	
 		
 	}
+//backed collection methods.......
 	
+/*	public void passengerSorting(){
+	
+	SortedMap<String, Passenger> submap;
+//submap = metro.getPassengers().subMap("C","T"); // #1 create a backed collection
+//submap = metro.getPassengers().headMap("C");
+submap = metro.getPassengers().tailMap("C");
+System.out.println(metro.getPassengers() + " " + submap);
+	}*/
 	public void printPassengerDeatils(){
 		System.out.println(metro.getPassengers());
-		searchForPassenger();
 		
+		
+		// String methods...............
+		/*String s1 = "spring ";
+String s2 = s1 + "summer ";
+String s3=s1.concat("fall ");
+System.out.println(s1);
+System.out.println(s2);
+System.out.println(s3);
+String s4=s2.concat(s1);
+s1 += "wiNter ";
+System.out.println(s1+"123".toString());
+System.out.println(s1+"123");
+System.out.println(s1.toLowerCase());
+System.out.println(s1.toUpperCase());
+System.out.println(s1.length());
+System.out.println(s1.replace("s","X"));
+System.out.println(s1 + " " + s2);*/
+
 	}
+	
 	public void searchForPassenger(){
+		// searching passenger using the backed collections
 		String search;int x;
+		SortedMap<String, Passenger> submap;
 		do{
 		metroView.enterSearchKey();
-		search=scan.next();	
-		System.out.println(metro.getPassengers().get(search));
+		search=scan.next().toUpperCase();
+		submap = metro.getPassengers().tailMap(search);
+		assert subMap != null : 
+		//System.out.println(submap);
+		System.out.println(submap.get(search));
 		metroView.enterOption();String choice = scan.next();
-		x = Integer.parseInt(choice);}while(x==1);	
-
-		
+		x = Integer.parseInt(choice);}while(x==1);		
 	}
+	
+/*not working code block
+public void addPlatform(){	
+Platform[] platform=new Platform[10];
+for(int i=0;i<5;i++){
+	platform[i]=new Platform(i);
+metro.setPlatform(platform);}	
+try {
+FileOutputStream fs = new FileOutputStream("./com/lxisoft/metro/file/Platform.txt");
+ObjectOutputStream os = new ObjectOutputStream(fs);
+
+os.writeObject(metro.getPlatform());
+os.close();
+} catch (Exception e) { e.printStackTrace(); }
+try{
+FileInputStream fis = new FileInputStream("./com/lxisoft/metro/file/Platform.txt");
+ObjectInputStream ois = new ObjectInputStream(fis);
+for(int i=0;i<5;i++){
+platform = (Platform[]) ois.readObject();
+System.out.println(platform);
+}
+ois.close();
+} catch (Exception e) { e.printStackTrace(); }
+}
+*/
 }
