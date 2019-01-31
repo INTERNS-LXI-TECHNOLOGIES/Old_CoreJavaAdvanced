@@ -91,5 +91,41 @@ public class Train implements Comparable<Train>{
 
 		return trainName.compareTo(train.getTrainName());
 	}
+	public boolean equals(Object o){
+
+		Train train=(Train) o;
+		if(o==null){
+			return false;
+		}
+		if(this==o){
+
+			return true;
+		}
+		if(trainName.equals(train.trainName)){
+
+			return true;
+		}
+		else{
+
+			return false;
+		}
+	}
+	public int hashCode(){
+
+		int result=0;
+		if(trainName.contains("EXPRESS")){
+
+			result=1;
+			return result;
+		}
+		if(trainName.contains("PASS")){
+
+			result=2;
+			return result;
+		}
+		else{
+			return result;
+		}
+	}
 	
 }

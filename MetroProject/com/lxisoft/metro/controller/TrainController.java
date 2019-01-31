@@ -11,6 +11,7 @@ import com.lxisoft.metro.comparator.SortByDest;
 public class TrainController{
 
 ArrayList<Train> trainList =new ArrayList<Train>();
+HashSet<Train> hashSet=new HashSet<Train>();
 File trainFile=new File("./com/lxisoft/metro/TrainDetails.txt");	
 ArrayList<String> nameList=new ArrayList<String>();
 ArrayList<String> destList=new ArrayList<String>();
@@ -20,31 +21,58 @@ Scanner input=new Scanner(System.in);
 		try{
 			FileReader fr=new FileReader(trainFile);
 			BufferedReader br=new BufferedReader(fr);
-			System.out.println("No."+"\t*Train Name*\t*Train Id*\t*Arraival Time*\t*Departure Time*\t*Start point*\t*Destination Point*  ");
-			String line;int i=1;
+			
+			String line;
 			while((line=br.readLine())!=null)
 			{	
 				String data[]=line.split(";");
 				
 				Train train=new Train(data[0].toUpperCase(),data[1],data[2].toUpperCase(),data[3].toUpperCase(),data[4].toUpperCase(),data[5].toUpperCase());
 				trainList.add(train);
+				hashSet.add(train);
 				nameList.add(data[0].toUpperCase());
 				destList.add(data[5].toUpperCase());
 		
 			}
 			metro.setTrain(trainList);
 			Collections.sort(trainList);
-			for(Train train:trainList){
-			System.out.println("\n"+i+"\t"+train.getTrainName()+"\t"+train.getTrainId()+"\t\t"+train.getArraivalTime()+"\t\t"+train.getDepartureTime()+"       \t\t"+train.getStartPoint()+"     \t\t"+train.getDestinationPoint());
-			i++;
 			
-		}
 		}
 
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	
+	}
+	public void viewTrains(){
+		int i=1;
+		System.out.println("No."+" *Train Name*    \t\t*Train Id*\t*Arraival Time*\t*Departure Time*\t*Start point*\t*Destination Point*  ");
+		for(Train train:trainList){
+			System.out.println("\n"+i+" "+train.getTrainName()+"     \t\t"+train.getTrainId()+"\t\t"+train.getArraivalTime()+"\t\t"+train.getDepartureTime()+"       \t\t"+train.getStartPoint()+"     \t\t"+train.getDestinationPoint());
+			i++;
+			
+		}
+		searching();
+	}
+	public void searching(){
+
+		System.out.println("\nEnter Train Name");
+		String tname1=input.next().toUpperCase();
+		Train train3=Train.tn(tname1);
+		Iterator<Train> ite=hashSet.iterator();
+
+		while(ite.hasNext()){
+
+			searchingTrain(ite.next(),train3);
+			
+		}
+	}
+	public void searchingTrain(Train train2,Train train3){
+
+		if(train2.equals(train3)){
+
+			System.out.println("\n"+" "+train2.getTrainName()+"     \t\t"+train2.getTrainId()+"\t\t"+train2.getArraivalTime()+"\t\t"+train2.getDepartureTime()+"       \t\t"+train2.getStartPoint()+"     \t\t"+train2.getDestinationPoint());		}
+
 	}
 	public void sortDestination(Metro metro){
 
@@ -60,8 +88,8 @@ Scanner input=new Scanner(System.in);
 	
 					train1=metro.getTrain().get(index);
 				int i=1;
-		System.out.println("No."+"\t*Train Name*\t*Train Id*\t*Arraival Time*\t*Departure Time*\t*Start point*\t*Destination Point*  ");
-			System.out.println("\n"+i+"\t"+train1.getTrainName()+"\t"+train1.getTrainId()+"\t\t"+train1.getArraivalTime()+"\t\t"+train1.getDepartureTime()+"       \t\t"+train1.getStartPoint()+"     \t\t"+train1.getDestinationPoint());
+		System.out.println("No. "+"*Train Name*\t\t*Train Id*\t*Arraival Time*\t*Departure Time*\t*Start point*\t*Destination Point*  ");
+			System.out.println("\n"+i+" "+train1.getTrainName()+"\t\t"+train1.getTrainId()+"\t\t"+train1.getArraivalTime()+"\t\t"+train1.getDepartureTime()+"       \t\t"+train1.getStartPoint()+"     \t\t"+train1.getDestinationPoint());
 			i++;
 		
 					} 

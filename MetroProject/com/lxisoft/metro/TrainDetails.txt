@@ -1,2 +1,7 @@
 amrithaExp;123;6:00am;9:pm;palakkad;trivandrum
 chennaimail;1234;1:00pm;3:00am;chennai;coimbatore
+chennaiexpress;12334;2:30pm;12:00am;chennai;palakkad
+amrithaExpress;3434;9:00pm;6:00am;palakkad;trivandrum
+coimbatorepass;4554;8:00am;10:00am;coimbatore;palakkad
+kanyakumaripass;3446;8:00am;11:00am;trivandrum;kanyakumari
+mumbaiExpress;12345;1:00pm;2:00am;mumbaii;bangalore

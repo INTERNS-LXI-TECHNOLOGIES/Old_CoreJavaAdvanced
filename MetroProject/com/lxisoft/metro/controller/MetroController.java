@@ -24,6 +24,7 @@ public class MetroController{
 	
 
 	public void homePage(){
+		traincntrl.trainDetails(metro);
 		String con;
 		do{
 		System.out.println("1.Admin Login.......2.Train Details........3.searchDetails........4.search By Start and Destination ...5.Enter Passenger...6.search Passenger");
@@ -33,7 +34,7 @@ public class MetroController{
 		{
 			case 1:adminLogin();
 					break;
-			case 2:traincntrl.trainDetails(metro);
+			case 2:traincntrl.viewTrains();
 					break;
 			case 3:traincntrl.searchDetails();
 					break;
