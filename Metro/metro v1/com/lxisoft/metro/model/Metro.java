@@ -5,19 +5,28 @@ public class Metro{
 private Admin admin;
 private Train train;
 private Passenger passenger;
-//private Platform[] platform;
+private Platform[] platform;
 
-private ArrayList<Train> trainList=new ArrayList<Train>();
+//private ArrayList<Train> trainList=new ArrayList<Train>();
 //private HashMap<String,Passenger> passengers= new HashMap<String,Passenger>(); 
 private TreeMap<String,Passenger> passengers= new TreeMap<String,Passenger>();	
+private HashSet<Train> trainSet=new HashSet<Train>();
 	
-	public void setTrainList(ArrayList<Train> trainList){
+	/*public void setTrainList(ArrayList<Train> trainList){
 		this.trainList=trainList;
 	}
 
 
 	public ArrayList<Train> getTrainList(){
 		return trainList;
+	}*/
+	
+	public void setTrains(HashSet<Train> trainSet){
+		this.trainSet=trainSet;	
+	}
+	
+	public HashSet<Train> getTrains(){
+		return trainSet;
 	}
 	
 
@@ -36,13 +45,13 @@ private TreeMap<String,Passenger> passengers= new TreeMap<String,Passenger>();
 	public Train  getTrain(){
 		return train;
 	}
-/*	public void setPlatform(Platform[] platform){
+	public void setPlatform(Platform[] platform){
 		this.platform=platform;	
 	}
 	
 	public Platform[] getPlatform(){
 		return platform;
-	}*/
+	}
 	
 	public void setPassenger(Passenger passenger){
 		this.passenger=passenger;	

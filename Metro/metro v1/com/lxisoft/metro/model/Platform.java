@@ -3,7 +3,6 @@ import java.io.*;
 
 public class Platform implements Serializable{
  private int platformNumber;
- private Train currentTrain;
  public Platform(int platformNumber){
 		this.platformNumber=platformNumber;
 	}

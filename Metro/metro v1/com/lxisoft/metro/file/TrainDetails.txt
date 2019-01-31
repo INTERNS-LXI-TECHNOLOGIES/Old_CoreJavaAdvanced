@@ -1,9 +1,7 @@
-parasuRam,111,8.00am,8.10am,palakkad,kottayam
-intercity,1222,2.00am,2.30am,palakkad,ernamkulam
-sathabthi,13334,7.10pm,8.00pm,palakkad,trivandram
-adfg,1245,16.00,16.12,palakkad,kollam
-jjefllj,23453,17.00,23.00,palakkas,pala
-poouejf,233553,22,10.00,palakkad,kozhikod
-ipj,1324,11.00,12.00,palakkad,vayana
-abcExp,12345,1.15am,1.30am,palakkad,kozhikod
-abcdef,1092,10.50,1.00,palakkad,kochi
+ChennaiExpress,111,1.00,1.15,palakkad,chennai
+parasuramExpress,111,2.00,2.10,palakkad,kochi
+amrithaExpress,222,3.00,3.10,palakkad,kanyakumari
+rajadaniExpress,333,4.00,4.05,palakkad,kottayam
+chennaimail,4444,5.05,5.10,palakkad,trivandram
+kozPassenger,665,7.00,7.15,palakkad,kozhikode
+coimbathurPassenger,873486,8.45,9.00,palakkad,coimbathur

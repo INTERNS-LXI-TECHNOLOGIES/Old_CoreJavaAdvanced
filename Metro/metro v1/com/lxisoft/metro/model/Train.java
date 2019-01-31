@@ -7,6 +7,7 @@ public class Train implements Comparable<Train>{
 	
 	private String trainName;
 	private String trainId;
+	//private String type;
 	//private Compartment compartment;
 	private String arraivalTime,departureTime;
 	private String startPoint,destination;
@@ -15,6 +16,7 @@ public class Train implements Comparable<Train>{
 	public Train(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination){
 		this.trainName=trainName;
 		this.trainId=trainId;
+		//this.type=type;
 		this.arraivalTime=arraivalTime;		
 		this.departureTime=departureTime;
 		this.destination=destination;
@@ -54,8 +56,7 @@ public class Train implements Comparable<Train>{
 		return trainName;
 	}
 
-	public String  getTrainId(){
-		
+	public String  getTrainId(){	
 		return trainId;
 	}
 	
@@ -82,4 +83,46 @@ public class Train implements Comparable<Train>{
     public int compareTo(Train train){ 
         return trainName.compareTo(train.getTrainName()); 
     } 
+	
+	public boolean equals(Object o) {
+		
+		Train train=(Train)o;
+		if(o==null){
+			return false;
+		}
+		if(this==o){
+			return true;
+		}
+		if(trainName.equals(train.trainName)){
+			return true;
+		}
+		/*if((o instanceof Train) &&(((Train)o).trainName == trainName)) {
+			return true;
+			}
+		else if((o instanceof Train)&&(((Train)o).type==type)){
+			return true;}*/		
+		else {
+			return false;}
+	}
+	public int hashCode() {
+		int result=0;
+		if(trainName.contains("PASS")){
+			result=1;
+			return result;
+		}
+		if(trainName.contains("EXP")){
+			result=2;
+			return result;
+		}
+		/*if(type==passenger){
+			return 111;
+		}
+		else if(type==express){
+			return 222;
+		}*/
+		else{
+			return result;
+	 }
+		
+}
 }

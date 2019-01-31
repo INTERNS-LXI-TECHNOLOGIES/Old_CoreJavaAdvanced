@@ -29,6 +29,7 @@ public class Passenger implements Comparable<Passenger>{
 	}
 	public int hashCode() {
 		return name.length(); }
+		
 	public String toString(){ 
 		return name+" "+mobileNumber+" ";  
 	}

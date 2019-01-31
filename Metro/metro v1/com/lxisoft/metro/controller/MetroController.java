@@ -3,6 +3,7 @@ import com.lxisoft.metro.model.*;
 import com.lxisoft.metro.view.*;
 import java.util.*;
 import java.io.*;
+import java.io.Console;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -38,10 +39,6 @@ public class MetroController{
 		case 2:trainControl.loadTrainDetailsFile(metro);
 			   printTrains();
 		break;
-		case 3:addPassengerDetails();
-				printPassengerDeatils();
-				searchForPassenger();
-		break;
 		default: metroView.defaultCase();
 		homePage();}
 	}
@@ -56,11 +53,13 @@ public class MetroController{
 	public void adminLogin(){
 		String userName,passWord,line;
 		Admin admin;
-		//Console con = System.console(); 
+		Console con = System.console(); 
        
 		int count=0;
 		metroView.enterUserName();userName=scan.next();
-		metroView.enterPassWord();passWord=scan.next();
+		metroView.enterPassWord();
+		char[] ch=con.readPassword();    
+		passWord=String.valueOf(ch);//converting char array into string  
 		try{
 			
 				FileReader fr=new FileReader(adminDetails);
@@ -81,11 +80,13 @@ public class MetroController{
 					case 1: trainControl.addTrainDetails(metro,metroView);
 							//printTrains();					
 					break;
-					//case 3:
-					//break;
+					case 2:addPassengerDetails();
+							printPassengerDeatils();
+							searchForPassenger();
+					break;
 					default: metroView.defaultCase();}
-					count++;
-				}else {
+							count++;
+					}else {
 					metroView.loginFailed();
 					adminLogin();
 					}
@@ -98,23 +99,26 @@ public class MetroController{
 	public void printTrains(){
 		int x;
 		do{
-		metroView.selectSortOrder();
+		metroView.selectOrder();
 		String option = scan.next();
 		int key = Integer.parseInt(option);			
 		switch(key){
-			case 1: trainControl.sortTrainsByName(metro);;					
+			/*case 1: trainControl.sortTrainsByName(metro);;					
 			break;
 			case 2:trainControl.sortTrainsByArraivalTime(metro);
 			break;
 			case 3:trainControl.sortByDestination(metro);
 			break;
 			case 4:trainControl.iteratorMethod(metro);
+			break;*/
+			case 1:trainControl.printTrainSet(metro);
 			break;
-			case 5:trainControl.searchForTrains(metro,metroView);
+			case 2:trainControl.searchingTrains(metro,metroView);
 			break;
-			case 6:trainControl.searchByStartAndDestination(metro,metroView);
-			break;
-			//case 7:addPlatform();break;
+			/*case 6:trainControl.searchByStartAndDestination(metro,metroView);
+			break;*/
+			
+			
 			default:metroView.defaultCase();
 		}
 		metroView.enterOption();String choice = scan.next();
@@ -174,19 +178,17 @@ System.out.println(s1 + " " + s2);*/
 		metroView.enterSearchKey();
 		search=scan.next().toUpperCase();
 		submap = metro.getPassengers().tailMap(search);
-		assert subMap != null : 
+
 		//System.out.println(submap);
 		System.out.println(submap.get(search));
 		metroView.enterOption();String choice = scan.next();
 		x = Integer.parseInt(choice);}while(x==1);		
 	}
 	
-/*not working code block
-public void addPlatform(){	
-Platform[] platform=new Platform[10];
-for(int i=0;i<5;i++){
-	platform[i]=new Platform(i);
-metro.setPlatform(platform);}	
+//not working code block
+/*public void addPlatform(){	
+
+metro.setPlatform(new Platform());}	
 try {
 FileOutputStream fs = new FileOutputStream("./com/lxisoft/metro/file/Platform.txt");
 ObjectOutputStream os = new ObjectOutputStream(fs);
@@ -205,4 +207,9 @@ ois.close();
 } catch (Exception e) { e.printStackTrace(); }
 }
 */
+// example of console readPassword() method....
+/*Console c=System.console();
+        char[] ch=c.readPassword();    
+		String name=String.valueOf(ch);//converting char array into string    
+        System.out.println(name); */
 }
