@@ -7,18 +7,19 @@ public class Train implements Comparable<Train>{
 	
 	private String trainName;
 	private String trainId;
+	private Compartment compartment;
 	private String arraivalTime,departureTime;
 	private String startPoint,destination;
+	private ArrayList<Compartment> compartList= new ArrayList<Compartment>();
 	
-	
-	public Train(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination){
+	public Train(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination,Compartment compartment){
 		this.trainName=trainName;
 		this.trainId=trainId;
-		//this.type=type;
 		this.arraivalTime=arraivalTime;		
 		this.departureTime=departureTime;
 		this.destination=destination;
-		this.startPoint=startPoint;			
+		this.startPoint=startPoint;	
+		this.compartment=compartment;		
 	}
 	
 	public Train(){
@@ -66,6 +67,13 @@ public class Train implements Comparable<Train>{
 		return departureTime;
 	}
 	
+	public void setCompartment(Compartment compartment){
+		this.compartment=compartment;	
+	}
+	
+	public Compartment  getCompartment(){
+		return compartment;
+	}
 	public String  getDestination(){
 		return destination;
 	}
@@ -86,19 +94,11 @@ public class Train implements Comparable<Train>{
 		
 		Train train=(Train)o;
 		if(o==null){
-			return false;
-		}
+			return false;}
 		if(this==o){
-			return true;
-		}
+			return true;}
 		if(trainName.equals(train.trainName)){
-			return true;
-		}
-		/*if((o instanceof Train) &&(((Train)o).trainName == trainName)) {
-			return true;
-			}
-		else if((o instanceof Train)&&(((Train)o).type==type)){
-			return true;}*/		
+			return true;}	
 		else {
 			return false;}
 	}
@@ -112,12 +112,6 @@ public class Train implements Comparable<Train>{
 			result=2;
 			return result;
 		}
-		/*if(type==passenger){
-			return 111;
-		}
-		else if(type==express){
-			return 222;
-		}*/
 		else{
 			return result;
 	 }

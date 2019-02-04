@@ -64,7 +64,9 @@ public class MetroView{
 	public void enterSearchKey(){
 		System.out.println("Enter the search key");
 	}
-	
+	public void enterCompartmentNum(){
+		System.out.println("Compartment ::")
+	}
 	public void enterPassengerName(){
 		System.out.println("Name::");
 	}

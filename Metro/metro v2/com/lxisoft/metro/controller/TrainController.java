@@ -1,13 +1,8 @@
 package com.lxisoft.metro.controller;
 import com.lxisoft.metro.model.*;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import com.lxisoft.metro.fileOperations.*;
 import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.util.Scanner;
+import java.io.*;
 import java.util.*;
 
 import com.lxisoft.metro.view.*;
@@ -16,9 +11,10 @@ import com.lxisoft.metro.view.*;
 public class TrainController{
 	
 	Scanner scan=new Scanner(System.in);
-	File TrainDetails= new File("./com/lxisoft/metro/file/TrainDetails.txt");
-	
-	public void addTrainDetails(Metro metro,MetroView metroView){
+	File trainDetails= new File("./com/lxisoft/metro/file/TrainDetails.txt");
+	File tempFile=new File("./com/lxisoft/metro/file/TempFile.txt");
+	FileOperation file=new FileOperation();
+	public void addTrainDetails(Metro metro,MetroView metroView,FileOperation file){
 		String trainName,trainId,startPoint,destination,arraivalTime,departureTime,choice;
 		do{
 		metroView.enterTrainName();
@@ -34,54 +30,54 @@ public class TrainController{
 		metroView.enterDestination();
 		destination=scan.next();
 		metroView.enterOption();
-		addTrainDetailsToFile(trainName,trainId,arraivalTime,departureTime,startPoint,destination);
+		addTrainDetailsToFile(trainName,trainId,arraivalTime,departureTime,startPoint,destination,file);
 		choice= scan.next();		
 		}while(choice.equals("Y")||choice.equals("y"));
 	}
 
-	public void addTrainDetailsToFile(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination){
-		FileWriter fw=null;
-		BufferedWriter bw=null;
+	public void addTrainDetailsToFile(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination,FileOperation file){
+	
 		try{
-		fw = new FileWriter(TrainDetails,true);
-		bw = new BufferedWriter(fw);
-		bw.write(trainName+","+trainId+","+arraivalTime+","+departureTime+",");
-		bw.write(startPoint+","+destination);
-		bw.newLine();
+	file.setFileWriter(new FileWriter(trainDetails,true));
+	file.setBufferedWriter(new BufferedWriter(file.getFileWriter()));
+	file.getBufferedWriter().write(trainName+","+trainId+","+arraivalTime+","+departureTime+","+startPoint+","+destination);
+	file.getBufferedWriter().newLine();
 	}catch(IOException e){
 			System.out.println("Error");	
 		}finally{
 			try{
-				if (bw != null)
-					bw.close();
-				if (fw != null)
-					fw.close();}
-		catch(IOException e){
+				if (file.getBufferedWriter() != null)
+					file.getBufferedWriter().close();
+				if (file.getFileWriter() != null)
+					file.getFileWriter().close();}
+			catch(IOException e){
 				e.printStackTrace();}
 	}
 	}
-	public void loadTrainDetailsFile(Metro metro){
+	public void loadTrainDetailsFile(Metro metro,FileOperation file){
 		String line;
-	try{	
-		FileReader fr=new FileReader(TrainDetails);
-		BufferedReader br=new BufferedReader(fr);	
-		while((line=br.readLine())!=null){
+	try{
+		
+		file.setFileReader(new FileReader(trainDetails));
+		file.setBufferedReader(new BufferedReader(file.getFileReader()));	
+		while((line=file.getBufferedReader().readLine())!=null){
 		String[] data = line.split(",");
 		metro.setTrain(new Train(data[0].toUpperCase(),data[1],data[2],data[3],data[4].toUpperCase(),data[5].toUpperCase()));
 		metro.getTrains().add(metro.getTrain());}
 	
+		file.getFileReader().close();
+		file.getBufferedReader().close();
 		}catch(IOException e){
 			
 			System.out.println("Error");}			
 	}
 	public void printTrainSet(Metro metro){
 		
-		
-		System.out.println("Train name 		Train num	ArraivalTime 		DepartureTime  		StartPoint 		Destination");
+	System.out.println("[<Train name>]	[<Train num>]	[<ArraivalTime>]	[<DepartureTime>]	[<StartPoint>]	 [<Destination>]");
 		Iterator<Train> iter=metro.getTrains().iterator();
 		while(iter.hasNext()){
 			Train t=iter.next();
-			System.out.println(t.getTrainName()+"\t\t"+t.getTrainId()+"\t \t "+t.getArraivalTime()+"\t\t\t "+t.getDepartureTime()+"\t \t\t "+t.getStartPoint()+"\t\t"+t.getDestination());  
+			System.out.println(t.getTrainName()+"\t\t"+t.getTrainId()+"\t\t "+t.getArraivalTime()+"\t\t\t "+t.getDepartureTime()+"\t\t\t "+t.getStartPoint()+"\t\t"+t.getDestination());  
 		}
 	}
 	public void searchingTrains(Metro metro,MetroView metroView){
@@ -101,5 +97,33 @@ public class TrainController{
 		if(train.equals(train1)){
 			System.out.println(train);
 		}
+	}
+	
+	
+	public void deleteTrain(MetroView metroView) throws IOException{
+		String currentLine,search;
+		metroView.enterSearchKey();
+		search=scan.next();
+		file.setFileReader(new FileReader(trainDetails));
+		file.setBufferedReader(new BufferedReader(file.getFileReader()));		
+				file.setBufferedWriter(new BufferedWriter(new FileWriter(tempFile)));			
+				while((currentLine=file.getBufferedReader().readLine())!=null){
+					if(!currentLine.contains(search)){
+						 System.out.println(currentLine);
+					 file.getBufferedWriter().write(currentLine + System.getProperty("line.separator"));}
+				}
+				file.getFileReader().close();
+				file.getBufferedReader().close();
+			file.getBufferedWriter().close();
+			if(trainDetails.delete()){
+			System.out.println("Success");
+			}else{
+			System.out.println("file exist");}		
+		boolean successful = tempFile.renameTo(trainDetails);
+        System.out.println(successful);
+	}
+	
+	public void initCompartment(){
+		
 	}
 }

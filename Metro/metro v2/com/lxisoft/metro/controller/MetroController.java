@@ -6,7 +6,7 @@ import java.util.*;
 import java.io.*;
 import java.io.Console;
 import java.io.File;
-
+import com.lxisoft.metro.fileOperations.*;
 import java.io.IOException;
 
 import java.text.DateFormat;  
@@ -17,6 +17,7 @@ public class MetroController{
 	MetroView metroView;
 	TrainController trainControl;
 	Passenger passenger;
+	FileOperation file=new FileOperation();
 	Scanner scan= new Scanner(System.in);
 	Date date=new Date();
 	File adminDetails= new File("./com/lxisoft/metro/file/AdminDetails.txt");
@@ -37,7 +38,7 @@ public class MetroController{
 		switch(key){
 		case 1: adminLogin();	
 		break;
-		case 2:trainControl.loadTrainDetailsFile(metro);
+		case 2:trainControl.loadTrainDetailsFile(metro,file);
 			   trainControl.printTrainSet(metro);
 		break;
 		case 3:trainControl.searchingTrains(metro,metroView);
@@ -60,12 +61,12 @@ public class MetroController{
 		Console con = System.console(); 
 		metroView.enterUserName();userName=scan.next();
 		metroView.enterPassWord();
-		char[] ch=con.readPassword();    
-		passWord=String.valueOf(ch);//converting char array into string  
+		char[] ch=con.readPassword();     
+		passWord=String.valueOf(ch);//converting char array into string
 		try{	
-				FileReader fr=new FileReader(adminDetails);
-				BufferedReader br=new BufferedReader(fr);	
-				while((line=br.readLine())!=null){
+				file.setFileReader(new FileReader(adminDetails));
+				file.setBufferedReader(new BufferedReader(file.getFileReader()));	
+				while((line=file.getBufferedReader().readLine())!=null){
 					String[] data = line.split(";");
 					String userName1=data[0];
 					String passWord1=data[1];
@@ -77,13 +78,13 @@ public class MetroController{
 					String choice = scan.next();
 					int key = Integer.parseInt(choice);			
 					switch(key){
-					case 1: trainControl.addTrainDetails(metro,metroView);					
+					case 1: trainControl.addTrainDetails(metro,metroView,file);					
 					break;
 					case 2:addPassengerDetails();
 							printPassengerDeatils();
 							searchForPassenger();
 					break;
-					case 3:deleteTrain();
+					case 3:trainControl.deleteTrain(metroView);
 					break;
 					default: metroView.defaultCase();}
 							count++;
@@ -94,6 +95,7 @@ public class MetroController{
 				}while(false);
 			}catch(IOException e){
 			System.out.println("Error");}		
+			
 	}
 	
 	public void printTrains(){
@@ -114,11 +116,9 @@ public class MetroController{
 		}while(choice.equals("Y")||choice.equals("y"));	
 	}
 	
-	public void deleteTrain(){
-		
-	}
+	
 	public void ticketReservation(){
-		trainControl.loadTrainDetailsFile(metro);
+		trainControl.loadTrainDetailsFile(metro,file);
 		trainControl.printTrainSet(metro);
 		searchByStartAndDestination();	
 	}

@@ -34,6 +34,7 @@ private HashSet<Train> trainSet=new HashSet<Train>();
 		return train;
 	}
 	
+	
 	public void setPassenger(Passenger passenger){
 		this.passenger=passenger;	
 	}
