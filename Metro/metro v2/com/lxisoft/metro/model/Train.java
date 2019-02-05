@@ -12,14 +12,13 @@ public class Train implements Comparable<Train>{
 	private String startPoint,destination;
 	private ArrayList<Compartment> compartList= new ArrayList<Compartment>();
 	
-	public Train(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination,Compartment compartment){
+	public Train(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination){
 		this.trainName=trainName;
 		this.trainId=trainId;
 		this.arraivalTime=arraivalTime;		
 		this.departureTime=departureTime;
 		this.destination=destination;
-		this.startPoint=startPoint;	
-		this.compartment=compartment;		
+		this.startPoint=startPoint;		
 	}
 	
 	public Train(){
@@ -81,7 +80,12 @@ public class Train implements Comparable<Train>{
 	public String  getStartPoint(){
 		return startPoint;
 	}
-	
+	public void setCompartments(ArrayList<Compartment> compartList){
+		this.compartList=compartList;
+	}
+	public ArrayList<Compartment> getCompartments(){
+		return compartList;
+	}
 	public String toString(){ 
 		return  trainName+" "+trainId+" "+arraivalTime+" "+departureTime+" "+startPoint+" "+destination+" ";  
 	} 

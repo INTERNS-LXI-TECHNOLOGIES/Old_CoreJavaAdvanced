@@ -61,11 +61,14 @@ public class MetroView{
 	public void selectOrder(){
 	System.out.println("1.Trains... 2.Search Train....");}
 	
+	public void enterCompartment(){
+		System.out.println("Enter your choice");
+	}
 	public void enterSearchKey(){
 		System.out.println("Enter the search key");
 	}
 	public void enterCompartmentNum(){
-		System.out.println("Compartment ::")
+		System.out.println("Compartment ::");
 	}
 	public void enterPassengerName(){
 		System.out.println("Name::");

@@ -135,6 +135,7 @@ public class MetroController{
 		if(index>=0){
 			t2=trainList.get(index);
 			System.out.println(t2);
+			trainControl.printCompartment(metro,metroView);
 		}
 	
 	}

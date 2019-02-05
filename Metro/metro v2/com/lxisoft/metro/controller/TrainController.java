@@ -63,7 +63,8 @@ public class TrainController{
 		while((line=file.getBufferedReader().readLine())!=null){
 		String[] data = line.split(",");
 		metro.setTrain(new Train(data[0].toUpperCase(),data[1],data[2],data[3],data[4].toUpperCase(),data[5].toUpperCase()));
-		metro.getTrains().add(metro.getTrain());}
+		metro.getTrains().add(metro.getTrain());
+		initCompartment(metro);}
 	
 		file.getFileReader().close();
 		file.getBufferedReader().close();
@@ -88,15 +89,16 @@ public class TrainController{
 		Train train1=Train.tn(search);
 		Iterator<Train> iter=metro.getTrains().iterator();
 		while(iter.hasNext()){
-		searchingTrainSet(iter.next(),train1);
+		searchingTrainSet(iter.next(),train1,metro);
 		}
 		metroView.enterOption(); choice = scan.next();
 		}while(choice.equals("Y")||choice.equals("y"));
 	}
-	public void searchingTrainSet(Train train,Train train1){
+	public void searchingTrainSet(Train train,Train train1,Metro metro){
 		if(train.equals(train1)){
 			System.out.println(train);
 		}
+		
 	}
 	
 	
@@ -121,9 +123,71 @@ public class TrainController{
 			System.out.println("file exist");}		
 		boolean successful = tempFile.renameTo(trainDetails);
         System.out.println(successful);
+		
 	}
 	
-	public void initCompartment(){
+	public void initCompartment(Metro metro){
+		ArrayList<Compartment> compart=new ArrayList<Compartment>();
+		metro.getTrain().setCompartment(new Compartment("AC COMPARTMENT"));
+		initSeat(metro);
+		compart.add(metro.getTrain().getCompartment());		
+		metro.getTrain().setCompartment(new Compartment("SLEEPER CLASS"));
+		initSeat(metro);
+		compart.add(metro.getTrain().getCompartment());				
+		metro.getTrain().setCompartment(new Compartment("FIRST CLASS"));
+		initSeat(metro);
+		compart.add(metro.getTrain().getCompartment());				
+		metro.getTrain().setCompartment(new Compartment("SECOND CLASS"));
+		initSeat(metro);
+		compart.add(metro.getTrain().getCompartment());			
+		metro.getTrain().setCompartment(new Compartment("GENERAL COMPARTMENT"));
+		initSeat(metro);
+		compart.add(metro.getTrain().getCompartment());				
+		metro.getTrain().setCompartments(compart);
+
+		}
+		public void selectCompartment(Metro metro,MetroView metroView){
+			String choice;
+			do{	
+		metroView.enterCompartment();
+		String option = scan.next();
+		int key = Integer.parseInt(option);			
+		switch(key){
+			case 1:metro.getTrain().getCompartments().get(0);
+			System.out.println(metro.getTrain().getCompartments().get(0).getSeats());
+			break;
+			case 2:metro.getTrain().getCompartments().get(1);
+			System.out.println(metro.getTrain().getCompartments().get(0).getSeats());
+			break;
+			case 3:metro.getTrain().getCompartments().get(2);
+			System.out.println(metro.getTrain().getCompartments().get(0).getSeats());
+			break;
+			case 4:metro.getTrain().getCompartments().get(3);
+			System.out.println(metro.getTrain().getCompartments().get(0).getSeats());
+			
+			break;
+			case 5:metro.getTrain().getCompartments().get(4);
+			System.out.println(metro.getTrain().getCompartments().get(0).getSeats());
+			break;
+			default:metroView.defaultCase();
+		}
+		metroView.enterOption();choice = scan.next();
+		}while(choice.equals("Y")||choice.equals("y"));	
+		}
+	public void printCompartment(Metro metro,MetroView metroView){
+		int i=1;
+		for(Compartment com:metro.getTrain().getCompartments())
+		{	System.out.println(i+" "+com);
+	i++;}
+	selectCompartment(metro,metroView);
+	}
+	public void initSeat(Metro metro){
+		int i;
+		metro.getTrain().getCompartment().setSeats(new ArrayList<Seat>());
+		
+		for(i=1;i<=10;i++){
+		metro.getTrain().getCompartment().setSeat(new Seat(i));
+		metro.getTrain().getCompartment().getSeats().add(metro.getTrain().getCompartment().getSeat());}
 		
 	}
 }

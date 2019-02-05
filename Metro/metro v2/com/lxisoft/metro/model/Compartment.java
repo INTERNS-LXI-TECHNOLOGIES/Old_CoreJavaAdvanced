@@ -3,18 +3,20 @@ import java.util.*;
 
 public class Compartment{
 	
-	private int id;
+	private String type;
 	
 	private Seat seat;
 	
-	private TreeSet<Seat> seatSet= new TreeSet<Seat>();
+	//private TreeSet<Seat> seatSet;
 	
-	public void setCompartmentId(int id ){
-		this.id=id;	
+	private ArrayList<Seat> seatList;
+	
+	public Compartment(String type){
+		this.type=type;	
 	}
 	
-	public int  getCompartmentId(){
-		return id;
+	public String  getCompartmentType(){
+		return type;
 	}
 	
 	public void setSeat(Seat seat){
@@ -25,13 +27,25 @@ public class Compartment{
 		return seat;
 	}
 	
-	public void setSeats(TreeSet<Seat> seatSet){
+	/*public void setSeats(TreeSet<Seat> seatSet){
 		
 		this.seatSet=seatSet;	
 	}
 	
 	public TreeSet<Seat> getSeats(){
 		return seatSet;
+	}*/
+	
+	public void setSeats(ArrayList<Seat> seatList){
+		
+		this.seatList=seatList;	
 	}
+	
+	public ArrayList<Seat> getSeats(){
+		return seatList;
+	}
+	public String toString(){ 
+		return  type+" ";  
+	} 
 	
 }
