@@ -76,10 +76,32 @@ public class MetroView{
 	public void enterMobileNumber(){
 		System.out.println("Mobile Number::");
 	}
+	public void enterAge(){
+		System.out.println("Age::");
+	}
 	public void enterDestinationForSearch(){
 		System.out.println("Destination:");	
 	}
 	public void enterStartPointForSearch(){
 		System.out.println("Start Point:");
+	}
+	
+	public void printTicketReservation(){
+		System.out.println("TICKET RESERVATION");
+	}
+	public void selectTicketReservation(){
+	System.out.println(" Want to Reserve ticket....Press 1");
+	}
+	public void printCompartment(){
+		System.out.println("Compartments");
+	}
+	public void selectCompartment(){
+		System.out.println("Select Compartment");
+	}
+	public void printSeats(){
+		System.out.println("Available Seats Are::");
+	}
+	public void selectSeat(){
+		System.out.println("Select Your seat");
 	}
 }

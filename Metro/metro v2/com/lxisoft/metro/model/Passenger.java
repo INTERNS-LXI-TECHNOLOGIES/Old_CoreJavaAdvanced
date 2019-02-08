@@ -3,6 +3,7 @@ package com.lxisoft.metro.model;
 public class Passenger implements Comparable<Passenger>{
 	private String name;
 	private String mobileNumber;
+	private String age;
 	
 	public Passenger(String name){
 		this.name=name;
@@ -19,6 +20,13 @@ public class Passenger implements Comparable<Passenger>{
 	
 	public String  getMobileNumber(){
 		return mobileNumber;
+	}
+	public void setAge(String age){
+		this.age=age;	
+	}
+	
+	public String  getAge(){
+		return age;
 	}
 	
 	public boolean equals(Object o) {

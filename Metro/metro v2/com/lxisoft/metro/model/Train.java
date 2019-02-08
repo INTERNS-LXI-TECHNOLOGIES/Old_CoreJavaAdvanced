@@ -7,87 +7,52 @@ public class Train implements Comparable<Train>{
 	
 	private String trainName;
 	private String trainId;
-	private Compartment compartment;
+	//private Compartment compartment;
 	private String arraivalTime,departureTime;
 	private String startPoint,destination;
-	private ArrayList<Compartment> compartList= new ArrayList<Compartment>();
+	private ArrayList<Compartment> compartments;//= new ArrayList<Compartment>();
 	
-	public Train(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination){
+	public Train(String trainName,String trainId,String arraivalTime,String departureTime,String startPoint,String destination,ArrayList<Compartment> compartments){
 		this.trainName=trainName;
 		this.trainId=trainId;
 		this.arraivalTime=arraivalTime;		
 		this.departureTime=departureTime;
 		this.destination=destination;
-		this.startPoint=startPoint;		
+		this.startPoint=startPoint;
+		this.compartments=compartments;		
 	}
 	
-	public Train(){
-		
-	}
-	public static Train tn(String trainName){
-		Train t=new Train();
-		t.trainName=trainName;
-		return t;
-	}
-	public static  Train tId(String trainId){
-		Train t=new Train();
-		t.trainId=trainId;
-		return t;
-	}
-	public static Train aT(String arraivalTime){
-		Train t=new Train();
-		t.arraivalTime=arraivalTime;
-		return t;		
-	}
-	public static Train dn(String destination){
-		Train t=new Train();
-		t.destination=destination;
-		return t;
-	}
+	public Train(){}
+	public Train (String trainName){
+		this.trainName=trainName;}
 	
 	public Train(String startPoint,String destination){
 		this.startPoint=startPoint;
-		this.destination=destination;
-
-	}
+		this.destination=destination;}
+		
 	public String  getTrainName(){
-		return trainName;
-	}
+		return trainName;}
 
 	public String  getTrainId(){	
-		return trainId;
-	}
+		return trainId;}
 	
 	public String  getArraivalTime(){
-		return arraivalTime;
-	}
+		return arraivalTime;}
 	
 	public String  getDepartureTime(){
-		return departureTime;
-	}
+		return departureTime;}
 	
-	public void setCompartment(Compartment compartment){
-		this.compartment=compartment;	
-	}
-	
-	public Compartment  getCompartment(){
-		return compartment;
-	}
 	public String  getDestination(){
-		return destination;
-	}
+		return destination;}
 
 	public String  getStartPoint(){
-		return startPoint;
-	}
-	public void setCompartments(ArrayList<Compartment> compartList){
-		this.compartList=compartList;
-	}
+		return startPoint;}
+
 	public ArrayList<Compartment> getCompartments(){
-		return compartList;
+		return compartments;
 	}
 	public String toString(){ 
-		return  trainName+" "+trainId+" "+arraivalTime+" "+departureTime+" "+startPoint+" "+destination+" ";  
+		return  trainName+" "+trainId+" "+arraivalTime+" "+departureTime+" "+startPoint+" "+destination+" "+compartments;  
 	} 
 	
     public int compareTo(Train train){ 
@@ -118,7 +83,7 @@ public class Train implements Comparable<Train>{
 		}
 		else{
 			return result;
-	 }
+		}
 		
-}
+	}
 }

@@ -5,47 +5,21 @@ public class Compartment{
 	
 	private String type;
 	
-	private Seat seat;
+	private ArrayList<Seat> seats;
 	
-	//private TreeSet<Seat> seatSet;
-	
-	private ArrayList<Seat> seatList;
-	
-	public Compartment(String type){
-		this.type=type;	
+	public Compartment(String type,ArrayList<Seat> seats){
+		this.type=type;
+		this.seats=seats;		
 	}
 	
 	public String  getCompartmentType(){
 		return type;
 	}
-	
-	public void setSeat(Seat seat){
-		this.seat=seat;	
-	}
-	
-	public Seat getSeat(){
-		return seat;
-	}
-	
-	/*public void setSeats(TreeSet<Seat> seatSet){
-		
-		this.seatSet=seatSet;	
-	}
-	
-	public TreeSet<Seat> getSeats(){
-		return seatSet;
-	}*/
-	
-	public void setSeats(ArrayList<Seat> seatList){
-		
-		this.seatList=seatList;	
-	}
-	
 	public ArrayList<Seat> getSeats(){
-		return seatList;
+		return seats;
 	}
 	public String toString(){ 
-		return  type+" ";  
+		return  type+" "+seats;  
 	} 
 	
 }
