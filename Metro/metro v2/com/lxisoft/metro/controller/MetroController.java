@@ -21,6 +21,8 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;  
@@ -35,7 +37,7 @@ public class MetroController{
 	Scanner scan;
 	Date date=new Date();
 	File adminDetails= new File("./com/lxisoft/metro/file/AdminDetails.txt");
-	File passengerDetails=new File("./com/lxisoft/,etro/file/PassengerDetails");
+	File passengerDetails=new File("./com/lxisoft/metro/file/PassengerDetails");
 	
 	public MetroController(){
 		file=new FileOperation();
@@ -47,31 +49,34 @@ public class MetroController{
 	
 	public void homePage(){	
 	dateFormating();
+	trainControl.loadTrainDetailsFile(metro,file);
 	String choice;
 	do{
 	    metroView.printHomeView(date);
 		String option = scan.next();
 		int key = Integer.parseInt(option);			
 		switch(key){
-		case 1: adminLogin();	
+		case 1: ticketReservation();	
 		break;
-		case 2:trainControl.loadTrainDetailsFile(metro,file);
-			   trainControl.printTrainSet(metro);
+		case 2:printTrains();
 		break;
 		case 3:trainControl.searchingTrains(metro,metroView);
 		break;
-		case 4:ticketReservation();
+		case 4:adminLogin();
+		trainControl.loadTrainDetailsFile(metro,file);
 		break;
 		default: metroView.defaultCase();
 		}metroView.enterOption(); choice = scan.next();
 		}while(choice.equals("Y")||choice.equals("y"));	
 	}
+	
 	private void dateFormating(){
 	String strDate;
 	date = Calendar.getInstance().getTime();  
     DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");  
     strDate = dateFormat.format(date);
 	}
+	
 	public void adminLogin(){
 		String userName,passWord,line;int count=0;
 		Console con = System.console(); 
@@ -89,16 +94,14 @@ public class MetroController{
 					admin=new Admin(userName1,passWord1);
 					metro.setAdmin(admin);}
 				do{		
-				if(userName.equals(metro.getAdmin().getUserName()) && passWord.equals(metro.getAdmin().getPassWord())){
+					if(userName.equals(metro.getAdmin().getUserName()) && passWord.equals(metro.getAdmin().getPassWord())){
 					metroView.loginSucceed();
 					String choice = scan.next();
 					int key = Integer.parseInt(choice);			
 					switch(key){
 					case 1: trainControl.addTrainDetails(metro,metroView,file);					
 					break;
-					case 2:addPassengerDetails();
-							printPassengerDeatils();
-							searchForPassenger();
+					case 2:printPassengerDeatils();
 					break;
 					case 3:trainControl.deleteTrain(metroView);
 					break;
@@ -127,15 +130,15 @@ public class MetroController{
 			default:metroView.defaultCase();
 		}
 		metroView.enterOption();choice = scan.next();
-		}while(choice.equals("Y")||choice.equals("y"));	
-		
+		}while(choice.equals("Y")||choice.equals("y"));		
 	}
+	
 	public void ticketReservation(){
 		String choice;
 		metroView.printTicketReservation();
 			do{
 				Train t=searchByStartAndDestination();
-				metroView.selectTicketReservation();
+				metroView.selectTicketReservation(t);
 				String choice1=scan.next();
 				int ch=Integer.parseInt(choice1);
 				if(ch==1){
@@ -161,8 +164,7 @@ public class MetroController{
 									int rs=0;
 									rs=seat;rs--;
 									System.out.println("you reserved the ticket\n");
-									createTicket(passenger.getName(),passenger.getAge(),passenger.getMobileNumber(),t.getTrainName(),t.getCompartments().get(s).getCompartmentType(),t.getCompartments().get(s).getSeats().get(rs).getSeatNum());
-									addPassengerDetailsToFile(passenger.getName(),passenger.getAge(),passenger.getMobileNumber(),t.getTrainName(),t.getCompartments().get(s).getCompartmentType(),t.getCompartments().get(s).getSeats().get(rs).getSeatNum());
+									createTicket(passenger.getName(),passenger.getAge(),passenger.getMobileNumber(),t.getTrainName(),t.getCompartments().get(s).getCompartmentType(),t.getCompartments().get(s).getSeats().get(rs).getSeatNum());			
 									t.getCompartments().get(s).getSeats().remove(rs);
 								break;}
 								}
@@ -173,7 +175,6 @@ public class MetroController{
 		}while(choice.equals("Y")||choice.equals("y"));	
 	}
 	public Train searchByStartAndDestination(){
-		trainControl.loadTrainDetailsFile(metro,file);
 		ArrayList<Train> trainList = new ArrayList<Train>(metro.getTrains());
 		metroView.enterStartPointForSearch();
 		String spoint=scan.next().toUpperCase();
@@ -183,12 +184,9 @@ public class MetroController{
 		int index=Collections.binarySearch(trainList,t2,new SortByDestination());
 		if(index>=0){
 			t2=trainList.get(index);
-			System.out.println(t2.getTrainName()+"\t"+t2.getTrainId()+"\t"+t2.getArraivalTime()+"\t"+t2.getDepartureTime()+"\t"+t2.getStartPoint()+"\t"+t2.getDestination());  
 		}
 		return t2;
-	
 	}
-	
 	public void addPassengerDetails(){
 		String name,mobileNumber,choice;
 		TreeMap<String,Passenger> pass=new TreeMap<String,Passenger>();
@@ -199,31 +197,14 @@ public class MetroController{
 		metroView.enterAge();
 		passenger.setAge(scan.next());
 		pass.put(passenger.getName(),passenger);
-		metro.setPassengers(pass);
-			
+		metro.setPassengers(pass);		
 	}
-	
-/*	public void printPassengerDeatils(){
-		System.out.println(metro.getPassengers());
-	}
-	
-	public void searchForPassenger(){
-		String search,choice;
-		SortedMap<String, Passenger> submap;
-		do{
-		metroView.enterSearchKey();
-		search=scan.next().toUpperCase();
-		submap = metro.getPassengers().tailMap(search);
-		System.out.println(submap.get(search));
-		metroView.enterOption();choice = scan.next();
-		}while(choice.equals("Y")||choice.equals("y"));		
-	}*/
-	public void passengerDetailsToFile(String passName,String pAge,String mNumber,String tName,String compartType,int seatNo){
+	public void passengerDetailsToFile(String passName,String pAge,String mNumber,String tName,String compartType,int seatNo,int fair){
 		try{
-	file.setFileWriter(new FileWriter(passengerDetails,true));
-	file.setBufferedWriter(new BufferedWriter(file.getFileWriter()));
-	file.getBufferedWriter().write(passName+":"+pAge+":"+mNumber+":"+tName+":"+compartType+":"+seatNo+"\n");
-
+			file.setFileWriter(new FileWriter(passengerDetails,true));
+			file.setBufferedWriter(new BufferedWriter(file.getFileWriter()));
+			file.getBufferedWriter().write(date+";"+passName+";"+pAge+";"+mNumber+";"+tName+";"+compartType+";"+seatNo+";"+fair+" ");
+			file.getBufferedWriter().newLine();
 		}catch(IOException e){
 			System.out.println("Error");	
 		}finally{
@@ -234,25 +215,42 @@ public class MetroController{
 					file.getFileWriter().close();}
 			catch(IOException e){
 				e.printStackTrace();}
-	}
+		}
 	}
 	public void createTicket(String passName,String pAge,String mNumber,String tName,String compartType,int seatNo){
-
-		Ticket ticket=new Ticket(passName,pAge,tName,compartType,seatNo);
+		int fair;
+		if(tName.contains("PASS")){
+			fair=45;
+		}else if(tName.contains("EXP")){
+			fair=60;
+		}else{
+			fair=55;
+		}
+		
+		Ticket ticket=new Ticket(date,passName,pAge,tName,compartType,seatNo,fair);
 		ArrayList<Ticket> ticketList=new ArrayList<Ticket>();
 		ticketList.add(ticket);
 		metro.setTicket(ticketList);
-		System.out.println("*************Train Ticket***************");
-		System.out.println("| Name :	"+passName+"		");
-		System.out.println("|"+"						");
-		System.out.println("| Age :		"+pAge+"Mobile Number:"+mNumber);
-		System.out.println("|"+"						");
-		System.out.println("| Train Name :	"+tName+"				");
-		System.out.println("|"+"						"); 
-		System.out.println("| Compartment :	"+compartType+"		");
-		System.out.println("|"+"			");
-		System.out.println("|"+" Seat No :	"+seatNo+"		");
-		System.out.println("|"+"						");
-		System.out.println("****************************************");
+		metroView.printTicket(date,passName,pAge,mNumber,tName,compartType,seatNo,ticket.getFair());
+		passengerDetailsToFile(passName,pAge,mNumber,tName,compartType,seatNo,ticket.getFair());
 	}
+	
+	public void printPassengerDeatils(){
+		String line;
+		try{
+		file.setFileReader(new FileReader(passengerDetails));
+		file.setBufferedReader(new BufferedReader(file.getFileReader()));
+		
+		System.out.println("PASSENGERS");		
+		while((line=file.getBufferedReader().readLine())!=null){
+		String[] data = line.split(";");
+		
+		System.out.println("Date:"+data[0]+"Name: "+data[1]+ " Age:"+data[2]+" MobileNumber:"+data[3]+" Train:"+data[4]+" Compartment:"+data[5]+" Seat:"+data[6]+" Fair"+data[7]+"\n");
+		}
+		file.getFileReader().close();
+		file.getBufferedReader().close();
+		}catch(IOException e){
+			
+			System.out.println("Error");}	
+		}
 }

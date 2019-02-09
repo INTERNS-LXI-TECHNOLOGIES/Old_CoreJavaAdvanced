@@ -9,7 +9,7 @@ public class MetroView{
 		System.out.println(">>>>>>>>>>>METRO<<<<<<<<<<<<");
 		System.out.println("---------------------------");
 		System.out.println(date);
-		System.out.println("1.Admin 2.Train details 3.Search 4.Ticket Reservation");
+		System.out.println("1.Ticket Reservation 2.Train details 3.Search 4.Admin");
 		
 	}
 	public void enterUserName(){
@@ -89,8 +89,9 @@ public class MetroView{
 	public void printTicketReservation(){
 		System.out.println("TICKET RESERVATION");
 	}
-	public void selectTicketReservation(){
-	System.out.println(" Want to Reserve ticket....Press 1");
+	public void selectTicketReservation(Train t2){
+		System.out.println(t2.getTrainName()+"\t"+t2.getTrainId()+"\t"+t2.getArraivalTime()+"\t"+t2.getDepartureTime()+"\t"+t2.getStartPoint()+"\t"+t2.getDestination());
+	System.out.println("Want to Reserve ticket....Press 1");
 	}
 	public void printCompartment(){
 		System.out.println("Compartments");
@@ -104,4 +105,21 @@ public class MetroView{
 	public void selectSeat(){
 		System.out.println("Select Your seat");
 	}
+	
+	public void printTicket(Date date,String passName,String pAge,String mNumber,String tName,String compartType,int seatNo,int fair){
+		System.out.println("***************Train Ticket*****************");
+		System.out.println("| Date: "+date);
+		System.out.println("| Name : "+passName+"		");
+		System.out.println("|"+"						");
+		System.out.println("| Age :	"+pAge+" Mobile Number:"+mNumber);
+		System.out.println("|"+"						");
+		System.out.println("| Train Name : "+tName+"				");
+		System.out.println("|"+"						"); 
+		System.out.println("| Compartment :	"+compartType+"		");
+		System.out.println("|"+"			");
+		System.out.println("|"+" Seat No :	"+seatNo+"	"+"Fair: "+fair);
+		System.out.println("|"+"						");
+		System.out.println("********************************************");
+	}
+	
 }

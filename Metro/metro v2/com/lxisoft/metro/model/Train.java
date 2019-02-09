@@ -7,7 +7,6 @@ public class Train implements Comparable<Train>{
 	
 	private String trainName;
 	private String trainId;
-	//private Compartment compartment;
 	private String arraivalTime,departureTime;
 	private String startPoint,destination;
 	private ArrayList<Compartment> compartments;//= new ArrayList<Compartment>();

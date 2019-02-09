@@ -1,4 +1,4 @@
-amritha,111,1.00am,1.10pm,palakkad,kozhikode
-lxiExp,222,2.00pm,2.20pm,palakkad,chennai
-navinPass,333,3.10pm,3.20pm,palakkad,chennai
-abcExp,444,3.50pm,4.00pm,palakkad,kottayam
+anishExp,12432,3.00am,4.00pm,palakkad,kozhikode
+lxiExp,123453,4.40pm,6.00pm,palakkad,kochi
+lxiPass,324554,9.00pm,5.00am,palakkad,kottayam
+ptbPass,34454,6.20am,9.00pm,palakkad,wayanad

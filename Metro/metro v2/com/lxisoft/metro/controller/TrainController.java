@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Iterator;
 import java.util.HashSet;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import com.lxisoft.metro.view.MetroView;
 
@@ -131,8 +135,7 @@ public class TrainController{
 			}else{
 			System.out.println("file exist");}		
 		boolean successful = tempFile.renameTo(trainDetails);
-        System.out.println(successful);
-		
+        System.out.println(successful);	
 	}
 	
 	public ArrayList<Compartment> initCompartment(){
@@ -158,9 +161,10 @@ public class TrainController{
 	}
 	public ArrayList<Seat> createSeat(){
 		ArrayList<Seat> seats=new ArrayList<Seat>();
+		Seat seat=null;
 		for(int i=1;i<=10;i++){
 
-			Seat seat=new Seat(i);
+			seat=new Seat(i);
 			seats.add(seat);
 		}
 		return seats;

@@ -1,7 +1,8 @@
 package com.lxisoft.metro.model;
+import java.io.Serializable;
 
 
-public class Seat{
+public class Seat implements Serializable{
 	private int seatNum;
 	
 	public Seat(int seatNum){
